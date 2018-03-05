@@ -18,7 +18,7 @@ public class Exam05_2 {
 
         System.out.println(f);
         System.out.println(d);
-        // 주의!
+        // 주의!!!!!!
         // 정수의 경우 리터럴을 표현할 때
         // 값이 그 크기를 넘어가면 컴파일 오류가 발생하지만,
         // 부동소수점의 경우 리터럴이 메모리의 크기를 넘어갈 때
