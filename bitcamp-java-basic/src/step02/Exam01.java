@@ -1,5 +1,5 @@
-//패키지
-// 
+// 패키지
+// -step01/Exam01.java 관련 예제이다.
 
 package step02;
 
