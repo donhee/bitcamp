@@ -16,17 +16,26 @@ public class Exam08_3 {
         // 값이 짤릴 수 있다.
         f = b; // byte(1) ==> float(4)  - 값을 그대로 저장.
         System.out.println(f);
+
+
         f = s; // short(2) ==> float(4) - 값을 그대로 저장.
         System.out.println(f);
+
+
         f = c; // char(2) ==> float(4)  - 값을 그대로 저장.
         System.out.println(f);
+
+
         f = i; // int(4) ==> float(4)   - 가수부 크기(23비트)를 넘는 정수는 짤린다.
                                         //즉 유효자릿수를 넘는 정수는 짤린다.
         System.out.println(f);
+
+
         f = l; // long(8) ==> long(8)  - 가수부 크기(23비트)를 넘는 정수는 짤린다.
                                         //즉 유효자릿수를 넘는 정수는 짤린다.
         System.out.println(f);
 
+        
         d = i; // int(4) ==> double(8)
                // double 의 가수부는 53비트 크기를 갖는다.
                // 따라서 int(32비트) 값을 그대로 저장할 수 있다.

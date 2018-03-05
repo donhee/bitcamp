@@ -18,8 +18,8 @@ public class Exam08_2 {
         // 작은 메모리의 값을 큰 메모리에 넣을 수 있다.
         s2 = b; // byte(1byte) ==> short(2byte)
         i2 = c; // char(2byte) ==> int(4byte)
-        l2 = i; // short(2byte) ==> int(4byte)    //이따가 주석확인!
-         i2 = s; // int(4byte) ==> long(8byte)
+        i2 = s; // short(2byte) ==> int(4byte)    
+        l2 = i; // int(4byte) ==> long(8byte)
         
     }
 }    
