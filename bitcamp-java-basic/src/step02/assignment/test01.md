@@ -4,7 +4,7 @@
 
 ## 실행 결과
 ```
->java -classpath in step02.assignment.Test01
+>java -classpath bin step02.assignment.Test01
 이름? 홍길동
 국어? 100
 영어? 90
