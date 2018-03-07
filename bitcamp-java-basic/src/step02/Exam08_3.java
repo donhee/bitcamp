@@ -17,14 +17,11 @@ public class Exam08_3 {
         f = b; // byte(1) ==> float(4)  - 값을 그대로 저장.
         System.out.println(f);
 
-
         f = s; // short(2) ==> float(4) - 값을 그대로 저장.
         System.out.println(f);
 
-
         f = c; // char(2) ==> float(4)  - 값을 그대로 저장.
         System.out.println(f);
-
 
         f = i; // int(4) ==> float(4)   
                 // - 가수부 크기(23비트)를 넘는 정수는 짤린다.

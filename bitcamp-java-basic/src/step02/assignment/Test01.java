@@ -1,6 +1,3 @@
-//패키지
-// 
-
 package step02.assignment;
 
 public class Test01 {
@@ -18,12 +15,18 @@ public class Test01 {
         
         System.out.print("이름? ");
         s = keyScan.nextLine();
+
         System.out.print("국어? ");
-        la = keyScan.nextInt();
+        la = keyScan.nextInt(); 
+        //Integer.parseInt(keyScan.nextLine());
+
         System.out.print("영어? ");
         english = keyScan.nextInt();
+        //Integer.parseInt(keyScan.nextLine());
+        
         System.out.print("수학? ");
         math = keyScan.nextInt();
+        //Integer.parseInt(keyScan.nextLine());
 
         sum = la + english + math;
         avg = sum / 3;
