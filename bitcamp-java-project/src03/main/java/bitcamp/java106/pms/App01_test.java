@@ -11,7 +11,7 @@ public class App01_test {
         Score sc = new Score();
 
         System.out.print("팀명? ");
-        sc.name = scanner.nextLine();
+        sc.teamName = scanner.nextLine();
         System.out.print("설명? ");
         sc.description = scanner.nextLine();
         System.out.print("최대인원? ");
@@ -24,6 +24,6 @@ public class App01_test {
         System.out.println("==============");
 
         System.out.printf("%s, %d명, %s ~ %s", 
-            sc.name, sc.maxQty, sc.startDate, sc.endDate);
+            sc.teamName, sc.maxQty, sc.startDate, sc.endDate);
     }
 }

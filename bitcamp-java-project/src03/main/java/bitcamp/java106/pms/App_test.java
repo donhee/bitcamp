@@ -17,7 +17,7 @@ public class App_test {
             sc[i] = new Score();
 
             System.out.print("팀명? ");
-            sc[i].name = scanner.nextLine();
+            sc[i].teamName = scanner.nextLine();
 
             System.out.print("설명? ");
             sc[i].description = scanner.nextLine();
@@ -37,7 +37,7 @@ public class App_test {
 
             System.out.print("계속 입력하시겠습니까?(Y/n)");
             String input = scanner.nextLine();
-            if( input.equals("n")){
+            if( input.toLowerCase().equals("n")){
                 break;
             }else{
                 continue;
@@ -53,7 +53,7 @@ public class App_test {
 
         for( int i = 0; i < count; i++) {
             System.out.printf("%s, %d명, %s ~ %s\n", 
-                sc[i].name, sc[i].maxQty, sc[i].startDate, sc[i].endDate);
+                sc[i].teamName, sc[i].maxQty, sc[i].startDate, sc[i].endDate);
         }
         
     }

@@ -53,5 +53,6 @@ public class App {
                 teams[i].name, teams[i].maxQty, 
                 teams[i].startDate, teams[i].endDate);
         }
+        
     }
 }

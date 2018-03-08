@@ -15,7 +15,7 @@ public class App03_test {
             sc[i] = new Score();
 
             System.out.print("팀명? ");
-            sc[i].name = scanner.nextLine();
+            sc[i].teamName = scanner.nextLine();
 
             System.out.print("설명? ");
             sc[i].description = scanner.nextLine();
@@ -34,7 +34,7 @@ public class App03_test {
 
         for( int i = 0; i < 5; i++) {
             System.out.printf("%s, %d명, %s ~ %s\n", 
-                sc[i].name, sc[i].maxQty, sc[i].startDate, sc[i].endDate);
+                sc[i].teamName, sc[i].maxQty, sc[i].startDate, sc[i].endDate);
         }
         
     }
