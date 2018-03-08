@@ -32,7 +32,7 @@ public class Exam02_3 {
         for (int i = 0; i < arr.length; i++){
             System.out.printf("이름: %s\n", arr[i].name);
         }
-        
+         
     }
 }
 // 결론 !
