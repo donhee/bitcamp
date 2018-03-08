@@ -35,7 +35,8 @@ public class Exam01_5 {
        // => int가 long으로 암시적 형변환 한 이후 연산을 수행한다.
        // int r6 + i + l; // 컴파일 오류!
 
-       // long + float = float ***********중요***
+       // ***********중요**************
+       // long + float = float 
        // => long이 float으로 암시적 형변환 한 이후 연산을 수행한다
        // long r7 = l + f; // 컴파일 오류!
 
