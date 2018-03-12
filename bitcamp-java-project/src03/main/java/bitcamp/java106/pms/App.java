@@ -32,7 +32,7 @@ public class App {
 
             System.out.print("시작일? ");
             teams[i].startDate = keyScan.nextLine();
-
+ 
             System.out.print("종료일? ");
             teams[i].endDate = keyScan.nextLine();
 

@@ -1,4 +1,4 @@
-// 논리 연산자 = 비트연산
+// 논리 연산자 : 비트연산
 package step04;
 
 public class Exam03_5 {

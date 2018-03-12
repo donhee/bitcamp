@@ -1,0 +1,96 @@
+package bitcamp.java106.pms;
+
+// 컴파일러에게 클래스의 위치 정보를 알려준다.
+// => 컴파일한 후 import 명령은 제거된다.
+//    즉 .class 파일에 포함되지 않는다.
+// => 그러니 import 문장이 많으면 .class 파일이 커지지 않을까 걱정말라!
+import bitcamp.java106.pms.domain.Team;
+import java.util.Scanner;
+
+public class App {
+    public static void main(String[] args) {
+        Scanner keyScan = new Scanner(System.in);
+
+        // 팀 정보를 받을 메모리 준비
+        Team[] teams = new Team[7];
+        
+        int count = 0;
+        
+        for (int i = 0; i < teams.length; i++) {
+            
+            System.out.printf("명령> ");
+            String order = keyScan.nextLine();
+            String[] m = order.split(" ");
+
+            if (order.equals("help")) {
+                System.out.println("팀 등록 명령 : team/add");
+                System.out.println("팀 조회 명령 : team/list");
+                System.out.println("팀 상세조회 명령 : team/view 팀명");
+                System.out.println("회원 등록 명령 : member/add");
+                System.out.println("회원 조회 명령 : member/list");
+                System.out.println("회원 상세조회 명령 : member/view 아이디");
+                System.out.println("quit : quit");
+            }
+               
+            else if( order.equals("team/add")) {
+                
+                teams[count] = new Team();
+
+                System.out.print("팀명? ");
+                teams[count].name = keyScan.nextLine();
+    
+                System.out.print("설명? ");
+                teams[count].description = keyScan.nextLine();
+    
+                System.out.print("최대인원? ");
+                teams[count].maxQty = keyScan.nextInt();
+                keyScan.nextLine(); 
+    
+                System.out.print("시작일? ");
+                teams[count].startDate = keyScan.nextLine();
+     
+                System.out.print("종료일? ");
+                teams[count].endDate = keyScan.nextLine();
+
+                count++;
+            }
+            else if( order.equals("team/list")) {
+                
+                for (int j = 0; j < count; j++) {
+                    
+                    System.out.printf("%s, %d명, %s ~ %s\n", 
+                        teams[j].name, teams[j].maxQty, 
+                        teams[j].startDate, teams[j].endDate);
+        
+                }
+            }
+            else if( m[0].equals("team/view")) {
+
+                for (int k = 0; k < count; k++) {
+                    if( m[1].equals( teams[k].name)){
+                        System.out.printf("팀명? %s\n", teams[k].name);
+                        System.out.printf("설명? %s\n", teams[k].description);
+                        System.out.printf("최대인원? %d\n", teams[k].maxQty);
+                        System.out.printf("기간? %s ~ %s\n", teams[k].startDate, teams[k].endDate);
+                    }
+                    else if(m[1].equals( teams[k].name) == null)  {
+                         System.out.println("팀명을 입력하시기 바랍니다.");
+                    }
+                    else if(m[1].equals( teams[k].name) != order.equals(" "))  {
+                        System.out.println("해당 이름의 팀이 없습니다.");
+                   }
+                }
+            }
+
+            else if(order.equals("quit")) {
+                System.out.println("bye");
+            }
+
+        }
+            
+    }
+        
+
+    
+    
+}
