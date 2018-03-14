@@ -1,7 +1,6 @@
 // 흐름 제어문 - if ~ else 문
 package step05;
 
-import javax.print.event.PrintJobListener;
 
 public class Exam01_4 {
     public static void main(String[] args) {
