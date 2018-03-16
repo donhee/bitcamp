@@ -17,11 +17,11 @@ public class Exam03_3 {
     // 객체에 담아 넘겨라!
 
     static void swap(MyObject ref) {
-        System.out.printf("swap(): a=%d, b=%d\n", ref.a, ref.b);
+        System.out.printf("swap(1): a=%d, b=%d\n", ref.a, ref.b);
         int temp = ref.a;
         ref.a = ref.b;
         ref.b = temp;
-        System.out.printf("swap(): a=%d, b=%d\n", ref.a, ref.b);
+        System.out.printf("swap(2): a=%d, b=%d\n", ref.a, ref.b);
     }
 
 
@@ -32,9 +32,10 @@ public class Exam03_3 {
         MyObject ref = new MyObject();
         ref.a = 100;
         ref.b = 200;
+        System.out.printf("main(1): a=%d, b=%d\n", ref.a, ref.b);
         // a, b 변수가 들어있는 인스턴스(객체=메모리)의 주소를
         // swap()에 넘긴다. => 그래서 "call by referenct"인 것이다.
         swap(ref);
-        System.out.printf("main(): a=%d, b=%d\n", ref.a, ref.b);
+        System.out.printf("main(2): a=%d, b=%d\n", ref.a, ref.b);
     }
 }
