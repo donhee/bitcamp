@@ -4,7 +4,7 @@ package step07;
 public class ExamY_2 {
     public static void main(String[] args) {
         // 계산 결과를 보관할 변수는 더이상 필요가 없다.
-        // Calculator2 내부에서 계싼 결과를 관리한다.
+        // Calculator2 내부에서 계산 결과를 관리한다.
         //int result = 0;
         
         // 2 + 3 - 1 * 7 / 3 = ?

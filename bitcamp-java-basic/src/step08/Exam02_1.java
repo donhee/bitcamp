@@ -18,7 +18,7 @@ public class Exam02_1 {
             System.out.println("m2()");
         }
     }
-    
+     
     public static void main(String[] args) {
         // 클래스 메서드 호출
         // 클래스명.메서드명();
@@ -31,7 +31,7 @@ public class Exam02_1 {
         obj1.m2(); // OK!
         // 인스턴스 메서드를 반드시 인스턴스 주소를 사용하여 호출해야 한다.
         
-        A obj2 = null;
+        A obj2 = null;     
         //obj2 = obj1;
         obj2.m2(); // 컴파일은 OK! 하지만 실행은 오류!
                   // 왜? obj2 변수에 들어 있는 인스턴스 주소가 무효하기 때문이다.

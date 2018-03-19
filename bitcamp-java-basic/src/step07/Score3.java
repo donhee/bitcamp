@@ -34,6 +34,8 @@ public class Score3 {
         this.sum = this.kor + this.eng + this.math;
         this.average = this.sum / 3f;
     }
+    
+
 }
 //
 // 클래스 메서드

@@ -1,6 +1,8 @@
 // 인스턴스 변수 응용 - 성적 데이터 저장할 메모리 만들기
 package step08;
 
+import step08.Exam02_2.Score;
+
 public class Exam01_2 {
 
     public static void main(String[] args) {
@@ -47,6 +49,7 @@ public class Exam01_2 {
         s3.average = s3.sum / 3f;
         // 3명분의 데이터
         
+        System.out.printf("%.4f", s1.average);
     }
 }
 //
