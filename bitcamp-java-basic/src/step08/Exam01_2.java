@@ -1,8 +1,6 @@
 // 인스턴스 변수 응용 - 성적 데이터 저장할 메모리 만들기
 package step08;
 
-import step08.Exam02_2.Score;
-
 public class Exam01_2 {
 
     public static void main(String[] args) {
