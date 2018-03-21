@@ -2,6 +2,7 @@
 package bitcamp.java106.pms.domain;
 
 public class Board {
+    public int no; // 게시물에 인덱스를 저장할 변수
     public String title;
     public String content;
     public String createdDate;
