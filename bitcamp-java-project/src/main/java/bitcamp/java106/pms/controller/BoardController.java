@@ -9,11 +9,24 @@ import bitcamp.java106.pms.util.Console;
 public class BoardController {
     // 이 클래스를 사용하기 전에 App 클래스에서 준비한 Scanner 객체를
     // keyScan 변수에 저장하라!
-    public Scanner keyScan;
+    Scanner keyScan;
 
     Board[] boards = new Board[1000];
     int boardIndex = 0;
-
+    public BoardController(Scanner scanner) {
+        // BoardController의 메서드를 이용하려면 반드시 설정해야 하는 값이 있다.
+        // Board[] 배열이나 boardIndex 처럼 내부에서 생성하는 값이 있고,
+        // Scanner 처럼 외부에서 받아야 하는 값이 있다.
+        // 외부에서 반드시 받아야 하는 값은 생성자를 통해 입력 받도록 하면 된다.
+        // 이것이 생성자가 필요한 이유이다.
+        // 즉 객체가 작업하는데 필수적으로 요구되는 값을 준비시키는 역할을 수행하는게 
+        // 바로 "생성자"이다.
+        //
+        // BoardController 객체를 생성할 때
+        // 필수 값을 반드시 입력 받도록 선언한다.
+        // 필수 값이 설정되어 있어야만 작업을 수행할 수 있기 때문이다.
+        this.keyScan = scanner;
+    }
     public void service(String menu, String option) {
         if (menu.equals("board/add")) {
             this.onBoardAdd();

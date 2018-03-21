@@ -8,38 +8,38 @@ import java.util.Scanner;
 public class MemberController {
     // 이 클래스를 사용하려면 keyboard 스캐너가 있어야 한다.
     // 이 클래스를 사용하기 전에 스캐너를 설정하라!
-    public static Scanner keyScan;
+    public Scanner keyScan;
 
-    static Member[] members = new Member[1000];
-    static int memberIndex = 0;
+    Member[] members = new Member[1000];
+    int memberIndex = 0;
 
-    public static void service(String menu, String option) {
+    public void service(String menu, String option) {
         if (menu.equals("member/add")) {
-            onMemberAdd();
+            this.onMemberAdd();
         } else if (menu.equals("member/list")) {
-            onMemberList();
+            this.onMemberList();
         } else if (menu.equals("member/view")) {
-            onMemberView(option);                
+            this.onMemberView(option);                
         } else if (menu.equals("member/update")) {
-            onMemberUpdate(option);                
+            this.onMemberUpdate(option);                
         } else if (menu.equals("member/delete")) {
-            onMemberDelete(option);                
+            this.onMemberDelete(option);                
         } else {
             System.out.println("명령어가 올바르지 않습니다.");
         }
     }
 
-    static int getMemberIndex(String id) {
-        for (int i = 0; i < memberIndex; i++) {
-            if (members[i] == null) continue;
-            if (id.equals(members[i].id.toLowerCase())) {
+    int getMemberIndex(String id) {
+        for (int i = 0; i < this.memberIndex; i++) {
+            if (this.members[i] == null) continue;
+            if (id.equals(this.members[i].id.toLowerCase())) {
                 return i;
             }
         }
         return -1;
     }
 
-    static void onMemberAdd() {
+    void onMemberAdd() {
         System.out.println("[회원 정보 입력]");
         Member member = new Member();
         
@@ -53,45 +53,45 @@ public class MemberController {
         member.password = keyScan.nextLine();
 
         // 회원 정보가 담겨있는 객체의 주소를 배열에 보관한다.
-        members[memberIndex++] = member;
+        this.members[this.memberIndex++] = member;
     }
 
-    static void onMemberList() {
+    void onMemberList() {
         System.out.println("[회원 목록]");
-        for (int i = 0; i < memberIndex; i++) {
-            if (members[i] == null) continue;
+        for (int i = 0; i < this.memberIndex; i++) {
+            if (this.members[i] == null) continue;
             System.out.printf("%s, %s, %s\n", 
-                members[i].id, members[i].email, members[i].password);
+                    this.members[i].id, this.members[i].email, this.members[i].password);
         }
     }
 
-    static void onMemberView(String id) {
+    void onMemberView(String id) {
         System.out.println("[회원 정보 조회]");
         if (id == null) {
             System.out.println("아이디를 입력하시기 바랍니다.");
             return;
         }
         
-        int i = getMemberIndex(id);
+        int i = this.getMemberIndex(id);
 
         if (i == -1) {
             System.out.println("해당 아이디의 회원이 없습니다.");
         } else {
-            Member member = members[i];
+            Member member = this.members[i];
             System.out.printf("아이디: %s\n", member.id);
             System.out.printf("이메일: %s\n", member.email);
             System.out.printf("암호: %s\n", member.password);
         }
     }
 
-    static void onMemberUpdate(String id) {
+    void onMemberUpdate(String id) {
         System.out.println("[회원 정보 변경]");
         if (id == null) {
             System.out.println("아이디를 입력하시기 바랍니다.");
             return;
         }
         
-        int i = getMemberIndex(id);
+        int i = this.getMemberIndex(id);
 
         if (i == -1) {
             System.out.println("해당 아이디의 회원이 없습니다.");
@@ -104,25 +104,25 @@ public class MemberController {
             updateMember.email = keyScan.nextLine();
             System.out.printf("암호? ");
             updateMember.password = keyScan.nextLine();
-            members[i] = updateMember;
+            this.members[i] = updateMember;
             System.out.println("변경하였습니다.");
         }
     }
 
-    static void onMemberDelete(String id) {
+    void onMemberDelete(String id) {
         System.out.println("[회원 정보 삭제]");
         if (id == null) {
             System.out.println("아이디를 입력하시기 바랍니다.");
             return;
         }
         
-        int i = getMemberIndex(id);
+        int i = this.getMemberIndex(id);
 
         if (i == -1) {
             System.out.println("해당 아이디의 회원이 없습니다.");
         } else {
             if (Console.confirm("정말 삭제하시겠습니까?")) {
-                members[i] = null;
+                this.members[i] = null;
                 System.out.println("삭제하였습니다.");
             }
         }

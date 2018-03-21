@@ -8,30 +8,30 @@ import java.util.Scanner;
 public class TeamController {
     // 이 클래스를 사용하기 전에 App 클래스에서 준비한 Scanner 객체를
     // keyScan 변수에 저장하라!
-    public static Scanner keyScan;
+    public Scanner keyScan;
 
-    static Team[] teams = new Team[1000];
-    static int teamIndex = 0;
+    Team[] teams = new Team[1000];
+    int teamIndex = 0;
 
-    public static void service(String menu, String option) {
+    public void service(String menu, String option) {
         if (menu.equals("team/add")) {
-            onTeamAdd();
+            this.onTeamAdd();
         } else if (menu.equals("team/list")) {
-            onTeamList();
+            this.onTeamList();
         } else if (menu.equals("team/view")) {
-            onTeamView(option);
+            this.onTeamView(option);
         } else if (menu.equals("team/update")) {
-            onTeamUpdate(option);
+            this.onTeamUpdate(option);
         } else if (menu.equals("team/delete")) {
-            onTeamDelete(option);
+            this.onTeamDelete(option);
         } else {
             System.out.println("명령어가 올바르지 않습니다.");
         }
     }
 
-    static int getTeamIndex(String name) {
-        for (int i = 0; i < teamIndex; i++) {
-            if (teams[i] == null) continue;
+    int getTeamIndex(String name) {
+        for (int i = 0; i < this.teamIndex; i++) {
+            if (this.teams[i] == null) continue;
             if (name.equals(teams[i].name.toLowerCase())) {
                 return i;
             }
@@ -39,7 +39,7 @@ public class TeamController {
         return -1;
     }
 
-    static void onTeamAdd() {
+    void onTeamAdd() {
         System.out.println("[팀 정보 입력]");
         Team team = new Team();
 
@@ -60,20 +60,20 @@ public class TeamController {
         team.endDate = keyScan.nextLine();
 
         // 팀 정보가 담겨있는 객체의 주소를 배열에 보관한다.
-        teams[teamIndex++] = team;
+        this.teams[this.teamIndex++] = team;
     }
 
-    static void onTeamList() {
+    void onTeamList() {
         System.out.println("[팀 목록]");
-        for (int i = 0; i < teamIndex; i++) {
-            if (teams[i] == null) continue;
+        for (int i = 0; i < this.teamIndex; i++) {
+            if (this.teams[i] == null) continue;
             System.out.printf("%s, %d, %s ~ %s\n", 
-                teams[i].name, teams[i].maxQty, 
-                teams[i].startDate, teams[i].endDate);
+                    this.teams[i].name, this.teams[i].maxQty, 
+                    this.teams[i].startDate, this.teams[i].endDate);
         }
     }
 
-    static void onTeamView(String name) {
+    void onTeamView(String name) {
         System.out.println("[팀 정보 조회]");
         if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
@@ -81,12 +81,12 @@ public class TeamController {
                     // 의미? 즉시 메서드 실행을 멈추고 이전 위치로 돌아간다.
         }
         
-        int i = getTeamIndex(name);
+        int i = this.getTeamIndex(name);
 
         if (i == -1) {
             System.out.println("해당 이름의 팀이 없습니다.");
         } else {
-            Team team = teams[i];
+            Team team = this.teams[i];
             System.out.printf("팀명: %s\n", team.name);
             System.out.printf("설명: %s\n", team.description);
             System.out.printf("최대인원: %d\n", team.maxQty);
@@ -95,14 +95,14 @@ public class TeamController {
         }
     }
 
-    static void onTeamUpdate(String name) {
+    void onTeamUpdate(String name) {
         System.out.println("[팀 정보 변경]");
         if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return;
         }
         
-        int i = getTeamIndex(name);
+        int i = this.getTeamIndex(name);
 
         if (i == -1) {
             System.out.println("해당 이름의 팀이 없습니다.");
@@ -120,25 +120,25 @@ public class TeamController {
             updateTeam.startDate = keyScan.nextLine();
             System.out.printf("종료일(%s)? ", team.endDate);
             updateTeam.endDate = keyScan.nextLine();
-            teams[i] = updateTeam;
+            this.teams[i] = updateTeam;
             System.out.println("변경하였습니다.");
         }
     }
 
-    static void onTeamDelete(String name) {
+    void onTeamDelete(String name) {
         System.out.println("[팀 정보 삭제]");
         if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return; 
         }
         
-        int i = getTeamIndex(name);
+        int i = this.getTeamIndex(name);
 
         if (i == -1) {
             System.out.println("해당 이름의 팀이 없습니다.");
         } else {
             if (Console.confirm("정말 삭제하시겠습니까?")) {
-                teams[i] = null;
+                this.teams[i] = null;
                 System.out.println("삭제하였습니다.");
             }
         }
