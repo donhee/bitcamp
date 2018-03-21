@@ -27,7 +27,7 @@ public class App {
         System.out.println("회원 상세조회 명령 : member/view 아이디");
         System.out.println("종료 : quit");
     }
-
+   
     public static void main(String[] args) {
         // 클래스를 사용하기 전에 필수 값을 설정한다.
         TeamController.keyScan = keyScan;
