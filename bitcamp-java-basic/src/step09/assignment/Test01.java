@@ -19,9 +19,10 @@ public class Test01 {
         c.set(Calendar.DATE, day);
         
         String[] weeks = {" ","일", "월", "화", "수", "목", "금", "토"};
-        
+       
         int i = c.get(c.get(Calendar.DAY_OF_WEEK));
         System.out.printf("요일: %s요일\n", weeks[i]);
+        System.out.printf("요일: %d주차\n", c.get(Calendar.DAY_OF_WEEK));
         System.out.printf("주차: %d주차\n", c.get(Calendar.WEEK_OF_MONTH));
         System.out.printf("일차: %d일차\n", c.get(Calendar.DAY_OF_YEAR));
         

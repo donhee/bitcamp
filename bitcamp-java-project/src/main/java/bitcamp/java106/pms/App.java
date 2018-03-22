@@ -32,9 +32,7 @@ public class App {
         // 클래스를 사용하기 전에 필수 값을 설정한다.
         
         TeamController teamController = new TeamController(keyScan);
-        
         MemberController memberController = new MemberController(keyScan);
-        
         BoardController boardController = new BoardController(keyScan);
         
         Console.keyScan = keyScan;

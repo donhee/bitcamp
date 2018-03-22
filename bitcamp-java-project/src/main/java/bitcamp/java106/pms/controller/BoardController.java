@@ -56,7 +56,7 @@ public class BoardController {
         board.content = this.keyScan.nextLine();
 
         System.out.print("등록일? ");
-        board.createdDate = this.keyScan.nextLine();
+        board.createdDate = Date.valueOf(this.keyScan.nextLine());
 
         boardDao.insert(board);
     }
@@ -98,7 +98,7 @@ public class BoardController {
             System.out.println("번호를 입력하시기 바랍니다.");
             return;
         }
-        
+                                                                                   
         Board board = boardDao.get(Integer.parseInt(option));
         
         if (board == null) {
@@ -106,9 +106,9 @@ public class BoardController {
         } else {
             Board updateBoard = new Board();
             System.out.printf("제목(%s)? ", board.title);
-            updateBoard.title = keyScan.nextLine();
+            updateBoard.title = this.keyScan.nextLine();
             System.out.printf("설명(%s)? ", board.content);
-            updateBoard.content = keyScan.nextLine();
+            updateBoard.content = this.keyScan.nextLine();
             updateBoard.createdDate = board.createdDate;
             updateBoard.no = board.no;
             boardDao.update(updateBoard);

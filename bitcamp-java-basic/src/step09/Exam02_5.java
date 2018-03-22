@@ -26,7 +26,7 @@ public class Exam02_5 {
         
         // 상수의 활용   ==> step08 Exam01_6.java 참고
         System.out.println(c.get(Calendar.YEAR)); // 1은 년
-        System.out.println(c.get(Calendar.MONTH) + 1); // 0~11 월
+        System.out.println(c.get(Calendar.MONTH) + 1); // 0~11 1월 2월
         System.out.println(c.get(Calendar.DATE)); // 5는 일
         System.out.println(c.get(Calendar.DAY_OF_WEEK)); // 7은 요일(1 ~ 7) 일 월 화 수 목 금 토
         System.out.println(c.get(Calendar.WEEK_OF_MONTH)); // 그 달의 몇 번째 주
