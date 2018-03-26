@@ -77,9 +77,7 @@ public class TeamMemberController {
         
         System.out.println("[팀 멤버 목록]");
         System.out.println("회원들: ");
-        
         Member[] members = team.getMembers();
-        
         for (int i = 0; i < members.length; i++) {
             if (members[i] == null) continue;
             System.out.printf("%s, ", members[i].getId());
