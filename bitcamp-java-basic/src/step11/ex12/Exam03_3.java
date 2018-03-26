@@ -1,8 +1,7 @@
-// 오버라이딩(overriding) - 응용 예: equals()
+// Object 클래스의 메서드를 오버라이딩 하기 - equals()
 package step11.ex12;
 
 public class Exam03_3 {
-    
     
     public static void main(String[] args) {
         String s1 = new String("hello");

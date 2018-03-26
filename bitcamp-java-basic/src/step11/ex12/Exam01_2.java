@@ -1,4 +1,4 @@
-// Object 클래스의 메서드를 오버라이딩 하기 - toString()
+// Object 클래스의 메서드를 오버라이딩 하기 - hashCode()
 package step11.ex12;
 
 public class Exam01_2 {

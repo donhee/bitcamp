@@ -13,7 +13,7 @@ public class Exam02_3 extends C{
         // => 의미?
         //    보통 개발자가 클래스를 만들 때는 자신 만의 패키지를 넣어서 만든다
         //    - java.util 패키지를 자신의 클래스를 두기 위해 사용하지는 않을 것이다
-        //    따라서 Calendar 새엇ㅇ자가 protected로 되어 있다는 것은 
+        //    따라서 Calendar 생성자가 protected로 되어 있다는 것은 
         //    개발자가 직접 생성자를 호출하지는 말라는 의미다
         //    물론 Calendar를 만든 자신들은 나중에 Calendar의 서브 클래스를 만들 때
         //    이 생성자를 직접 사용하겠다는 의도로 생성자를 protected 했음을 알 수 있다.
