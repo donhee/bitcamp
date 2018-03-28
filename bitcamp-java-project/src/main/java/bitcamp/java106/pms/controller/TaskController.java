@@ -4,8 +4,10 @@ package bitcamp.java106.pms.controller;
 import java.sql.Date;
 import java.util.Scanner;
 
+import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
+import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
@@ -16,11 +18,16 @@ public class TaskController {
     Scanner keyScan;
     TeamDao teamDao;
     TaskDao taskDao;
+    MemberDao memberDao;
+    TeamMemberDao teamMemberDao;
     
-    public TaskController(Scanner scanner, TeamDao teamDao, TaskDao taskDao) {
+    public TaskController(Scanner scanner, TeamDao teamDao, 
+            TaskDao taskDao, TeamMemberDao teamMemberDao, MemberDao memberDao) {
         this.keyScan = scanner;
         this.teamDao = teamDao;
         this.taskDao = taskDao;
+        this.teamMemberDao = teamMemberDao;
+        this.memberDao = memberDao;
     }
     public void service(String menu, String option) {
         if (option == null) {
@@ -89,11 +96,11 @@ public class TaskController {
         System.out.print("작업자 아이디? ");
         String memberId = keyScan.nextLine();
         if (memberId.length() != 0) { 
-            Member member = team.getMember(memberId);
-            if (member == null) {
+            if (!teamMemberDao.isExist(team.getName(), memberId)) {
                 System.out.printf("'%s'는 이 팀의 회원이 아닙니다. 작업자는 비워두겠습니다", memberId);
             } else {
-                task.setWorker(member);
+                task.setWorker(this.memberDao.get(memberId));
+                //task.setWorker(worker);
             }
         } 
         
@@ -197,11 +204,12 @@ public class TaskController {
         if (memberId.length() == 0) {
             task.setWorker(originTask.getWorker());
         } else {
-            Member member = team.getMember(memberId);
-            if (member == null) {
-                System.out.printf("'%s'는 이 팀의 회원이 아닙니다. 작업자는 비워두겠습니다\n", memberId);
+                // team클래스의 name과 memberId가 존재하지 않는다면
+            if (!teamMemberDao.isExist(team.getName(), memberId)) { 
+                System.out.printf("'%s'는 이 팀의 회원이 아닙니다. 작업자는 비워두겠습니다", memberId);
             } else {
-                task.setWorker(member);
+                task.setWorker(this.memberDao.get(memberId));
+                //task.setWorker(worker);
             }
         } 
         
