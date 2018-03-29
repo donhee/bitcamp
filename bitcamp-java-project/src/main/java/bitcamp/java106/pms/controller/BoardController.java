@@ -64,10 +64,9 @@ public class BoardController {
     void onBoardList() {
         System.out.println("[게시물 목록]");
         Board[] list = boardDao.list();
-        for (int i = 0; i < list.length; i++) {
-            if (list[i] == null) continue;
+        for (Board board : list) {
             System.out.printf("%d, %s, %s\n",
-                i, list[i].getTitle(), list[i].getCreatedDate());
+                    board.getNo(), board.getTitle(), board.getCreatedDate());
         }
     }
 
@@ -77,10 +76,7 @@ public class BoardController {
             System.out.println("번호를 입력하시기 바랍니다.");
             return;
         }
-        /*
-        int i = Integer.parseInt(option);
-        Board board = boardDao.get(i);
-        */
+        
         Board board = boardDao.get(Integer.parseInt(option));
         
         if (board == null) {
@@ -105,12 +101,13 @@ public class BoardController {
             System.out.println("유효하지 않은 게시물 번호입니다.");
         } else {
             Board updateBoard = new Board();
+            updateBoard.setNo(board.getNo());
+
             System.out.printf("제목(%s)? ", board.getTitle());
             updateBoard.setTitle(this.keyScan.nextLine());
             System.out.printf("설명(%s)? ", board.getContent());
             updateBoard.setContent(this.keyScan.nextLine());
             updateBoard.setCreatedDate(board.getCreatedDate());
-            updateBoard.setNo(board.getNo());
             boardDao.update(updateBoard);
             System.out.println("변경하였습니다.");
         }
@@ -137,3 +134,5 @@ public class BoardController {
     }
     
 }
+
+// ver 18 - BoardDao 변경 사항에 맞춰 이 클래스를 변경한다.

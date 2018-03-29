@@ -5,20 +5,23 @@ import java.util.Scanner;
 
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TeamDao;
+import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.util.Console;
  
 public class TeamMemberController {
     
     Scanner keyScan;
     TeamDao teamDao;
     MemberDao memberDao;
+    TeamMemberDao teamMemberDao;
     
-    public TeamMemberController(Scanner scanner, TeamDao teamDao, MemberDao memberDao) {
+    public TeamMemberController(Scanner scanner, TeamDao teamDao, 
+            MemberDao memberDao, TeamMemberDao teamMemberDao) {
         this.keyScan = scanner;
         this.teamDao = teamDao;
         this.memberDao = memberDao;
+        this.teamMemberDao = teamMemberDao;
     }
     public void service(String menu, String option) {
         if (menu.equals("team/member/add")) {
@@ -55,12 +58,12 @@ public class TeamMemberController {
         }
         
         //  팀에   있으면  멤버아이디가  --> 연산자역할
-        if (team.isExist(memberId)) {
+        if (teamMemberDao.isExist(teamName, memberId)) {
             System.out.println("이미 등록된 회원입니다.");
             return;
         }
         
-        team.addMember(member);
+        teamMemberDao.addMember(teamName, memberId);
     }
 
     void onTeamMemberList(String teamName) {
@@ -77,10 +80,12 @@ public class TeamMemberController {
         
         System.out.println("[팀 멤버 목록]");
         System.out.println("회원들: ");
-        Member[] members = team.getMembers();
+        
+        String[] members = teamMemberDao.getMembers(teamName);
+        
         for (int i = 0; i < members.length; i++) {
             if (members[i] == null) continue;
-            System.out.printf("%s, ", members[i].getId());
+            System.out.printf("%s, ", members[i]);
         }
         System.out.println();
     }
@@ -100,15 +105,16 @@ public class TeamMemberController {
         System.out.print("삭제할 팀원은? ");
         String memberId = keyScan.nextLine();
         
-        if (!team.isExist(memberId)) {
+        if (!teamMemberDao.isExist(teamName, memberId)) {
             System.out.println("이 팀의 회원이 아닙니다.");
             return;
         }
         
-        team.deleteMember(memberId);
+        teamMemberDao.deleteMember(teamName, memberId);
         
         System.out.println("[팀 멤버 삭제]");
         System.out.println("삭제하였습니다.");
     }
-    
 }
+
+// ver 17 - TeamMemberDao 클래스를 사용하여 팀 멤버의 아이디를 관리한다.

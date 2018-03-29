@@ -34,16 +34,6 @@ public class MemberController {
         }
     }
 
-//    int getMemberIndex(String id) {
-//        for (int i = 0; i < this.memberIndex; i++) {
-//            if (this.members[i] == null) continue;
-//            if (id.equals(this.members[i].id.toLowerCase())) {
-//                return i;
-//            }
-//        }
-//        return -1;
-//    }
-
     void onMemberAdd() {
         System.out.println("[회원 정보 입력]");
         Member member = new Member();
@@ -64,10 +54,9 @@ public class MemberController {
     void onMemberList() {
         System.out.println("[회원 목록]");
         Member[] list = memberDao.list();
-        for (int i = 0; i < list.length; i++) {
-            if (list[i] == null) continue;
+        for (Member member : list) {
             System.out.printf("%s, %s, %s\n", 
-                    list[i].getId(), list[i].getEmail(), list[i].getPassword());
+                    member.getId(), member.getEmail(),member.getPassword());
         }
     }
 
@@ -138,3 +127,8 @@ public class MemberController {
     }
     
 }
+
+
+
+// ver 18 - ArrayList가 적용된 MemberDao를 사용한다.
+//          onMemberList()에서 배열의 각 항목에 대해 null 값을 검사하는 부분을 제거하였다.

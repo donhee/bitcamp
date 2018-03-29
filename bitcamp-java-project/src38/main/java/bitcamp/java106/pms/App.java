@@ -11,6 +11,7 @@ import bitcamp.java106.pms.controller.TeamMemberController;
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
+import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
@@ -40,17 +41,18 @@ public class App {
         TeamDao teamDao = new TeamDao();
         MemberDao memberDao = new MemberDao();
         TaskDao taskDao = new TaskDao();
+        TeamMemberDao teamMemberDao = new TeamMemberDao();
         
-        // 테스트용 데이터를 준비
+        // 테스트용 데이터를 준비한다.
         prepareMemberData(memberDao);
-        prepareTeamData(teamDao, memberDao);
+        prepareTeamData(teamDao, teamMemberDao);
         
         TeamController teamController = new TeamController(keyScan, teamDao);
-        TeamMemberController teamMemberController = new TeamMemberController(keyScan, teamDao, memberDao);
+        TeamMemberController teamMemberController = new TeamMemberController(keyScan, teamDao, memberDao, teamMemberDao);
         MemberController memberController = new MemberController(keyScan, memberDao);
         BoardController boardController = new BoardController(keyScan);
-        TaskController taskController = new TaskController(keyScan, teamDao, taskDao);
-        
+        TaskController taskController = new TaskController(keyScan, teamDao, taskDao, teamMemberDao, memberDao);
+        // ver 17
         Console.keyScan = keyScan;
         
         
@@ -77,7 +79,7 @@ public class App {
                 memberController.service(menu, option);
             } else if (menu.startsWith("board/")) {
                 boardController.service(menu, option);
-            } else if (menu.startsWith("task/")) {
+            } else if (menu.startsWith("task/")) { //ver 17
                 taskController.service(menu, option);
             } else {
                 System.out.println("명령어가 올바르지 않습니다.");
@@ -86,59 +88,68 @@ public class App {
             System.out.println();
         }
     }
-    
+    // ver17
     static void prepareMemberData(MemberDao memberDao) {
         Member member = new Member();
         member.setId("aaa");
         member.setEmail("aaa@test.com");
         member.setPassword("1111");
+        
         memberDao.insert(member);
         
         member = new Member();
         member.setId("bbb");
         member.setEmail("bbb@test.com");
-        member.setPassword("2222");
+        member.setPassword("1111");
+        
         memberDao.insert(member);
-
+        
         member = new Member();
         member.setId("ccc");
         member.setEmail("ccc@test.com");
         member.setPassword("1111");
+        
         memberDao.insert(member);
         
         member = new Member();
         member.setId("ddd");
         member.setEmail("ddd@test.com");
         member.setPassword("1111");
+        
         memberDao.insert(member);
         
         member = new Member();
         member.setId("eee");
         member.setEmail("eee@test.com");
         member.setPassword("1111");
+        
         memberDao.insert(member);
     }
-    
-    static void prepareTeamData(TeamDao teamDao, MemberDao memberDao) {
+    static void prepareTeamData(TeamDao teamDao, TeamMemberDao teamMemberDao) {
         Team team = new Team();
         team.setName("t1");
         team.setMaxQty(5);
         team.setStartDate(Date.valueOf("2018-1-1"));
         team.setEndDate(Date.valueOf("2018-5-30"));
-        team.addMember(memberDao.get("aaa"));
-        team.addMember(memberDao.get("bbb"));
-        team.addMember(memberDao.get("ccc"));
         teamDao.insert(team);
+
+        teamMemberDao.addMember("t1", "aaa"); 
+        teamMemberDao.addMember("t1", "bbb");
+        teamMemberDao.addMember("t1", "ccc");
+        
         
         team = new Team();
         team.setName("t2");
         team.setMaxQty(5);
         team.setStartDate(Date.valueOf("2018-2-1"));
         team.setEndDate(Date.valueOf("2018-6-30"));
-        team.addMember(memberDao.get("ccc")); // 
-        team.addMember(memberDao.get("ddd"));
-        team.addMember(memberDao.get("eee"));
         teamDao.insert(team);
+
+        teamMemberDao.addMember("t2", "ccc"); 
+        teamMemberDao.addMember("t2", "ddd");
+        teamMemberDao.addMember("t2", "eee");
     }
     
 }
+// ver17 - Task 관리 기능 추가
+

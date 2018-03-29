@@ -84,7 +84,6 @@ public class TeamMemberController {
         String[] members = teamMemberDao.getMembers(teamName);
         
         for (int i = 0; i < members.length; i++) {
-            if (members[i] == null) continue;
             System.out.printf("%s, ", members[i]);
         }
         System.out.println();
@@ -116,5 +115,5 @@ public class TeamMemberController {
         System.out.println("삭제하였습니다.");
     }
 }
-
+// ver 18 - ArrayList가 적용된 TeamMemberDao를 사용한다.
 // ver 17 - TeamMemberDao 클래스를 사용하여 팀 멤버의 아이디를 관리한다.

@@ -7,6 +7,8 @@ public class Task {
     public static final int WORKING = 1;
     public static final int COMPLETE = 9;
     
+    private static int count = 1;
+    
     private int no; // 작업 번호 // 내부적으로 쓰기 위한 변수
     private String title;
     private Date startDate;
@@ -15,17 +17,17 @@ public class Task {
     private Member worker;
     private Team team;
     
-    // public Task() {}
-    // 기본 생성자 지운 이유 
-    // 빈 객체는 만들지 말아라
-    
     // 어느 팀에 소속되어있는지
     public Task(Team team) {
         this.team = team;
+        this.no= count++;
     }
     
     public Task(Team team, String title, Date startDate, Date endDate) {
-        this.team = team;
+        //this.no= count++;
+        //this.team = team;
+        // 같은 코드 
+        this(team);
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;

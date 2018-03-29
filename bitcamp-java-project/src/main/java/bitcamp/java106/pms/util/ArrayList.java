@@ -1,4 +1,4 @@
-package step12.ex01;
+package bitcamp.java106.pms.util;
 
 public class ArrayList {
     protected static final int DEFAULT_CAPACITY = 5; // protected 한 이유는 자식 클래스에서 사용할 수 있기 때문에
@@ -60,14 +60,13 @@ public class ArrayList {
     }
     
     public void add(int index, Object value) {
-        if (index < 0 || index > cursor)
+        if (index < 0 || index >= cursor)
             return;
-        if (cursor >= list.length) {
-            this.increaseArray();
-        }
+        
+        increaseArray();
         
         for (int i = cursor - 1; i >= index; i--) {
-            list[i+1] = list[i]; 
+            list[i+1] = list[i];
         }
         list[index] = value;
         cursor++;
@@ -90,25 +89,11 @@ public class ArrayList {
         return cursor;
     }
     
-                        // Object지만 실제 리턴되는 타입은 String이다. 
-                        //         value = "aaa" // String 타입!
-    public boolean contains(Object value) {
-        for (Object obj : list) {
-            if (obj.equals(value)) // 같은 객체가 들어 있는지 검사하는 것이 아니다.
-                                   // 같은 내용을 가진 객체가 들어 있는지 검사하는 것이다.
-                return true;
-        }
-        return false;
-    }
+    
+   
     
     
-    public int indexOf(Object value) {
-        for (int i = 0; i < list.length; i++) {
-            if (list[i].equals(value)) // 같은 객체가 들어 있는지 검사하는 것이 아니다.
-                return i;              // 같은 내용을 가진 객체가 들어 있는지 검사하는 것이다.
-        }
-        return -1;
-    }
+    
     
     
     

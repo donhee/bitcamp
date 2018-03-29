@@ -8,6 +8,7 @@ import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
+import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
@@ -33,7 +34,6 @@ public class TaskController {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return; 
         }
-        
         Team team = teamDao.get(option);
         if (team == null) {
             System.out.printf("'%s' 팀은 존재하지 않습니다.", option);
@@ -117,6 +117,7 @@ public class TaskController {
                     task.getNo(), task.getTitle(), 
                     task.getStartDate(), task.getEndDate(), 
                     (task.getWorker() == null) ? "-" : task.getWorker().getId());
+                    // 조건 연산자 - 삼항 연산자
         }
         System.out.println();
         
@@ -127,7 +128,7 @@ public class TaskController {
         System.out.print("작업 번호? ");
         int taskNo = Integer.parseInt(keyScan.nextLine());
         
-        Task task = taskDao.get(taskNo);
+        Task task = taskDao.get(team.getName(), taskNo);
         if (task == null) {
             System.out.printf("'%s' 팀의 %d번 작업을 찾을 수 없습니다.\n",
                     team.getName(), taskNo);
@@ -152,7 +153,7 @@ public class TaskController {
         int taskNo = Integer.parseInt(keyScan.nextLine());
         
              // 원래의 작업
-        Task originTask = taskDao.get(taskNo);
+        Task originTask = taskDao.get(team.getName(), taskNo);
         if (originTask == null) {
             System.out.printf("'%s' 팀의 %d번 작업을 찾을 수 없습니다.\n",
                     team.getName(), taskNo);
@@ -226,7 +227,7 @@ public class TaskController {
         System.out.print("삭제할 작업의 번호는? ");
         int taskNo = Integer.parseInt(keyScan.nextLine());
         
-        Task task = taskDao.get(taskNo);
+        Task task = taskDao.get(team.getName(), taskNo);
         if (task == null) {
             System.out.printf("'%s' 팀의 %d번 작업을 찾을 수 없습니다.\n",
                     team.getName(), taskNo);
@@ -246,7 +247,7 @@ public class TaskController {
         System.out.print("상태를 변경할 작업의 번호? ");
         int taskNo = Integer.parseInt(keyScan.nextLine());
         
-        Task task = taskDao.get(taskNo);
+        Task task = taskDao.get(team.getName(), taskNo);
         if (task == null) {
             System.out.printf("'%s' 팀의 %d번 작업을 찾을 수 없습니다.\n",
                     team.getName(), taskNo);

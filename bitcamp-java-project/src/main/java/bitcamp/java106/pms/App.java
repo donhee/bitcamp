@@ -52,7 +52,7 @@ public class App {
         MemberController memberController = new MemberController(keyScan, memberDao);
         BoardController boardController = new BoardController(keyScan);
         TaskController taskController = new TaskController(keyScan, teamDao, taskDao, teamMemberDao, memberDao);
-        // ver 17
+        
         Console.keyScan = keyScan;
         
         
@@ -79,7 +79,7 @@ public class App {
                 memberController.service(menu, option);
             } else if (menu.startsWith("board/")) {
                 boardController.service(menu, option);
-            } else if (menu.startsWith("task/")) { //ver 17
+            } else if (menu.startsWith("task/")) { 
                 taskController.service(menu, option);
             } else {
                 System.out.println("명령어가 올바르지 않습니다.");

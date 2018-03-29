@@ -1,49 +1,51 @@
 package bitcamp.java106.pms.dao;
 
 import bitcamp.java106.pms.domain.Member;
+import bitcamp.java106.pms.util.ArrayList;
 
 public class MemberDao {
-
-    Member[] members = new Member[1000];
-    int memberIndex = 0;
+    private ArrayList collection = new ArrayList();
     
     public void insert(Member member) {
-        this.members[this.memberIndex++] = member;
+        this.collection.add(member);
     }
     
     public Member[] list() {
-        Member[] arr = new Member[memberIndex];
-        for (int i = 0; i < memberIndex; i++) 
-            arr[i] = this.members[i];
+        Member[] arr = new Member[this.collection.size()];
+        for (int i = 0; i < this.collection.size(); i++) 
+            arr[i] = (Member) this.collection.get(i);
         return arr;
     }
     
     public Member get(String id) {
-        int i = getMemberIndex(id);
-        if (i == -1)
+        int index = getMemberIndex(id);
+        if (index < 0) 
             return null;
-        return this.members[i];
+        return (Member) collection.get(index);
     }
     
     public void update(Member member) {
-        int i = getMemberIndex(member.getId());
-        if (i != -1)
-            this.members[i] = member;
+        int index = getMemberIndex(member.getId());
+        if (index < 0) 
+            return;
+        collection.set(index, member);
     }
     
     public void delete(String id) {
-        int i = getMemberIndex(id);
-        if (i != -1)
-            this.members[i] = null;
+        int index = getMemberIndex(id);
+        if (index < 0) 
+            return;
+        collection.remove(index);
     }
-    // MemberDao 클래스 내부에서만 사용할 것이기 때문에 private으로 한다.
+    
     private int getMemberIndex(String id) {
-        for (int i = 0; i < this.memberIndex; i++) {
-            if (this.members[i] == null) continue;
-            if (id.equals(this.members[i].getId().toLowerCase())) {
+        for (int i = 0; i < collection.size(); i++) {
+            Member originmember = (Member) collection.get(i);
+            if (originmember.getId().toLowerCase().equals(id.toLowerCase())) {
                 return i;
             }
         }
         return -1;
     }
+    
 }

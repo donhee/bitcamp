@@ -1,6 +1,9 @@
 # 변경 내역
-- ver 17 및 주석 부분 
-- Task.java 추가
-- TaskController.java 추가
-- TaskDao.java 추가
-- App.java 변경
+- ver 18
+- ArrayList.java 추가
+- Board.java 변경
+- BoardDao.java 변경
+- BoardController.java 변경
+- MemberDao.java 변경
+- MemberController.java 변경
+

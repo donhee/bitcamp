@@ -34,16 +34,6 @@ public class TeamController {
         }
     }
 
-//    int getTeamIndex(String name) {
-//        for (int i = 0; i < teamIndex; i++) {
-//            if (this.teams[i] == null) continue;
-//            if (name.equals(teams[i].name.toLowerCase())) {
-//                return i;
-//            }
-//        }
-//        return -1;
-//    }
-
     void onTeamAdd() {
         System.out.println("[팀 정보 입력]");
         Team team = new Team();
@@ -71,12 +61,11 @@ public class TeamController {
 
     void onTeamList() {
         System.out.println("[팀 목록]");
-        Team[] list = teamDao.list();
-        for (int i = 0; i < list.length; i++) {
-            if (list[i] == null) continue;
+        Team[] teams = teamDao.list();
+        for (Team team : teams) {
             System.out.printf("%s, %d, %s ~ %s\n", 
-                    list[i].getName(), list[i].getMaxQty(), 
-                    list[i].getStartDate(), list[i].getEndDate());
+                    team.getName(), team.getMaxQty(), 
+                    team.getStartDate(), team.getEndDate());
         }
     }
 
