@@ -10,7 +10,7 @@ public class Exam02_2 {
         String s3 = new String("ccc");
         String s4 = new String("ddd");
         String s5 = new String("eee");
-        
+          
         LinkedList list = new LinkedList();
         list.add(s1);
         list.add(s2);

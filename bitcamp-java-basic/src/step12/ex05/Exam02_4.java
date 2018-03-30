@@ -10,7 +10,7 @@ public class Exam02_4 {
         String s3 = new String("ccc");
         String s4 = new String("ddd");
         String s5 = new String("eee");
-        
+         
         ArrayBlockingQueue queue = new ArrayBlockingQueue(100);
         queue.add(s1);
         queue.add(s2);

@@ -10,7 +10,7 @@ public class Exam02_3 {
         String s3 = new String("ccc");
         String s4 = new String("ddd");
         String s5 = new String("eee");
-        
+         
         Stack list = new Stack();
         list.add(s1);
         list.add(s2);
