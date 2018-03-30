@@ -8,7 +8,7 @@ public class Exam02_1 {
     public static void main(String[] args) {
         String v1 = new String("aaa");
         String v2 = new String("bbb");
-        String v3 = new String("3.14");
+        String v3 = new String("ccc");
         String v4 = new String("ddd");
         String v5 = new String("ccc");
         
@@ -40,7 +40,17 @@ public class Exam02_1 {
             System.out.print(컬렉션에서값을꺼내주는객체.next() + ", ");
         }
         System.out.println();
-        
     }
-    
 }
+//
+// Iterator 패턴
+// => 컬렉션에서 값을 꺼내는 기능을 객체화시키는 방법
+// => 즉 별도의 클래스로 정의하여 사용한다.
+// => 이점
+//    컬렉션의 타입에 상관없이 일관된 방식으로 값을 꺼낼 수 있다.
+//    예) ArrayList에서 값을 꺼낼 때는 get() 메서드를 사용했고,
+//       Stack에선 값을 꺼낼 때는 pop() 메서드를 사용했고,
+//       Queue에선 값을 꺼낼 때는 poll()를 사용했다.
+
+
+
