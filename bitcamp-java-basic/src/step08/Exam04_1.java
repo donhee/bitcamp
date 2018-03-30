@@ -1,7 +1,7 @@
 // 특별한 인스턴스 메서드 - 생성자(constructor)
 package step08;
 
-public class Exam04_1 {
+public class Exam04_1 { 
     // Exam04_1 클래스 조차도 기본 생성자가 자동으로 추가된다.
     // 즉 다음의 생성자를 컴파일러가 자동으로 붙일 것이다.
     // Exam04_1() {} -> 아무것도 안 하는 생성자 
