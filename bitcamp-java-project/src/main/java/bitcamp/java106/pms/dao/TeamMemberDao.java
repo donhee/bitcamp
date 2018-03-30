@@ -1,81 +1,72 @@
 package bitcamp.java106.pms.dao;
 
-import bitcamp.java106.pms.util.ArrayList;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class TeamMemberDao {
-    
-    ArrayList teamCollection = new ArrayList();
-    ArrayList memberCollection = new ArrayList();
-    
-    //private Object[][] teamMembers = new Object[1000][2];
-    //private int rowIndex; // 현재 위치 // 값을 설정하지 않아도 초기화 0
-    
-    private int getIndex(String teamName, String memberId) {
-        String ptn = teamName.toLowerCase(); // 파라미터 teamName
-        String pmi = memberId.toLowerCase(); // 파라미터 memberId
-        for (int i = 0; i < teamCollection.size(); i++) {
-            String tn = teamCollection.get(i).toString().toLowerCase();
-            String mi = memberCollection.get(i).toString().toLowerCase();
-            if (tn.equals(ptn) && mi.equals(pmi)) {
-                return i;
-            }
-        }
-        return -1; // 인덱스이기 때문에 0을 리턴하면 값이 있다는것. 그래서 음수를 사용해야함
-    }
-    
+    private HashMap<String, ArrayList<String>> collection = new HashMap<>(); 
+                    
     public int addMember(String teamName, String memberId) {
-        if (this.isExist(teamName, memberId)) { // 이미 존재하는 멤버라면,
-            return 0; // 0을 리턴 . add시키지 않은 것
+        String teamNameLC = teamName.toLowerCase();
+        String memberIdLC = memberId.toLowerCase();
+        // 팀 이름으로 멤버 아이디가 들어 있는 ArrayList를 가져온다.
+        ArrayList<String> members = collection.get(teamNameLC);
+        if (members == null) { // 해당 팀의 멤버가 추가된 적이 없다면,
+            members = new ArrayList<>();
+            members.add(memberIdLC);
+            collection.put(teamNameLC, members);
+            // 컬렉션에               팀이름으로          members 주소를 저장
+            return 1;
         }
-        teamCollection.add(teamName); // 사용자가 입력한 값 그대로 저장 (대소문자 구별없이)
-        memberCollection.add(memberId);
+        
+        // ArrayList에 해당 아이디를 가진 멤버가 들어 있다면,
+        if (members.contains(memberIdLC)) {
+            return 0;
+        }
+        members.add(memberId.toLowerCase());
+        
+        collection.put(teamNameLC, members); 
         return 1;
     }
     
     public int deleteMember(String teamName, String memberId) {
-        int index = this.getIndex(teamName, memberId);
-        if (index < 0) { // 존재하지 않는 멤버라면,
-            return 0; // 
+        String teamNameLC = teamName.toLowerCase();
+        String memberIdLC = memberId.toLowerCase();
+        
+        ArrayList<String> members = collection.get(teamNameLC);
+        if (members == null || !members.contains(memberIdLC)) {
+            // 그 방의 주소가 없거나 or 그 방에 들어있는 memberIdLC 값이 없으면
+            return 0;
         }
-        teamCollection.remove(index);
-        memberCollection.remove(index);
-        return 1; // 지운것
+        members.remove(memberIdLC);
+        return 1;
     }
+    
+    public Iterator<String> getMembers(String teamName) {
+        ArrayList<String> members = collection.get(teamName.toLowerCase());
+        if (members == null)
+            return null;
+        return members.iterator();
+    }
+        // 멤버의 목록을 관리하는 getMembers() 메소드 에는 TeamMemberController에게
+        // 리턴 타입으로 ArrayList<String>을 하게 되면 ArrayList 를 통채로 주게 된다.
+        // Iterator를 쓰는 이유는 그 안에 있는 메소드는 값을 꺼내는 hasNext(), next() 밖에
+        // 없기 때문에 따로 add나 delete 등을 할 수가 없다.
     
     public boolean isExist(String teamName, String memberId) {
-        if (this.getIndex(teamName, memberId) < 0) {
+        String teamNameLC = teamName.toLowerCase();
+        String memberIdLC = memberId.toLowerCase();
+        // 팀 이름으로 멤버 아이디가 들어 있는 ArrayList를 가져온다.
+        ArrayList<String> members = collection.get(teamNameLC);
+        if (members == null || !members.contains(memberIdLC)) {
             return false;
-        } else {
-            return true;
         }
-    }
-
-    private int getMemberCount(String teamName) {
-        int cnt = 0; // 로컬 변수는 자동으로 0으로 초기화 되지 않는다. // 반드시 초기화 시켜라!
-        String ptn = teamName.toLowerCase(); // 파라미터 teamName
-        
-        for (int i = 0; i < teamCollection.size(); i++) {
-            String tn = teamCollection.get(i).toString().toLowerCase();
-            if (tn.equals(ptn)) { // 원래 팀 정보와 파라미터로 받은 teamName이 같으면
-                cnt++; // cnt를 증가시켜라
-            }
-        }
-        return cnt;
+        return true;
     }
     
-    public String[] getMembers(String teamName) {
-        String ptn = teamName.toLowerCase(); // 파라미터 teamName 을 소문자로 바꿔라
-        String[] members = new String[this.getMemberCount(teamName)]; // teamName을 받아서 member 개수만큼 배열을 준비
-        
-        for (int i = 0, x = 0; i < teamCollection.size(); i++) {
-            String tn = teamCollection.get(i).toString().toLowerCase(); // 팀 이름을 가져와서
-            if (tn.equals(ptn)) { // 원래 팀 이름와 파라미터로 받은 teamName이 같으면
-                members[x++] = memberCollection.get(i).toString();
-            }
-        }
-        return members;
-    }
-}
+}    
+    
 // 용어 정리!
 // 메서드 시그너처(method signature) = 함수 프로토타입(function prototype)
 // => 메서드의 이름과 파라미터 형식, 리턴 타입에 대한 정보를 말한다.
