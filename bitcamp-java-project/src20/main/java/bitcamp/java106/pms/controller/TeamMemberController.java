@@ -10,7 +10,7 @@ import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Team;
  
-public class TeamMemberController implements Controller  {
+public class TeamMemberController {
     
     Scanner keyScan;
     TeamDao teamDao;

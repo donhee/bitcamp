@@ -15,7 +15,6 @@ class Exam01 {
         
         // 표준 출력 장치(모니터)로 출력하는 명령어이다.
         System.out.println("Hello, world!");
-        
     }
 }
 

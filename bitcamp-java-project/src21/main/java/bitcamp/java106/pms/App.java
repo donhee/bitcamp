@@ -57,15 +57,15 @@ public class App {
         TaskController taskController = new TaskController(keyScan, teamDao, taskDao, teamMemberDao, memberDao);
         ClassroomController classroomController = new ClassroomController(keyScan);
         
-        HashMap<String,Controller> controllerMap = 
-                new HashMap<>();
-
+        HashMap<String, Controller> controllerMap = new HashMap<>();
+        
         controllerMap.put("board", boardController);
         controllerMap.put("classroom", classroomController);
         controllerMap.put("member", memberController);
         controllerMap.put("task", taskController);
         controllerMap.put("team", teamController);
         controllerMap.put("team/member", teamMemberController);
+        
         
         Console.keyScan = keyScan;
         

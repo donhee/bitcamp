@@ -12,7 +12,9 @@ import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
  
-public class TaskController implements Controller  {
+//TaskController는 Controller 규칙을 이행한다.
+//=> Controller 규칙에 따라 메서드를 만든다.
+public class TaskController implements Controller {
     
     Scanner keyScan;
     TeamDao teamDao;

@@ -10,7 +10,9 @@ import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Team;
  
-public class TeamMemberController implements Controller  {
+//TeamMemberController는 Controller 규칙을 이행한다.
+//=> Controller 규칙에 따라 메서드를 만든다.
+public class TeamMemberController implements Controller {
     
     Scanner keyScan;
     TeamDao teamDao;

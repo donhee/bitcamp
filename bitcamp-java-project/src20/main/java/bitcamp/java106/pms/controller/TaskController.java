@@ -12,7 +12,7 @@ import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
  
-public class TaskController implements Controller  {
+public class TaskController {
     
     Scanner keyScan;
     TeamDao teamDao;
