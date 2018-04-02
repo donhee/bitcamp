@@ -85,11 +85,13 @@ public class App {
                 break;
             } else if (menu.equals("help")) {
                 onHelp();
-            } else {
+            } else {            //ex) board/add
                 int slashIndex = menu.lastIndexOf("/");
+                //System.out.println(slashIndex); // 5
                 String controllerKey = menu.substring(0, slashIndex);
+                //System.out.println(controllerKey); // board
                 Controller controller = controllerMap.get(controllerKey);
-                
+                //System.out.println(controller); // boardController
                 if (controller != null) {
                     controller.service(menu, option);
                 } else {
