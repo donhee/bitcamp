@@ -8,7 +8,7 @@ public class Exam01 {
         Worker w1 = new BlueWorker();
         
         // 인터페이스를 구현하지 않은 클래스의 인스턴스 주소를 저장할 수 없다.
-        //Worker w2 = new String(); // 커마일 오류!
+        //Worker w2 = new String(); // 컴파일 오류!
         
         Worker w2 = new WhiteWorker();
         Worker w3 = new JubuWorker();
