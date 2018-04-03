@@ -57,15 +57,15 @@ public class App {
         TaskController taskController = new TaskController(keyScan, teamDao, taskDao, teamMemberDao, memberDao);
         ClassroomController classroomController = new ClassroomController(keyScan);
         
-        HashMap<String, Controller> controllerMap = new HashMap<>();
-        
+        HashMap<String,Controller> controllerMap = 
+                new HashMap<>();
+
         controllerMap.put("board", boardController);
         controllerMap.put("classroom", classroomController);
         controllerMap.put("member", memberController);
         controllerMap.put("task", taskController);
         controllerMap.put("team", teamController);
         controllerMap.put("team/member", teamMemberController);
-        
         
         Console.keyScan = keyScan;
         
@@ -85,11 +85,13 @@ public class App {
                 break;
             } else if (menu.equals("help")) {
                 onHelp();
-            } else {
+            } else {            //ex) board/add
                 int slashIndex = menu.lastIndexOf("/");
+                //System.out.println(slashIndex); // 5
                 String controllerKey = menu.substring(0, slashIndex);
+                //System.out.println(controllerKey); // board
                 Controller controller = controllerMap.get(controllerKey);
-                
+                //System.out.println(controller); // boardController
                 if (controller != null) {
                     controller.service(menu, option);
                 } else {

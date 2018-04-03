@@ -13,9 +13,7 @@ import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
  
-//TaskController는 Controller 규칙을 이행한다.
-//=> Controller 규칙에 따라 메서드를 만든다.
-public class TaskController implements Controller {
+public class TaskController implements Controller  {
     
     Scanner keyScan;
     TeamDao teamDao;
@@ -114,6 +112,7 @@ public class TaskController implements Controller {
         System.out.println("[팀 작업 목록]");
         
         Iterator<Task> iterator = taskDao.list(team.getName());
+        
         while (iterator.hasNext()) {
             Task task = iterator.next();
             System.out.printf("%d,%s,%s,%s,%s\n",
@@ -121,6 +120,8 @@ public class TaskController implements Controller {
                     task.getStartDate(), task.getEndDate(), 
                     (task.getWorker() == null) ? "-" : task.getWorker().getId());
         }
+        System.out.println();
+        
     }
     
     private void onTaskView(final Team team) {

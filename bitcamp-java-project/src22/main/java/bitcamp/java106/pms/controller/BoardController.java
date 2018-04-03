@@ -1,4 +1,4 @@
-// Controller 규칙에 따라 메서드 작성
+// 게시판 관련 기능을 모아 둔 클래스
 package bitcamp.java106.pms.controller;
 
 import java.sql.Date;
@@ -9,8 +9,6 @@ import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.util.Console;
 
-// BoardController는 Controller 규칙을 이행한다.
-// => Controller 규칙에 따라 메서드를 만든다.
 public class BoardController implements Controller {
     // 이 클래스를 사용하기 전에 App 클래스에서 준비한 Scanner 객체를
     // keyScan 변수에 저장하라!

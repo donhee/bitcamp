@@ -8,9 +8,7 @@ import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.util.Console;
 
-//MemberController는 Controller 규칙을 이행한다.
-//=> Controller 규칙에 따라 메서드를 만든다.
-public class MemberController implements Controller {
+public class MemberController implements Controller  {
     // 이 클래스를 사용하려면 keyboard 스캐너가 있어야 한다.
     // 이 클래스를 사용하기 전에 스캐너를 설정하라!
     Scanner keyScan;
@@ -58,7 +56,7 @@ public class MemberController implements Controller {
         System.out.println("[회원 목록]");
         Iterator<Member> iterator = memberDao.list();
         while (iterator.hasNext()) {
-        Member member = iterator.next();
+            Member member = iterator.next();
             System.out.printf("%s, %s, %s\n", 
                     member.getId(), member.getEmail(),member.getPassword());
         }
@@ -92,7 +90,7 @@ public class MemberController implements Controller {
         }
         
         Member member = memberDao.get(id);
-        
+
         if (member == null) {
             System.out.println("해당 아이디의 회원이 없습니다.");
         } else {
@@ -104,8 +102,9 @@ public class MemberController implements Controller {
             System.out.printf("암호? ");
             updateMember.setPassword(keyScan.nextLine());
             
-            int index = memberDao.indexOf(member.getId());
+            int index = memberDao.indexOf(updateMember.getId());
             memberDao.update(index, updateMember);
+            // this.members[i] = updateMember;
             System.out.println("변경하였습니다.");
         }
     }
