@@ -4,7 +4,7 @@ public class Sedan extends Car {
     
     @Override
     public void run() {
-        System.out.println("ㅁㄴㅇㄹ");
+        System.out.println("쌩쌩 달린다.");
     }
     
     

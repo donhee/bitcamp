@@ -2,7 +2,8 @@ package bitcamp.java106.pms.dao;
 
 import bitcamp.java106.pms.domain.Member;
 
-public class MemberDao extends AbstractDao<Member>{
+
+public class MemberDao extends AbstractDao<Member> {
     
     public int indexOf(Object key) {
         String id = (String) key;

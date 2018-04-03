@@ -9,6 +9,7 @@ package step11.ex16;
 // start()와 shutdown() 은
 // Sedan이나 Truck 모두 같은 작업을 수행하기 때문에 상속 받은 것을 그대로 사용하면 되지만,
 // run()은 Sedan과 Truck이 서로 다르게 작업하기 때문에 오버라이딩 해야 한다.
+
 // 마우스 오른쪽 -> Refactor -> Extract Superclass...
 public class Exam01 {
     public static void main(String[] args) {
