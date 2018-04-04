@@ -1,8 +1,6 @@
 // non-static 중첩 클래스 응용
 package step17.ex03;
 
-import java.util.Iterator;
-
 public class ArrayList {
 
     public class MyIterator {
