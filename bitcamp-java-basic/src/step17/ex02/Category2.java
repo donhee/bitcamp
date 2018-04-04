@@ -13,6 +13,8 @@ public class Category2 {
     // => 이렇게 중첩 클래스로 만들면 사용할 때 다음과 같이 계층적으로 작성하기 때문에 이해하기가 쉬워진다.
     //    ex) int value = Category2.computer.CPU;
     // => 바깥 클래스를 패키지처럼 생각할 수 있어 이해하고 관리하기 편하다.
+    // => 구글에서는 일부로 static nested class 이름을 소문자로 해놨다.
+    // 그래서 계층적으로 작성하기 때문에 이해하기가 쉬워진다. ex) Category2.computer.OOO;
     public static class computer {
         public static final int CPU = 1;
         public static final int VGA = 2;
