@@ -1,6 +1,8 @@
 // Reflection API : 클래스 로딩과 "class" 라는 스태틱 변수
 package step18.ex01;
 
+import java.io.File;
+
 public class Exam03 {
 
     static class A {
@@ -33,5 +35,9 @@ public class Exam03 {
         // 자바 소스 안에 명확히 해당 클래스를 지정해야 하기 때문에
         // 임의로 다른 클래스를 로딩하는 코드를 작성할 수 없다.
         // 즉 다른 클래스를 로딩하고 싶으면 소스 코드를 변경해야 한다.
+        
+        Class clazz2 = String.class;
+        Class clazz3 = System.class;
+        Class clazz4 = File.class;
     }
 }
