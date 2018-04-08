@@ -5,18 +5,20 @@ import java.sql.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.util.Console;
 
+@Component("board")
 public class BoardController implements Controller {
     // 이 클래스를 사용하기 전에 App 클래스에서 준비한 Scanner 객체를
     // keyScan 변수에 저장하라!
     Scanner keyScan;
 
-    BoardDao boardDao = new BoardDao();
+    BoardDao boardDao;
     
-    public BoardController(Scanner scanner) {
+    public BoardController(Scanner scanner, BoardDao boardDao) {
         // BoardController의 메서드를 이용하려면 반드시 설정해야 하는 값이 있다.
         // Board[] 배열이나 boardIndex 처럼 내부에서 생성하는 값이 있고,
         // Scanner 처럼 외부에서 받아야 하는 값이 있다.
@@ -29,6 +31,7 @@ public class BoardController implements Controller {
         // 필수 값을 반드시 입력 받도록 선언한다.
         // 필수 값이 설정되어 있어야만 작업을 수행할 수 있기 때문이다.
         this.keyScan = scanner;
+        this.boardDao = boardDao;
     }
     public void service(String menu, String option) {
         if (menu.equals("board/add")) {

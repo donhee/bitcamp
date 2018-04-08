@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import bitcamp.java106.pms.context.ApplicationContext;
 import bitcamp.java106.pms.controller.BoardController;
 import bitcamp.java106.pms.controller.ClassroomController;
 import bitcamp.java106.pms.controller.Controller;
@@ -20,6 +21,9 @@ import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
 
 public class App {
+    
+    static ApplicationContext iocContainer;
+    
     static Scanner keyScan = new Scanner(System.in);
     public static String option = null; 
     
@@ -38,37 +42,20 @@ public class App {
         System.out.println("종료 : quit");
     }
    
-    public static void main(String[] args) {
-        // 클래스를 사용하기 전에 필수 값을 설정한다.
+    public static void main(String[] args) throws Exception {
         
-        TeamDao teamDao = new TeamDao();
-        MemberDao memberDao = new MemberDao();
-        TaskDao taskDao = new TaskDao();
-        TeamMemberDao teamMemberDao = new TeamMemberDao();
+        // 기본 객체 준비
+        HashMap<String,Object> defaultBeans = new HashMap<>();
+        defaultBeans.put("java.util.Scanner", keyScan);
+        
+        // 기본 객체와 함께 @Component가 붙은 클래스의 객체를 준비한다.
+        iocContainer = new ApplicationContext("bitcamp.java106.pms", defaultBeans);
         
         // 테스트용 데이터를 준비한다.
-        prepareMemberData(memberDao);
-        prepareTeamData(teamDao, teamMemberDao);
-        
-        TeamController teamController = new TeamController(keyScan, teamDao);
-        TeamMemberController teamMemberController = new TeamMemberController(keyScan, teamDao, memberDao, teamMemberDao);
-        MemberController memberController = new MemberController(keyScan, memberDao);
-        BoardController boardController = new BoardController(keyScan);
-        TaskController taskController = new TaskController(keyScan, teamDao, taskDao, teamMemberDao, memberDao);
-        ClassroomController classroomController = new ClassroomController(keyScan);
-        
-        HashMap<String,Controller> controllerMap = 
-                new HashMap<>();
-
-        controllerMap.put("board", boardController);
-        controllerMap.put("classroom", classroomController);
-        controllerMap.put("member", memberController);
-        controllerMap.put("task", taskController);
-        controllerMap.put("team", teamController);
-        controllerMap.put("team/member", teamMemberController);
+        prepareMemberData();
+        prepareTeamData();
         
         Console.keyScan = keyScan;
-        
         
         while (true) {
             String[] arr = Console.prompt();
@@ -90,7 +77,7 @@ public class App {
                 //System.out.println(slashIndex); // 5
                 String controllerKey = menu.substring(0, slashIndex);
                 //System.out.println(controllerKey); // board
-                Controller controller = controllerMap.get(controllerKey);
+                Controller controller = (Controller) iocContainer.getBean(controllerKey);
                 //System.out.println(controller); // boardController
                 if (controller != null) {
                     controller.service(menu, option);
@@ -103,7 +90,8 @@ public class App {
         }
     }
     // ver17
-    static void prepareMemberData(MemberDao memberDao) {
+    static void prepareMemberData() {
+        MemberDao memberDao = (MemberDao) iocContainer.getBean("bitcamp.java106.pms.dao.MemberDao");
         Member member = new Member();
         member.setId("aaa");
         member.setEmail("aaa@test.com");
@@ -139,7 +127,10 @@ public class App {
         
         memberDao.insert(member);
     }
-    static void prepareTeamData(TeamDao teamDao, TeamMemberDao teamMemberDao) {
+    static void prepareTeamData() {
+        TeamDao teamDao = (TeamDao) iocContainer.getBean("bitcamp.java106.pms.dao.TeamDao");
+        TeamMemberDao teamMemberDao = (TeamMemberDao) iocContainer.getBean("bitcamp.java106.pms.dao.TeamMemberDao");
+        
         Team team = new Team();
         team.setName("t1");
         team.setMaxQty(5);

@@ -1,10 +1,13 @@
 package bitcamp.java106.pms.dao;
 
 import java.util.ArrayList;
+
 import java.util.Iterator;
 
+import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Task;
 
+@Component
 public class TaskDao extends AbstractDao<Task>{
     
     // 기존의 list() 메서드로는 작업을 처리할 수 없기 때문에
