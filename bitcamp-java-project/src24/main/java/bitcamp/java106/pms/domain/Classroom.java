@@ -12,7 +12,7 @@ public class Classroom {
     private String room;
     
     public Classroom() {
-        this.no= ++count; // 1부터 시작되게 
+        this.no = ++count;
     }
     
     @Override

@@ -11,10 +11,10 @@ import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Team;
 
 @Component
-public class TeamDao extends AbstractDao<Team>{
+public class TeamDao extends AbstractDao<Team> {
     
     public TeamDao() throws Exception {
-        load();
+        this.load();
     }
     
     public void load() throws Exception {
@@ -26,14 +26,13 @@ public class TeamDao extends AbstractDao<Team>{
                 team.setName(arr[0]);
                 team.setDescription(arr[1]);
                 team.setMaxQty(Integer.parseInt(arr[2]));
-                team.setStartDate(Date.valueOf(arr[3]));
-                team.setEndDate(Date.valueOf(arr[4]));
+                team.setStartDate(Date.valueOf(arr[4]));
+                team.setEndDate(Date.valueOf(arr[5]));
                 this.insert(team);
             } catch (Exception e) {
-                break; 
+                break;
             }
         }
-        
         in.close();
     }
     
@@ -41,31 +40,29 @@ public class TeamDao extends AbstractDao<Team>{
         PrintWriter out = new PrintWriter(new FileWriter("data/team.csv"));
         
         Iterator<Team> teams = this.list();
-        
-        // List에 보관된 데이터를 board.csv 파일에 저장한다.
-        // 기존에 저장된 데이터를 덮어쓴다. 즉 처음부터 다시 저장한다.
         while (teams.hasNext()) {
             Team team = teams.next();
             out.printf("%s,%s,%d,%s,%s\n", 
-                    team.getName(), team.getDescription(), team.getMaxQty(), 
-                    team.getStartDate(), team.getEndDate());
+                    team.getName(), team.getDescription(),
+                    team.getMaxQty(), team.getStartDate(),
+                    team.getEndDate());
         }
         out.close();
     }
     
     public int indexOf(Object key) {
         String name = (String) key;
-        
         for (int i = 0; i < collection.size(); i++) {
-            if (name.equalsIgnoreCase(collection.get(i).getName().toLowerCase())) {
+            if (name.equalsIgnoreCase(collection.get(i).getName())) {
                 return i;
             }
         }
         return -1;
     }
-
 }
 
+//ver 23 - @Component 애노테이션을 붙인다.
+//ver 22 - 추상 클래스 AbstractDao를 상속 받는다.
 //ver 19 - 우리 만든 ArrayList 대신 java.util.LinkedList를 사용하여 목록을 다룬다. 
 //ver 18 - ArrayList 클래스를 적용하여 객체(의 주소) 목록을 관리한다.
 //ver 16 - 인스턴스 변수를 직접 사용하는 대신 겟터, 셋터 사용.

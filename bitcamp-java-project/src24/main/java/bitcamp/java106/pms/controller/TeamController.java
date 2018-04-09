@@ -1,4 +1,4 @@
-// 팀 관련 기능을 모아 둔 클래스
+// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller;
 
 import java.sql.Date;
@@ -11,9 +11,8 @@ import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
 
 @Component("team")
-public class TeamController implements Controller  {
-    // 이 클래스를 사용하기 전에 App 클래스에서 준비한 Scanner 객체를
-    // keyScan 변수에 저장하라!
+public class TeamController implements Controller {
+
     Scanner keyScan;
     TeamDao teamDao;
     
@@ -21,6 +20,7 @@ public class TeamController implements Controller  {
         this.keyScan = scanner;
         this.teamDao = teamDao;
     }
+
     public void service(String menu, String option) {
         if (menu.equals("team/add")) {
             this.onTeamAdd();
@@ -42,14 +42,14 @@ public class TeamController implements Controller  {
         Team team = new Team();
 
         System.out.print("팀명? ");
-        team.setName(keyScan.nextLine());
+        team.setName(this.keyScan.nextLine());
 
         System.out.print("설명? ");
-        team.setDescription(keyScan.nextLine());
+        team.setDescription(this.keyScan.nextLine());
 
         System.out.print("최대인원? ");
-        team.setMaxQty(keyScan.nextInt());
-        keyScan.nextLine(); 
+        team.setMaxQty(this.keyScan.nextInt());
+        this.keyScan.nextLine(); 
 
         System.out.print("시작일? ");
         team.setStartDate(Date.valueOf(this.keyScan.nextLine()));
@@ -57,8 +57,6 @@ public class TeamController implements Controller  {
         System.out.print("종료일? ");
         team.setEndDate(Date.valueOf(this.keyScan.nextLine()));
 
-        // 팀 정보가 담겨있는 객체의 주소를 배열에 보관한다.
-        //this.teams[this.teamIndex++] = team;
         teamDao.insert(team);
     }
 
@@ -106,28 +104,25 @@ public class TeamController implements Controller  {
         if (team == null) {
             System.out.println("해당 이름의 팀이 없습니다.");
         } else {
-            //Team team = teams[i];
             Team updateTeam = new Team();
-            System.out.printf("팀명? %s\n", team.getName());
-            //updateTeam.name = keyScan.nextLine();
+            System.out.printf("팀명 : %s\n", team.getName());
             updateTeam.setName(team.getName());
             System.out.printf("설명(%s)? ", team.getDescription());
-            updateTeam.setDescription(keyScan.nextLine());
+            updateTeam.setDescription(this.keyScan.nextLine());
             System.out.printf("최대인원(%d)? ", team.getMaxQty());
-            updateTeam.setMaxQty(keyScan.nextInt());
-            keyScan.nextLine();
+            updateTeam.setMaxQty(this.keyScan.nextInt());
+            this.keyScan.nextLine();
             System.out.printf("시작일(%s)? ", team.getStartDate());
             updateTeam.setStartDate(Date.valueOf(this.keyScan.nextLine()));
             System.out.printf("종료일(%s)? ", team.getEndDate());
             updateTeam.setEndDate(Date.valueOf(this.keyScan.nextLine()));
-            //this.teams[i] = updateTeam;
             
             int index = teamDao.indexOf(updateTeam.getName());
             teamDao.update(index, updateTeam);
             System.out.println("변경하였습니다.");
         }
     }
-            
+
     void onTeamDelete(String name) {
         System.out.println("[팀 정보 삭제]");
         if (name == null) {
@@ -135,19 +130,24 @@ public class TeamController implements Controller  {
             return; 
         }
         
-        
         Team team = teamDao.get(name);
-        
+
         if (team == null) {
             System.out.println("해당 이름의 팀이 없습니다.");
         } else {
-            
             if (Console.confirm("정말 삭제하시겠습니까?")) {
-                //teams[i] = null;
-                teamDao.delete(name);
+                teamDao.delete(team.getName());
                 System.out.println("삭제하였습니다.");
             }
         }
     }
     
 }
+
+//ver 23 - @Component 애노테이션을 붙인다.
+//ver 22 - TaskDao 변경 사항에 맞춰 이 클래스를 변경한다.
+//ver 18 - ArrayList가 적용된 TeamDao를 사용한다.
+//ver 16 - 인스턴스 변수를 직접 사용하는 대신 겟터, 셋터 사용.
+// ver 15 - TeamDao를 생성자에서 주입 받도록 변경.
+// ver 14 - TeamDao를 사용하여 팀 데이터를 관리한다.
+// ver 13 - 시작일, 종료일을 문자열로 입력 받아 Date 객체로 변환하여 저장.

@@ -12,7 +12,7 @@ import bitcamp.java106.pms.domain.Classroom;
 
 @Component
 public class ClassroomDao extends AbstractDao<Classroom> {
-
+    
     public ClassroomDao() throws Exception {
         load();
     }
@@ -20,7 +20,6 @@ public class ClassroomDao extends AbstractDao<Classroom> {
     public void load() throws Exception {
         Scanner in = new Scanner(new FileReader("data/classroom.csv"));
         while (true) {
-            
             try {
                 String[] arr = in.nextLine().split(",");
                 Classroom classroom = new Classroom();
@@ -34,7 +33,6 @@ public class ClassroomDao extends AbstractDao<Classroom> {
                 break;
             }
         }
-        
         in.close();
     }
     
@@ -42,16 +40,16 @@ public class ClassroomDao extends AbstractDao<Classroom> {
         PrintWriter out = new PrintWriter(new FileWriter("data/classroom.csv"));
         
         Iterator<Classroom> classrooms = this.list();
-        
         while (classrooms.hasNext()) {
             Classroom classroom = classrooms.next();
-            out.printf("%d,%s,%s,%s,%s\n", classroom.getNo(), classroom.getTitle(),
-                    classroom.getStartDate(), classroom.getEndDate(), 
+            out.printf("%d,%s,%s,%s,%s\n",
+                    classroom.getNo(), classroom.getTitle(),
+                    classroom.getStartDate(), classroom.getEndDate(),
                     classroom.getRoom().equals("") ? " " : classroom.getRoom());
         }
         out.close();
-    
     }
+    
     
     public int indexOf(Object key) {
         int classroomNo = (Integer) key;
@@ -62,5 +60,12 @@ public class ClassroomDao extends AbstractDao<Classroom> {
         }
         return -1;
     }
-    
 }
+
+//ver 23 - @Component 애노테이션을 붙인다.
+//ver 22 - 추상 클래스 AbstractDao를 상속 받는다.
+//ver 20 - 클래스 추가
+
+
+
+

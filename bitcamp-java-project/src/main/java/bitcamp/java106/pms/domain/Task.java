@@ -34,6 +34,9 @@ public class Task {
         return no;
     }
     public void setNo(int no) {
+        if (no >= count) {
+            count = no;
+        }
         this.no = no;
     }
     public int getState() {

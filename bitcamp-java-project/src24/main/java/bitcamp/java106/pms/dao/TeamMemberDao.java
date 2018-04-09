@@ -14,7 +14,8 @@ import bitcamp.java106.pms.annotation.Component;
 
 @Component
 public class TeamMemberDao {
-    private HashMap<String, ArrayList<String>> collection = new HashMap<>(); 
+    
+    private HashMap<String, ArrayList<String>> collection = new HashMap<>();
     
     public TeamMemberDao() throws Exception {
         load();
@@ -23,7 +24,6 @@ public class TeamMemberDao {
     public void load() throws Exception {
         Scanner in = new Scanner(new FileReader("data/teammember.csv"));
         while (true) {
-            
             try {
                 String[] arr = in.nextLine().split(":");
                 String[] idList = arr[1].split(",");
@@ -32,21 +32,19 @@ public class TeamMemberDao {
                     list.add(id);
                 }
                 collection.put(arr[0], list);
-            } catch (Exception e) {
-                break;
+            } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
+                //e.printStackTrace();
+                break; // 반복문을 나간다.
             }
         }
-        
         in.close();
     }
     
     public void save() throws Exception {
         PrintWriter out = new PrintWriter(new FileWriter("data/teammember.csv"));
-        
-        Set<String> keyList = this.collection.keySet();
+        Set<String> keyList = collection.keySet();
         for (String key : keyList) {
             List<String> idList = collection.get(key);
-            
             out.printf("%s:", key);
             for (String id : idList) {
                 out.printf("%s,", id);
@@ -56,20 +54,16 @@ public class TeamMemberDao {
         out.close();
     }
     
-    
-    
-    
-    
     public int addMember(String teamName, String memberId) {
         String teamNameLC = teamName.toLowerCase();
         String memberIdLC = memberId.toLowerCase();
+        
         // 팀 이름으로 멤버 아이디가 들어 있는 ArrayList를 가져온다.
         ArrayList<String> members = collection.get(teamNameLC);
         if (members == null) { // 해당 팀의 멤버가 추가된 적이 없다면,
             members = new ArrayList<>();
             members.add(memberIdLC);
             collection.put(teamNameLC, members);
-            // 컬렉션에               팀이름으로          members 주소를 저장
             return 1;
         }
         
@@ -77,9 +71,8 @@ public class TeamMemberDao {
         if (members.contains(memberIdLC)) {
             return 0;
         }
-        members.add(memberId.toLowerCase());
         
-        collection.put(teamNameLC, members); 
+        members.add(memberIdLC);
         return 1;
     }
     
@@ -88,10 +81,9 @@ public class TeamMemberDao {
         String memberIdLC = memberId.toLowerCase();
         
         ArrayList<String> members = collection.get(teamNameLC);
-        if (members == null || !members.contains(memberIdLC)) {
-            // 그 방의 주소가 없거나 or 그 방에 들어있는 memberIdLC 값이 없으면
+        if (members == null || !members.contains(memberIdLC)) 
             return 0;
-        }
+
         members.remove(memberIdLC);
         return 1;
     }
@@ -102,26 +94,34 @@ public class TeamMemberDao {
             return null;
         return members.iterator();
     }
-        // 멤버의 목록을 관리하는 getMembers() 메소드 에는 TeamMemberController에게
-        // 리턴 타입으로 ArrayList<String>을 하게 되면 ArrayList 를 통채로 주게 된다.
-        // Iterator를 쓰는 이유는 그 안에 있는 메소드는 값을 꺼내는 hasNext(), next() 밖에
-        // 없기 때문에 따로 add나 delete 등을 할 수가 없다.
     
     public boolean isExist(String teamName, String memberId) {
         String teamNameLC = teamName.toLowerCase();
         String memberIdLC = memberId.toLowerCase();
+        
         // 팀 이름으로 멤버 아이디가 들어 있는 ArrayList를 가져온다.
         ArrayList<String> members = collection.get(teamNameLC);
-        if (members == null || !members.contains(memberIdLC)) {
+        if (members == null || !members.contains(memberIdLC)) 
             return false;
-        }
+        
         return true;
     }
-    
-}    
-    
+}
+
 // 용어 정리!
 // 메서드 시그너처(method signature) = 함수 프로토타입(function prototype)
 // => 메서드의 이름과 파라미터 형식, 리턴 타입에 대한 정보를 말한다.
-// ver 18 - ArrayList를 적용하여 객체(의 주소) 목록을 관리한다.
-// ver 17 - 클래스 추가
+
+//ver 23 - @Component 애노테이션을 붙인다.
+//ver 19 - 우리 만든 ArrayList 대신 java.util.LinkedList를 사용하여 목록을 다룬다. 
+//ver 18 - ArrayList를 적용하여 객체(의 주소) 목록을 관리한다.
+//ver 17 - 클래스 추가
+
+
+
+
+
+
+
+
+

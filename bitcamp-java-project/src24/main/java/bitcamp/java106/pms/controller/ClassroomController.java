@@ -1,3 +1,4 @@
+// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller;
 
 import java.sql.Date;
@@ -10,9 +11,8 @@ import bitcamp.java106.pms.domain.Classroom;
 import bitcamp.java106.pms.util.Console;
 
 @Component("classroom")
-public class ClassroomController implements Controller  {
+public class ClassroomController implements Controller {
     Scanner keyScan;
-
     ClassroomDao classroomDao;
     
     public ClassroomController(Scanner scanner, ClassroomDao classroomDao) {
@@ -33,12 +33,11 @@ public class ClassroomController implements Controller  {
             System.out.println("명령어가 올바르지 않습니다.");
         }
     }
-
     void onAdd() {
         System.out.println("[수업 등록]");
         Classroom classroom = new Classroom();
 
-        System.out.print("제목? ");
+        System.out.print("수업명? ");
         classroom.setTitle(this.keyScan.nextLine());
 
         System.out.print("시작일? ");
@@ -52,18 +51,18 @@ public class ClassroomController implements Controller  {
         
         classroomDao.insert(classroom);
     }
-    
+
     void onList() {
         System.out.println("[수업 목록]");
         Iterator<Classroom> iterator = classroomDao.list();
         while (iterator.hasNext()) {
             Classroom classroom = iterator.next();
             System.out.printf("%d, %s, %s ~ %s, %s\n",
-                    classroom.getNo(), classroom.getTitle(), classroom.getStartDate(), 
-                    classroom.getEndDate(), classroom.getRoom());
+                classroom.getNo(), classroom.getTitle(), 
+                classroom.getStartDate(), classroom.getEndDate(),
+                classroom.getRoom());
         }
     }
-    
 
     void onUpdate(String option) {
         System.out.println("[수업 정보 변경]");
@@ -74,7 +73,7 @@ public class ClassroomController implements Controller  {
             System.out.println("번호를 입력하시기 바랍니다.");
             return;
         }
-                                                                                   
+        
         Classroom classroom = classroomDao.get(Integer.parseInt(str));
         
         if (classroom == null) {
@@ -84,33 +83,33 @@ public class ClassroomController implements Controller  {
         
         Classroom updateClassroom = new Classroom();
         updateClassroom.setNo(classroom.getNo());
-
+        
         System.out.printf("수업명(%s)? ", classroom.getTitle());
         str = this.keyScan.nextLine();
-        if (str.length() == 0) 
+        if (str.length() == 0)
             updateClassroom.setTitle(classroom.getTitle());
-        else
+        else 
             updateClassroom.setTitle(str);
         
         System.out.printf("시작일(%s)? ", classroom.getStartDate());
         str = this.keyScan.nextLine();
-        if (str.length() == 0) 
+        if (str.length() == 0)
             updateClassroom.setStartDate(classroom.getStartDate());
-        else
+        else 
             updateClassroom.setStartDate(Date.valueOf(str));
         
         System.out.printf("종료일(%s)? ", classroom.getEndDate());
         str = this.keyScan.nextLine();
-        if (str.length() == 0) 
+        if (str.length() == 0)
             updateClassroom.setEndDate(classroom.getEndDate());
-        else
+        else 
             updateClassroom.setEndDate(Date.valueOf(str));
         
         System.out.printf("교실명(%s)? ", classroom.getRoom());
         str = this.keyScan.nextLine();
-        if (str.length() == 0) 
+        if (str.length() == 0)
             updateClassroom.setRoom(classroom.getRoom());
-        else
+        else 
             updateClassroom.setRoom(str);
         
         if (Console.confirm("변경하시겠습니까?")) {
@@ -120,13 +119,11 @@ public class ClassroomController implements Controller  {
         } else {
             System.out.println("취소하였습니다.");
         }
-        
-        
     }
-    
+
     void onDelete(String option) {
         System.out.println("[수업 정보 삭제]");
-        
+
         System.out.print("삭제할 수업 번호? ");
         String str = keyScan.nextLine();
         if (str.length() == 0) {
@@ -146,6 +143,9 @@ public class ClassroomController implements Controller  {
             }
         }
     }
-    
+
 }
-// ver 20 - 클래스 추가
+
+//ver 23 - @Component 애노테이션을 붙인다. ClassroomDao를 받도록 생성자 변경.
+//ver 22 - ClassroomDao 변경 사항에 맞춰 이 클래스를 변경한다.
+//ver 20 - 클래스 추가

@@ -8,9 +8,9 @@ public class Console {
     public static Scanner keyScan;
 
     public static boolean confirm(String message) {
-        System.out.printf("%s (y,N)", message);
+        System.out.printf("%s (y/N)", message);
         String input = keyScan.nextLine().toLowerCase();
-        if(input.equals("y")) 
+        if (input.equals("y")) 
             return true;
         else
             return false;
@@ -20,5 +20,9 @@ public class Console {
         System.out.print("명령> ");
         return keyScan.nextLine().toLowerCase().split(" ");
     }
-    
 }
+
+
+
+
+
