@@ -1,7 +1,6 @@
 package step21.ex05;
 
 public class BoardException extends RuntimeException {
-
     // 이 클래스는 생성자가 호출될 때 그와 대응하는 수퍼 클래스의 생성자를 호출하는
     // 일 외에는 다른 작업을 수행하지 않는다.
     //
