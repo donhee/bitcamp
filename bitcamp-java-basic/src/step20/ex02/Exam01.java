@@ -12,7 +12,7 @@ public class Exam01 {
         if (obj == null) {
             System.out.println("MyAnnotation을 추출할 수 없습니다");
         }
-    
+     
         // => 유지정책 : SOURCE
         MyAnnotation2 obj2 = (MyAnnotation2) clazz.getAnnotation(MyAnnotation2.class);
         if (obj2 == null) {

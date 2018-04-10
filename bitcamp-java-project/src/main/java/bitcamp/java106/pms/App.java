@@ -1,6 +1,5 @@
 package bitcamp.java106.pms;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -12,8 +11,6 @@ import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
-import bitcamp.java106.pms.domain.Member;
-import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
 
 public class App {
@@ -93,11 +90,7 @@ public class App {
                 onHelp();
             } else {
                 try {
-                    int slashIndex = menu.lastIndexOf("/");
-                    String controllerKey = (slashIndex < 0) ? 
-                            menu : menu.substring(0, slashIndex);
-                    
-                    Controller controller = (Controller) iocContainer.getBean(controllerKey);
+                    Controller controller = (Controller) iocContainer.getBean(menu);
                     
                     if (controller != null) {
                         controller.service(menu, option);
