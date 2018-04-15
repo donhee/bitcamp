@@ -32,7 +32,7 @@ public class Exam01_2 {
         in.read(bytes);
         member.name = new String(bytes, "UTF-8");
         
-        member.age = in.read() << 24;
+        member.age =  in.read() << 24;
         member.age += in.read() << 16;
         member.age += in.read() << 8;
         member.age += in.read();

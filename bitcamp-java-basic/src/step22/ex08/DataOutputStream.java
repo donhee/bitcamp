@@ -15,6 +15,12 @@ public class DataOutputStream extends OutputStream {
         this.out = out;
     }
     
+    @Override
+    public void write(int b) throws IOException {
+        // 생성자에서 받은 출력 객체의 write() 메서드를 사용
+        out.write(b);
+    }
+    
     public void writeUTF(String str) throws Exception {
         // 생성자에서 받은 출력 객체의 write() 메서드를 사용하여 문자열 출력
         byte[] bytes = str.getBytes("UTF-8");
@@ -56,12 +62,6 @@ public class DataOutputStream extends OutputStream {
         out.close();
     }
 
-    @Override
-    public void write(int b) throws IOException {
-        // 생성자에서 받은 출력 객체의 write() 메서드를 사용
-        out.write(b);
-    }
-    
 }
 
 

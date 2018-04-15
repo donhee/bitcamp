@@ -2,7 +2,6 @@
 // 플러그인(decorator) 클래스도 InputStream의 가족이 되어야 한다.
 package step22.ex08;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 

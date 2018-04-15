@@ -15,6 +15,14 @@ public class DataInputStream extends InputStream {
         this.in = in;
     }
     
+    @Override
+    public int read() throws IOException {
+        // 상속 받은 read() 추상메서드이기 때문에 구현하였지만,
+        // 플러그인으로서 사용되는 이 클래스 입장에서는
+        // 아무런 일도 하지 않는다.
+        return 0;
+    }
+    
     public String readUTF() throws Exception {
         // 생성자에서 받은 입력 객체의 read() 메서드를 사용하여 문자열 출력
         int size = in.read(); 
@@ -62,14 +70,6 @@ public class DataInputStream extends InputStream {
         in.close();
     }
 
-    @Override
-    public int read() throws IOException {
-        // 상속 받은 read() 추상메서드이기 때문에 구현하였지만,
-        // 플러그인으로서 사용되는 이 클래스 입장에서는
-        // 아무런 일도 하지 않는다.
-        return 0;
-    }
-    
 }
 
 

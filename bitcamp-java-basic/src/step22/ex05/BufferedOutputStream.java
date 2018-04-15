@@ -35,6 +35,7 @@ public class BufferedOutputStream extends FileOutputStream {
     @Override
     public void flush() throws IOException {
         if (cursor > 0) { // 버퍼에 남아있는 데이터가 있다면
+            // cursor == 0 : 데이터가 없다는것; 0보다 크면 데이터가 있다는것
             this.write(buf, 0, cursor);
             cursor = 0;
         }

@@ -11,10 +11,10 @@ public class ByteArrayDataInputStream extends ByteArrayInputStream{
 
     public String readUTF() throws Exception {
         // 상속 받은 read() 메서드를 사용하여 문자열 출력
-        byte[] bytes = new byte[100];
         int size = this.read(); 
-        this.read(bytes, 0, size); // 이름 배열 개수 만큼 바이트를 읽어 배열에 저장한다.
-        return new String(bytes, 0, size, "UTF-8");
+        byte[] bytes = new byte[size];
+        this.read(bytes); // 이름 배열 개수 만큼 바이트를 읽어 배열에 저장한다.
+        return new String(bytes, "UTF-8");
     }
     
     public int readInt() throws Exception {
@@ -44,7 +44,7 @@ public class ByteArrayDataInputStream extends ByteArrayInputStream{
     
     public boolean readBoolean() throws Exception {
         // 상속 받은 read() 메서드를 사용하여 boolean 값 출력
-        if (this.read()==1) 
+        if (this.read() == 1) 
             return true;
         else 
             return false;

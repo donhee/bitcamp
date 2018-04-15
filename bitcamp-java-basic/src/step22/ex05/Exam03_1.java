@@ -1,4 +1,4 @@
-// BufferedInputStream 사용 후 - 
+// BufferedInputStream 사용 후 - 데이터 읽는데 걸린 시간 측정
 package step22.ex05;
 
 public class Exam03_1 {
