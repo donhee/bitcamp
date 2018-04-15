@@ -1,48 +1,38 @@
-// 파일 보내기
+// 클라이언트 + 키보드 입력 + 무한 반복
 package step23.ex01;
 
-import java.io.BufferedInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class Sender3 {
 
     public static void main(String[] args) throws Exception {
-        File file = new File("temp/jls8.pdf");
+        Scanner keyScan = new Scanner(System.in);
         
-        FileInputStream fileIn = new FileInputStream(file);
-        System.out.println("서버에 연결 중...");
         Socket socket = new Socket("192.168.0.49", 8888);
-        System.out.println("서버에 연결 완료!");
-        
-        DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+
+        PrintStream out = new PrintStream(socket.getOutputStream());
         Scanner in = new Scanner(socket.getInputStream());
         
-        System.out.println("서버에 데이터 송신 중...");
-        //1) 파일 크기 보내기
-        out.writeLong(file.length());
-        
-        //2) 파일 이름 보내기
-        out.writeUTF(file.getName());
-        
-        //3) 파일 데이터 보내기
-        int b;
-        while ((b = fileIn.read()) != -1) {
-            out.write(b);
+        while (true) {
+            // 키보드 입력을 받아서 서버에게 전송한다.
+            System.out.print("입력> ");
+            String input = keyScan.nextLine();
+            out.println(input);
+    
+            // 서버가 보낸 데이터를 수신한다.
+            String str = in.nextLine();
+            System.out.println(str);
+            
+            if (input.equals("quit"))
+                break;
         } 
-        System.out.println("서버에 데이터 송신 완료!");
         
-        //4) 서버의 응답받기
-        String response = in.nextLine();
-        System.out.println(response);
-
         in.close();
         out.close();
         socket.close();
-        fileIn.close();
+        keyScan.close();
     }
 
 }
