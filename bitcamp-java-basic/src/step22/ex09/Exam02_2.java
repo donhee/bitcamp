@@ -11,6 +11,8 @@ public class Exam02_2 {
         FileOutputStream fileOut = new FileOutputStream("temp/test9_3.data");
         BufferedOutputStream bufOut = new BufferedOutputStream(fileOut);
         ObjectOutputStream out = new ObjectOutputStream(bufOut);
+        // ObjectOutputStream을 사용하면 객체를 저장할 수 있지만 파일에 직접 연결할 수는 없다.
+        // 그래서 보조 객체가 필요한 것이다.
         
         Member2 member = new Member2();
         member.name = "AB가각간";
