@@ -4,7 +4,7 @@ package step23.ex04;
 import java.io.DataOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
-
+ 
 //stateful 방식
 //=> 한 번 연결한 후 여러 번 요청/응답하는 방식
 //=> 단점: 
