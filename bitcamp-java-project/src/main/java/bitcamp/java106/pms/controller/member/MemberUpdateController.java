@@ -1,48 +1,40 @@
 // Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller.member;
 
-import java.util.Scanner;
+import java.io.PrintWriter;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.domain.Member;
+import bitcamp.java106.pms.server.ServerRequest;
+import bitcamp.java106.pms.server.ServerResponse;
 
-@Component("member/update")
+@Component("/member/update")
 public class MemberUpdateController implements Controller {
-    Scanner keyScan;
-
     MemberDao memberDao;
     
-    public MemberUpdateController(Scanner scanner, MemberDao memberDao) {
-        this.keyScan = scanner;
+    public MemberUpdateController(MemberDao memberDao) {
         this.memberDao = memberDao;
     }
 
-    public void service(String menu, String option) {
+    public void service(ServerRequest request, ServerResponse response) {
+        PrintWriter out = response.getWriter();
+        String id = request.getParameter("id");
         
-        System.out.println("[회원 정보 변경]");
-        if (option == null) {
-            System.out.println("아이디를 입력하시기 바랍니다.");
-            return;
-        }
-        
-        Member member = memberDao.get(option);
+        Member member = memberDao.get(id);
 
         if (member == null) {
-            System.out.println("해당 아이디의 회원이 없습니다.");
+            out.println("해당 아이디의 회원이 없습니다.");
         } else {
             Member updateMember = new Member();
-            System.out.printf("아이디: %s\n", member.getId());
-            updateMember.setId(member.getId());
-            System.out.printf("이메일(%s)? ", member.getEmail());
-            updateMember.setEmail(this.keyScan.nextLine());
-            System.out.printf("암호? ");
-            updateMember.setPassword(this.keyScan.nextLine());
+            updateMember.setId(request.getParameter("id"));
+            updateMember.setEmail(request.getParameter("email"));
+            updateMember.setPassword(request.getParameter("pw"));
             
             int index = memberDao.indexOf(member.getId());
             memberDao.update(index, updateMember);
-            System.out.println("변경하였습니다.");
+            out.println("변경하였습니다.");
         }
     }
    

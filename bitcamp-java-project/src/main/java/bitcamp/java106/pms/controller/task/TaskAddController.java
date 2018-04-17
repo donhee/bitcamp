@@ -13,7 +13,7 @@ import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
 
-@Component("task/add")
+//@Component("task/add")
 public class TaskAddController implements Controller {
     
     Scanner keyScan;

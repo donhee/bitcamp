@@ -1,46 +1,41 @@
 package bitcamp.java106.pms.controller.board;
 
-import java.util.Scanner;
+import java.io.PrintWriter;
+import java.sql.Date;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.domain.Board;
+import bitcamp.java106.pms.server.ServerRequest;
+import bitcamp.java106.pms.server.ServerResponse;
 
-@Component("board/update")
+@Component("/board/update")
 public class BoardUpdateController implements Controller {
-    Scanner keyScan;
     BoardDao boardDao;
     
-    public BoardUpdateController(Scanner scanner, BoardDao boardDao) {
-        this.keyScan = scanner;
+    public BoardUpdateController(BoardDao boardDao) {
         this.boardDao = boardDao;
     }
     
-    public void service(String menu, String option) {
+    @Override
+    public void service(ServerRequest request, ServerResponse response) {
+        PrintWriter out = response.getWriter();
         
-        System.out.println("[게시물 변경]");
-        if (option == null) {
-            System.out.println("번호를 입력하시기 바랍니다.");
-            return;
-        }
+        Board updateBoard = new Board();
+        updateBoard.setNo(Integer.parseInt(request.getParameter("no")));
+        updateBoard.setTitle(request.getParameter("title"));
+        updateBoard.setContent(request.getParameter("content"));
+        updateBoard.setCreatedDate(new Date(System.currentTimeMillis()));
         
-        Board board = boardDao.get(Integer.parseInt(option));
+        Board board = boardDao.get(updateBoard.getNo());
         
         if (board == null) {
-            System.out.println("유효하지 않은 게시물 번호입니다.");
+            out.println("유효하지 않은 게시물 번호입니다.");
         } else {
-            Board updateBoard = new Board();
-            updateBoard.setNo(board.getNo());
-            System.out.printf("제목(%s)? ", board.getTitle());
-            updateBoard.setTitle(this.keyScan.nextLine());
-            System.out.printf("설명(%s)? ", board.getContent());
-            updateBoard.setContent(this.keyScan.nextLine());
-            updateBoard.setCreatedDate(board.getCreatedDate());
-            
-            int index = boardDao.indexOf(board.getNo());
+            int index = boardDao.indexOf(updateBoard.getNo());
             boardDao.update(index, updateBoard);
-            System.out.println("변경하였습니다.");
+            out.println("변경하였습니다.");
         }
     }
     
