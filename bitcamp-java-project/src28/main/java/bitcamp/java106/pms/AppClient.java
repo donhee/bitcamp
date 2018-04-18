@@ -22,13 +22,13 @@ public class AppClient {
             int colonIndex = str.indexOf(':'); // : 위치 알아내기
             int slashIndex = str.indexOf('/');
             if (colonIndex != -1) {// 찾았다면
-                // 192.168.0.7:8888/board/list
+                // 192.168.0.7:/board/lis8888t
                 serverAddr = str.substring(0, colonIndex);
                 port = Integer.parseInt(
                         str.substring(colonIndex + 1, slashIndex));
             } else {
                 // 포트 번호가 없다면; default 값이면; default 값은 80
-             // 예) http://192.168.0.7/board/list
+             // 예) 192.168.0.7/board/list
                 serverAddr = str.substring(0, slashIndex);
                 port = 80;
             }
