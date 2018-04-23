@@ -47,7 +47,7 @@ public class Exam03_3 {
                     rs.getString("cont"), 
                     rs.getDate("rdt"));
             
-            // DBMS에 설정된 컬럼의 타입에 따라 getXxx)를 호출하면 된다.
+            // DBMS에 설정된 컬럼의 타입에 따라 getXxx()를 호출하면 된다.
             // int, number        => getInt()
             // char,varchar, text => getString()
             // date, datetime     => getDate()
