@@ -22,7 +22,7 @@ public class TeamAddController implements Controller {
     @Override
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
-        
+
         Team team = new Team();
 
         team.setName(request.getParameter("name"));
@@ -30,10 +30,14 @@ public class TeamAddController implements Controller {
         team.setMaxQty(Integer.parseInt(request.getParameter("maxQty")));
         team.setStartDate(Date.valueOf(request.getParameter("startDate")));
         team.setEndDate(Date.valueOf(request.getParameter("endDate")));
-
-        teamDao.insert(team);
         
-        out.println("팀명 입력 성공!");
+        try {
+            teamDao.insert(team);
+            out.println("팀명 등록 성공!");
+        } catch (Exception e) {
+            out.println("팀명 등록 실패!");
+            e.printStackTrace(out);
+        }
     }
 
 }

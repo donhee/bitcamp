@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.ClassroomDao;
-import bitcamp.java106.pms.domain.Classroom;
 import bitcamp.java106.pms.server.ServerRequest;
 import bitcamp.java106.pms.server.ServerResponse;
 
@@ -23,13 +22,17 @@ public class ClassroomDeleteController implements Controller {
         PrintWriter out = response.getWriter();
         int no = Integer.parseInt(request.getParameter("no"));
         
-        Classroom classroom = classroomDao.get(no);
-        
-        if (classroom == null) {
-            out.println("유효하지 않은 게시물 번호입니다.");
-        } else {
-            classroomDao.delete(no);
-            out.println("삭제하였습니다.");
+        try {
+            int count = classroomDao.delete(no);
+            
+            if (count == 0) {
+                out.println("유효하지 않은 교실 번호입니다.");
+            } else {
+                out.println("삭제하였습니다.");
+            }
+        } catch (Exception e) {
+            out.println("삭제 실패!");
+            e.printStackTrace(out);
         }
         
     }

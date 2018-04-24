@@ -21,16 +21,21 @@ public class TeamViewController implements Controller {
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
         
-        Team team = teamDao.get(request.getParameter("name"));
-
-        if (team == null) {
-            out.println("해당 이름의 팀이 없습니다.");
-        } else {
-            out.printf("팀명: %s\n", team.getName());
-            out.printf("설명: %s\n", team.getDescription());
-            out.printf("최대인원: %d\n", team.getMaxQty());
-            out.printf("기간: %s ~ %s\n", 
-                team.getStartDate(), team.getEndDate());
+        try {
+            Team team = teamDao.selectOne(request.getParameter("name"));
+    
+            if (team == null) {
+                out.println("해당 이름의 팀이 없습니다.");
+            } else {
+                out.printf("팀명: %s\n", team.getName());
+                out.printf("설명: %s\n", team.getDescription());
+                out.printf("최대인원: %d\n", team.getMaxQty());
+                out.printf("기간: %s ~ %s\n", 
+                    team.getStartDate(), team.getEndDate());
+            }
+        } catch (Exception e) {
+            out.println("상세조회 실패");
+            e.printStackTrace(out);
         }
     }
 

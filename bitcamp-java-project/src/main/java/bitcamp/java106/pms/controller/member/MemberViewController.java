@@ -21,14 +21,20 @@ public class MemberViewController implements Controller {
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
         
-        Member member = memberDao.get(request.getParameter("id"));
-
-        if (member == null) {
-            out.println("해당 아이디의 회원이 없습니다.");
-        } else {
-            out.printf("아이디: %s\n", member.getId());
-            out.printf("이메일: %s\n", member.getEmail());
-            out.printf("암호: %s\n", member.getPassword());
+        try {
+            Member member = memberDao.selectOne(request.getParameter("id"));
+    
+            if (member == null) {
+                out.println("해당 아이디의 회원이 없습니다.");
+            } else {
+                out.printf("아이디: %s\n", member.getId());
+                out.printf("이메일: %s\n", member.getEmail());
+                out.printf("암호: -\n");
+            }
+            
+        } catch (Exception e) {
+            out.println("상세조회 실패");
+            e.printStackTrace(out);
         }
     }
     

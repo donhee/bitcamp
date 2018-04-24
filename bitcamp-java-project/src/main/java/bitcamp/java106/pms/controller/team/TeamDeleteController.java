@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.TeamDao;
-import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.server.ServerRequest;
 import bitcamp.java106.pms.server.ServerResponse;
 
@@ -22,13 +21,17 @@ public class TeamDeleteController implements Controller {
         PrintWriter out = response.getWriter();
         String name = request.getParameter("name");
 
-        Team team = teamDao.get(name);
-
-        if (team == null) {
-            out.println("해당 이름의 팀이 없습니다.");
-        } else {
-            teamDao.delete(name);
-            out.println("삭제하였습니다.");
+        try {
+            int count = teamDao.delete(name);
+            
+            if (count == 0) {
+                out.println("해당 이름의 팀이 없습니다.");
+            } else {
+                out.println("삭제하였습니다.");
+            }
+        } catch (Exception e) {
+            out.println("삭제 실패!");
+            e.printStackTrace(out);
         }
     }
     

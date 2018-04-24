@@ -6,24 +6,21 @@ import java.sql.Date;
 public class Board implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static int count = 1;
-    
     private int no;
     private String title;
     private String content;
     private Date createdDate;
     
-    public Board() {
-        this.no = count++;
+    // 개발하는 동안 객체의 내용을 확인하기 이해서 오버라이딩 한다.
+    @Override
+    public String toString() {
+        return "Board [no=" + no + ", title=" + title + ", content=" + content + ", createdDate=" + createdDate + "]";
     }
     
     public int getNo() {
         return no;
     }
     public void setNo(int no) {
-        if (no >= count) {
-            count = no + 1;
-        }
         this.no = no;
     }
     public String getTitle() {
@@ -47,4 +44,5 @@ public class Board implements Serializable {
     
     
 }
+// ver31 - 생성자 제거 count 제거
 // ver 27 - java.io.Serializable 인터페이스 구현

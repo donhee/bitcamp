@@ -1,63 +1,127 @@
 package bitcamp.java106.pms.dao;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Iterator;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Team;
 
 @Component
-public class TeamDao extends AbstractDao<Team> {
-    
-    public TeamDao() throws Exception {
-        this.load();
+public class TeamDao {
+    public int delete(String name) throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
+                "java106", 
+                "1111");
+        
+            PreparedStatement stmt = con.prepareStatement(
+                "delete from pms_team where name=?")) {
+            stmt.setString(1, name);
+            return stmt.executeUpdate();   
+        }
     }
     
-    public void load() throws Exception {
+    public List<Team> selectList() throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-                ObjectInputStream in = new ObjectInputStream(
-                               new BufferedInputStream(
-                               new FileInputStream("data/team.data")));
-            ) {
-            
-            while (true) {
-                try {
-                    this.insert((Team) in.readObject());
-                } catch (Exception e){
-                    break;
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
+                "java106", 
+                "1111");
+
+            PreparedStatement stmt = con.prepareStatement(
+                "select name,max_qty,sdt,edt from pms_team");
+    
+            ResultSet rs = stmt.executeQuery()) {
+                
+                ArrayList<Team> arr = new ArrayList<>();
+                while (rs.next()) {
+                    Team team = new Team();
+                    team.setName(rs.getString("name"));
+                    team.setMaxQty(rs.getInt("max_qty"));
+                    team.setStartDate(rs.getDate("sdt"));
+                    team.setEndDate(rs.getDate("edt"));
+                    arr.add(team);
                 }
-            }
-            
+                return arr;
         }
     }
     
-    public void save() throws Exception {
+    public int insert(Team team) throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-                ObjectOutputStream out = new ObjectOutputStream(
-                                         new BufferedOutputStream(
-                                         new FileOutputStream("data/team.data")));
-            ) {
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
+                "java106", 
+                "1111");
+        
+            PreparedStatement stmt = con.prepareStatement(
+                "insert into pms_team(name,dscrt,max_qty,sdt,edt) values(?,?,?,?,?)")) {
             
-            Iterator<Team> teams = this.list();
-            while (teams.hasNext()) {
-                out.writeObject(teams.next());
-            }
+            stmt.setString(1, team.getName());
+            stmt.setString(2, team.getDescription());
+            stmt.setInt(3, team.getMaxQty());
+            stmt.setDate(4, team.getStartDate(), Calendar.getInstance(Locale.KOREAN));
+            stmt.setDate(5, team.getEndDate(), Calendar.getInstance(Locale.KOREAN));
+                
+            return stmt.executeUpdate();
         }
     }
-    
-    public int indexOf(Object key) {
-        String name = (String) key;
-        for (int i = 0; i < collection.size(); i++) {
-            if (name.equalsIgnoreCase(collection.get(i).getName())) {
-                return i;
-            }
+
+    public int update(Team team) throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
+                "java106", 
+                "1111");
+        
+            PreparedStatement stmt = con.prepareStatement(
+                "update pms_team set dscrt=?, max_qty=?, sdt=?, edt=? where name=?")) {
+            
+            stmt.setString(1, team.getDescription());
+            stmt.setInt(2, team.getMaxQty()); 
+            stmt.setDate(3, team.getStartDate(), Calendar.getInstance(Locale.KOREAN));
+            stmt.setDate(4, team.getEndDate(), Calendar.getInstance(Locale.KOREAN));
+            stmt.setString(5, team.getName());
+            return stmt.executeUpdate();
         }
-        return -1;
+    }
+
+    public Team selectOne(String name) throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
+                "java106", 
+                "1111");
+
+            PreparedStatement stmt = con.prepareStatement(
+                "select name,dscrt,max_qty,sdt,edt from pms_team where name=?")) {
+            
+            stmt.setString(1, name);
+            
+            try (ResultSet rs = stmt.executeQuery(); ) {
+                if (!rs.next()) 
+                    return null;
+                
+                Team team = new Team();
+                team.setName(rs.getString("name")); 
+                team.setDescription(rs.getString("dscrt"));
+                team.setMaxQty(rs.getInt("max_qty"));
+                team.setStartDate(rs.getDate("sdt"));
+                team.setEndDate(rs.getDate("edt"));
+                return team;
+            }
+        }    
     }
 }
 

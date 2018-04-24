@@ -2,7 +2,7 @@
 package bitcamp.java106.pms.controller.classroom;
 
 import java.io.PrintWriter;
-import java.util.Iterator;
+import java.util.List;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
@@ -23,13 +23,17 @@ public class ClassroomListController implements Controller {
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
         
-        Iterator<Classroom> iterator = classroomDao.list();
-        while (iterator.hasNext()) {
-            Classroom classroom = iterator.next();
-            out.printf("%d, %s, %s ~ %s, %s\n",
-                classroom.getNo(), classroom.getTitle(), 
-                classroom.getStartDate(), classroom.getEndDate(),
-                classroom.getRoom());
+        try {
+            List<Classroom> list = classroomDao.selectList();
+            for (Classroom classroom : list) {
+                out.printf("%d, %s, %s ~ %s, %s\n",
+                    classroom.getNo(), classroom.getTitle(), 
+                    classroom.getStartDate(), classroom.getEndDate(),
+                    classroom.getRoom());
+            }
+        } catch (Exception e) {
+            out.println("목록 가져오기 실패!");
+            e.printStackTrace(out);
         }
     }
 

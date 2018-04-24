@@ -1,73 +1,122 @@
 package bitcamp.java106.pms.dao;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Iterator;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Board;
 
 @Component
-public class BoardDao extends AbstractDao<Board> {
-    
-    public BoardDao() throws Exception {
-        load();
+public class BoardDao {
+    public int delete(int no) throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
+                "java106", 
+                "1111");
+        
+            PreparedStatement stmt = con.prepareStatement(
+                "delete from pms_board where bno=?")) {
+            stmt.setInt(1, no);
+            return stmt.executeUpdate();   
+        }
     }
     
-    public void load() throws Exception {
+    public List<Board> selectList() throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-                ObjectInputStream in = new ObjectInputStream(
-                               new BufferedInputStream(
-                               new FileInputStream("data/board.data")));
-            ) {
-            
-            while (true) {
-                try {
-                    // 게시물 데이터를 읽을 때 작업 번호가 가장 큰 것으로
-                    // 카운트 값을 설정한다.
-                    Board board = (Board) in.readObject();
-                    if (board.getNo() >= Board.count)
-                        Board.count = board.getNo() + 1;
-                    this.insert(board);
-                } catch (Exception e){
-                    break;
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
+                "java106", 
+                "1111");
+
+            PreparedStatement stmt = con.prepareStatement(
+                "select bno,titl,cdt from pms_board");
+    
+            ResultSet rs = stmt.executeQuery()) {
+                
+                ArrayList<Board> arr = new ArrayList<>();
+                while (rs.next()) {
+                    Board board = new Board();
+                    board.setNo(rs.getInt("bno"));
+                    board.setTitle(rs.getString("titl"));
+                    board.setCreatedDate(rs.getDate("cdt"));
+                    arr.add(board);
                 }
-            }
-            
+                return arr;
         }
     }
     
-    public void save() throws Exception {
+    public int insert(Board board) throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-                ObjectOutputStream out = new ObjectOutputStream(
-                                         new BufferedOutputStream(
-                                         new FileOutputStream("data/board.data")));
-            ) {
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
+                "java106", 
+                "1111");
+        
+            PreparedStatement stmt = con.prepareStatement(
+                "insert into pms_board(titl,cont,cdt) values(?,?,now())")) {
             
-            Iterator<Board> boards = this.list();
-            while (boards.hasNext()) {
-                out.writeObject(boards.next());
-            }
-            
+            stmt.setString(1, board.getTitle());
+            stmt.setString(2, board.getContent());
+        
+            return stmt.executeUpdate();
         }
     }
-    
-    public int indexOf(Object key) {
-        int no = (Integer) key; // Integer ==> int : auto-unboxing
-        for (int i = 0; i < collection.size(); i++) {
-            Board originBoard = collection.get(i);
-            if (originBoard.getNo() == no) {
-                return i;
-            }
+
+    public int update(Board board) throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
+                "java106", 
+                "1111");
+        
+            PreparedStatement stmt = con.prepareStatement(
+                "update pms_board set titl=?, cont=?, cdt=now() where bno=?")) {
+            
+            stmt.setString(1, board.getTitle());
+            stmt.setString(2, board.getTitle()); 
+            stmt.setInt(3, board.getNo());
+            return stmt.executeUpdate();
         }
-        return -1;
+    }
+
+    public Board selectOne(int no) throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
+                "java106", 
+                "1111");
+
+            PreparedStatement stmt = con.prepareStatement(
+                "select bno,titl,cont,cdt from pms_board where bno=?")) {
+            
+            stmt.setInt(1, no);
+            
+            try (ResultSet rs = stmt.executeQuery(); ) {
+                if (!rs.next()) 
+                    return null;
+                
+                Board board = new Board();
+                board.setNo(rs.getInt("bno")); 
+                board.setTitle(rs.getString("titl"));
+                board.setContent(rs.getString("cont"));
+                board.setCreatedDate(rs.getDate("cdt"));
+                return board;
+            }
+        }    
     }
 }
-
+// ver 31 - JDBC API 적용
+// ver 24 - File I/O 적용
 //ver 23 - @Component 애노테이션을 붙인다.
 //ver 22 - 추상 클래스 AbstractDao를 상속 받는다.
 //ver 19 - 우리 만든 ArrayList 대신 java.util.LinkedList를 사용하여 목록을 다룬다. 

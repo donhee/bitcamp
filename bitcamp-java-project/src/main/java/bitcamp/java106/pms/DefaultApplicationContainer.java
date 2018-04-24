@@ -1,7 +1,6 @@
 // ApplicationContainer 구현체
 package bitcamp.java106.pms;
 
-import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 

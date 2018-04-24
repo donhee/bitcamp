@@ -28,10 +28,14 @@ public class ClassroomAddController implements Controller {
         classroom.setEndDate(Date.valueOf(request.getParameter("endDate")));
         classroom.setRoom(request.getParameter("room"));
         
-        classroomDao.insert(classroom);
-        
         PrintWriter out = response.getWriter();
-        out.println("classroom 등록 성공");
+        try {
+            classroomDao.insert(classroom);
+            out.println("classroom 등록 성공");
+        } catch (Exception e) {
+            out.println("등록 실패!");
+            e.printStackTrace(out);
+        }
     }
 
 }

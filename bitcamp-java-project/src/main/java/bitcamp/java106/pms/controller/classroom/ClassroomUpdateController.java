@@ -23,21 +23,24 @@ public class ClassroomUpdateController implements Controller {
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
         
-        Classroom updateClassroom = new Classroom();
-        updateClassroom.setNo(Integer.parseInt(request.getParameter("no")));
-        updateClassroom.setTitle(request.getParameter("title"));
-        updateClassroom.setStartDate(Date.valueOf(request.getParameter("startDate")));
-        updateClassroom.setEndDate(Date.valueOf(request.getParameter("endDate")));
-        updateClassroom.setRoom(request.getParameter("room"));
+        Classroom classroom = new Classroom();
+        classroom.setNo(Integer.parseInt(request.getParameter("no")));
+        classroom.setTitle(request.getParameter("title"));
+        classroom.setStartDate(Date.valueOf(request.getParameter("startDate")));
+        classroom.setEndDate(Date.valueOf(request.getParameter("endDate")));
+        classroom.setRoom(request.getParameter("room"));
         
-        Classroom classroom = classroomDao.get(updateClassroom.getNo());
-        
-        if (classroom == null) {
-            out.println("유효하지 않은 교실 번호입니다.");
-        } else {
-            int index = classroomDao.indexOf(updateClassroom.getNo());
-            classroomDao.update(index, updateClassroom);
-            out.println("변경하였습니다.");
+        try {
+            int count = classroomDao.update(classroom);
+            if (count == 0) {
+                out.println("유효하지 않은 교실 번호입니다.");
+            } else {
+                out.println("변경하였습니다.");
+            }
+            
+        } catch (Exception e) {
+            out.println("변경 실패!");
+            e.printStackTrace(out);
         }
     }
 

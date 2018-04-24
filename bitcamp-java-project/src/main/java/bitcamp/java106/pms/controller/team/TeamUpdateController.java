@@ -23,21 +23,24 @@ public class TeamUpdateController implements Controller {
         PrintWriter out = response.getWriter();
         String name = request.getParameter("name");
         
-        Team team = teamDao.get(name);
-
-        if (team == null) {
-            out.println("해당 이름의 팀이 없습니다.");
-        } else {
-            Team updateTeam = new Team();
-            updateTeam.setName(name);
-            updateTeam.setDescription(request.getParameter("description"));
-            updateTeam.setMaxQty(Integer.parseInt(request.getParameter("maxQty")));
-            updateTeam.setStartDate(Date.valueOf(request.getParameter("startDate")));
-            updateTeam.setEndDate(Date.valueOf(request.getParameter("endDate")));
+        
+        Team team = new Team();
+        team.setName(name);
+        team.setDescription(request.getParameter("description"));
+        team.setMaxQty(Integer.parseInt(request.getParameter("maxQty")));
+        team.setStartDate(Date.valueOf(request.getParameter("startDate")));
+        team.setEndDate(Date.valueOf(request.getParameter("endDate")));
             
-            int index = teamDao.indexOf(name);
-            teamDao.update(index, updateTeam);
-            out.println("변경하였습니다.");
+        try {
+            int count = teamDao.update(team);
+            if (count == 0) {
+                out.println("해당 팀 이름이 없습니다.");
+            } else {
+                out.println("변경하였습니다.");
+            }
+        } catch (Exception e) {
+            out.println("팀원 변경 실패");
+            e.printStackTrace(out);
         }
     }
    

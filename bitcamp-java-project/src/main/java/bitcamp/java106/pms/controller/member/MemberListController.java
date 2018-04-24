@@ -1,7 +1,7 @@
 package bitcamp.java106.pms.controller.member;
 
 import java.io.PrintWriter;
-import java.util.Iterator;
+import java.util.List;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
@@ -21,11 +21,15 @@ public class MemberListController implements Controller {
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
         
-        Iterator<Member> iterator = memberDao.list();
-        while (iterator.hasNext()) {
-            Member member = iterator.next();
-            out.printf("%s, %s, %s\n", 
-                member.getId(), member.getEmail(), member.getPassword());
+        try {
+            List<Member> list = memberDao.selectList();
+            for (Member member : list) {
+                out.printf("%s, %s, -\n", 
+                    member.getId(), member.getEmail());
+            }
+        } catch (Exception e) {
+            out.println("목록 가져오기 실패");
+            e.printStackTrace(out);
         }
     }
    

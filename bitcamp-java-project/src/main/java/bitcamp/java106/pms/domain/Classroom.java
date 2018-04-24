@@ -6,17 +6,11 @@ import java.sql.Date;
 public class Classroom implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static int count = 1;
-    
     private int no;
     private String title;
     private Date startDate;
     private Date endDate;
     private String room;
-    
-    public Classroom() {
-        this.no = count++;
-    }
     
     @Override
     public String toString() {
@@ -28,9 +22,6 @@ public class Classroom implements Serializable {
         return no;
     }
     public void setNo(int no) {
-        if (no >= count) {
-            count = no + 1;
-        }
         this.no = no;
     }
     public String getTitle() {
