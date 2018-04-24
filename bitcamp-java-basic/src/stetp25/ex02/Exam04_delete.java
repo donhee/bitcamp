@@ -1,6 +1,6 @@
 // member + 삭제 + PreparedStatement
 package stetp25.ex02;
-
+  
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.Scanner;
