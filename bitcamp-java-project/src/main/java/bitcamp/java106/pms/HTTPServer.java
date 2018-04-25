@@ -27,7 +27,6 @@ public class HTTPServer {
             //t.start();
             // 클라이언트 요청을 처리할 코드를 기존의 실행흐름에서 분리하여 실행한다.
             // 그리고 바로 새 스레드(실행흐름)의 실행을 시작시킨다.
-            System.out.println("클라이언트 요청 처리중...");
             new RequestProcessorThread(socket).start(); 
             
             // 그리고 기존의 실행은 위의 t 스레드와 상관없이 계속 진행한다.
@@ -79,10 +78,9 @@ public class HTTPServer {
                 out.println(result); // 결과값
                 
             } catch (Exception e) {
-                // HTTP 프로토콜에 따라 응답한다.
                 out.println("HTTP/1.1 500 Internal Server Error");
                 out.println("Content-Type: text/plain;charset=UTF-8");
-                out.println();   // CRLF 빈줄 보내야한다.
+                out.println();   
                 out.println("서버 오류!");
                 e.printStackTrace(out);
                 out.println();

@@ -1,7 +1,6 @@
 package bitcamp.java106.pms.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,16 +10,20 @@ import java.util.Locale;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Classroom;
+import bitcamp.java106.pms.jdbc.DataSource;
 
 @Component
 public class ClassroomDao {
+    
+    DataSource dataSource;
+    
+    public ClassroomDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+    
     public int delete(int no) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", 
-                "1111");
+            Connection con = dataSource.getConnection();
         
             PreparedStatement stmt = con.prepareStatement(
                 "delete from pms_classroom where crno=?")) {
@@ -30,12 +33,8 @@ public class ClassroomDao {
     }
     
     public List<Classroom> selectList() throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", 
-                "1111");
+            Connection con = dataSource.getConnection();
 
             PreparedStatement stmt = con.prepareStatement(
                 "select crno,titl,sdt,edt,room from pms_classroom");
@@ -57,12 +56,8 @@ public class ClassroomDao {
     }
     
     public int insert(Classroom classroom) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", 
-                "1111");
+            Connection con = dataSource.getConnection();
         
             PreparedStatement stmt = con.prepareStatement(
                 "insert into pms_classroom(titl,sdt,edt,room) values(?,?,?,?)")) {
@@ -77,12 +72,8 @@ public class ClassroomDao {
     }
 
     public int update(Classroom classroom) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", 
-                "1111");
+            Connection con = dataSource.getConnection();
         
             PreparedStatement stmt = con.prepareStatement(
                 "update pms_classroom set titl=?, sdt=?, edt=? where crno=?")) {
@@ -96,12 +87,8 @@ public class ClassroomDao {
     }
 
     public Classroom selectOne(int no) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", 
-                "1111");
+            Connection con = dataSource.getConnection();
 
             PreparedStatement stmt = con.prepareStatement(
                 "select crno,titl,sdt,cdt,room from pms_classroom where crno=?")) {
@@ -123,7 +110,8 @@ public class ClassroomDao {
         }    
     }
 }
-
+//ver 32 - DB Connection Pool 적용
+//ver 31 - JDBC API 적용
 //ver 23 - @Component 애노테이션을 붙인다.
 //ver 22 - 추상 클래스 AbstractDao를 상속 받는다.
 //ver 20 - 클래스 추가

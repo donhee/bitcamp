@@ -1,7 +1,6 @@
 package bitcamp.java106.pms.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -13,16 +12,20 @@ import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
+import bitcamp.java106.pms.jdbc.DataSource;
 
 @Component
 public class TaskDao {
+    
+    DataSource dataSource;
+    
+    public TaskDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+    
     public int delete(int no) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", 
-                "1111");
+            Connection con = dataSource.getConnection();
         
             PreparedStatement stmt = con.prepareStatement(
                 "delete from pms_task where tano=?")) {
@@ -32,12 +35,8 @@ public class TaskDao {
     }
     
     public List<Task> selectList(String teamName) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", 
-                "1111");
+            Connection con = dataSource.getConnection();
 
             PreparedStatement stmt = con.prepareStatement(
                 "select tano,titl,sdt,edt,stat,mid from pms_task where tnm=?")) {
@@ -62,12 +61,8 @@ public class TaskDao {
     }
     
     public int insert(Task task) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", 
-                "1111");
+            Connection con = dataSource.getConnection();
         
             PreparedStatement stmt = con.prepareStatement(
                 "insert into pms_task(titl,sdt,edt,mid,tnm) values(?,?,?,?,?)")) {
@@ -82,12 +77,8 @@ public class TaskDao {
     }
 
     public int update(Task task) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", 
-                "1111");
+            Connection con = dataSource.getConnection();
         
             PreparedStatement stmt = con.prepareStatement(
                 "update pms_task set titl=?, sdt=?, edt=?, mid=?, tnm=? where tano=?")) {
@@ -103,12 +94,8 @@ public class TaskDao {
     }
 
     public Task selectOne(int no) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", 
-                "1111");
+            Connection con = dataSource.getConnection();
 
             PreparedStatement stmt = con.prepareStatement(
                 "select titl,sdt,edt,stat,mid,tnm from pms_task where tano=?")) {
@@ -134,12 +121,8 @@ public class TaskDao {
     }
 
     public int updateState(int no, int state) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", 
-                "1111");
+            Connection con = dataSource.getConnection();
         
             PreparedStatement stmt = con.prepareStatement(
                 "update pms_task set stat=? where tano=?")) {
@@ -151,7 +134,8 @@ public class TaskDao {
         
     }
 }
-// ver 31 - 
+//ver 32 - DB Connection Pool 적용
+//ver 31 - JDBC API 적용
 //ver 23 - @Component 애노테이션을 붙인다.
 //ver 22 - 추상 클래스 AbstractDao를 상속 받는다.
 //ver 19 - 우리 만든 ArrayList 대신 java.util.LinkedList를 사용하여 목록을 다룬다. 
