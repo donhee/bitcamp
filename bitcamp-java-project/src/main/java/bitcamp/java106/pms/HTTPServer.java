@@ -79,6 +79,10 @@ public class HTTPServer {
                 out.println(result); // 결과값
                 
             } catch (Exception e) {
+                // HTTP 프로토콜에 따라 응답한다.
+                out.println("HTTP/1.1 500 Internal Server Error");
+                out.println("Content-Type: text/plain;charset=UTF-8");
+                out.println();   // CRLF 빈줄 보내야한다.
                 out.println("서버 오류!");
                 e.printStackTrace(out);
                 out.println();

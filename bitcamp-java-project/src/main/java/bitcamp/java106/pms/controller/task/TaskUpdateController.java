@@ -10,6 +10,7 @@ import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
+import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.server.ServerRequest;
@@ -35,33 +36,32 @@ public class TaskUpdateController implements Controller {
     @Override
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
-        String teamName = request.getParameter("teamName");
-        Team team = teamDao.get(teamName);
-        if (team == null) {
-            out.printf("'%s' 팀은 존재하지 않습니다.\n", teamName);
-            return;
+
+        try {
+            Task task = new Task()
+                .setNo(Integer.parseInt(request.getParameter("no")))
+                .setTitle(request.getParameter("title"))
+                .setStartDate(Date.valueOf(request.getParameter("startDate")))
+                .setEndDate(Date.valueOf(request.getParameter("endDate")))
+                .setTeam(new Team().setName(request.getParameter("teamName")))
+                .setWorker(new Member().setId(request.getParameter("memberId")));
+                // task 빈 객체를 생성하고 그 안에 no,title,startDate~~memberId의 값을 넣겠다.
+            
+            int count = taskDao.update(task);
+            if (count == 0) {
+                out.println("해당 작업이 없습니다.");
+            } else {
+                out.println("변경하였습니다.");
+            }
+            
+        } catch (Exception e) {
+            out.println("변경 실패!");
+            e.printStackTrace(out);
         }
-        int taskNo = Integer.parseInt(request.getParameter("no"));
-        Task originTask = taskDao.get(taskNo);
-        if (originTask == null) {
-            out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
-                    teamName, taskNo);
-            return;
-        }
-        Task task = new Task(team);
-        task.setNo(taskNo);
-        task.setTitle(request.getParameter("title"));
-        task.setStartDate(Date.valueOf(request.getParameter("startDate")));
-        task.setEndDate(Date.valueOf(request.getParameter("endDate")));
-        task.setWorker(this.memberDao.get(request.getParameter("memberId")));
-        
-        int index = taskDao.indexOf(task.getNo());
-        taskDao.update(index, task);
-        out.println("변경하였습니다.");
     }
 
 }
-
+//ver 31 - JDBC API
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - TaskController에서 update() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.
