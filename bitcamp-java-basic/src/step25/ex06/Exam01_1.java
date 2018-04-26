@@ -16,7 +16,7 @@ public class Exam01_1 {
         
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);              
         SqlSession sqlSession = factory.openSession(); // openSession() : 객체를 생성해주는 메서드 : factory 패턴 적용
-    
+        
         List<Board> list = sqlSession.selectList("BoardMapper.selectBoard");
         
         for (Board board : list) {
