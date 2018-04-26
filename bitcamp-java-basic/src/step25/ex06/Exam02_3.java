@@ -33,7 +33,9 @@ public class Exam02_3 {
         // 
         // mybatis에서는 다음 메서드를 호출하여 DBMS에게 작업 결과를
         // 진짜 테이블에 반영하라고 명령해야 한다.
+        
         sqlSession.commit(); // commit : 저지르다.
+        
         // commit 명령을 내리지 않으면 insert/update/delete을 실제 테이블에 반영하지 않는다.
         // close() 할 때 취소된다.
         
