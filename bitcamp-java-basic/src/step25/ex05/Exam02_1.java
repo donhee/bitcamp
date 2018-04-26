@@ -8,7 +8,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
+ 
 // mybatis 설정 파일에서 fully-qualified class name을 사용하는 대신에
 // 짧은 이름으로 대체할 수 있다.
 // <typeAliases>
