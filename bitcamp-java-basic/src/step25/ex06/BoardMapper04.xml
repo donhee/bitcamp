@@ -17,7 +17,8 @@
           parameterType="값이들어있는객체의타입"
   -->
   <select id="selectBoard" 
-          resultMap="BoardMap" parameterType="map"> <!-- HashMap은 map구현체이기때문에 map이라해도 된다. -->
+          resultMap="BoardMap" parameterType="map"> 
+          <!-- HashMap은 map구현체이기때문에 map이라해도 된다. -->
     SELECT 
     bno,
     titl,
