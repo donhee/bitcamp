@@ -25,8 +25,12 @@ public class Exam02_1 {
         HashMap<String,Object> paramMap = new HashMap<>();
         paramMap.put("startIndex", 9); // key는 SQL 맵퍼 파일에 지정된 이름과 같아야 한다.
         paramMap.put("pageSize", 3);
-        List<Board> list = sqlSession.selectList("BoardMapper.selectBoard", paramMap);
-        
+        List<Board> list = sqlSession.selectList(
+                "BoardMapper.selectBoard", paramMap);
+        // ex) selectList(SQL문이름, 파라미터값)
+        //    - SQL문 이름 = 그룹명 + "." + SQL문장 아이디
+        //    - 파라미터 값 = primitive type 및 모든 자바 객체가 가능하다.
+        //                 여러 개의 값을 전달할 때는 Map에 담아 넘겨라!
         for (Board board : list) {
             System.out.printf("%d, %s, %s, %s\n",
                 board.getNo(), 
