@@ -34,7 +34,7 @@ public class Exam03_3 {
         ref.b = 200;
         System.out.printf("main(1): a=%d, b=%d\n", ref.a, ref.b);
         // a, b 변수가 들어있는 인스턴스(객체=메모리)의 주소를
-        // swap()에 넘긴다. => 그래서 "call by referenct"인 것이다.
+        // swap()에 넘긴다. => 그래서 "call by reference"인 것이다.
         swap(ref);
         System.out.printf("main(2): a=%d, b=%d\n", ref.a, ref.b);
     }
