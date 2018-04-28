@@ -6,7 +6,7 @@ public class Exam02 {
         System.out.println("src/step01/Exam02");
     }
 }
-
+ 
 // => 명령창에서 JVM이 바로 실행할 수 있는 클래스는
 //    main() 명령어 블록을 가지고 있는 클래스이다.
 //
