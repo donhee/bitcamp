@@ -1,4 +1,4 @@
-// 관계 연산자 = && vs &, || vs |
+// 논리 연산자 = && vs &, || vs |
 package step04;
 
 public class Exam03_4 {
