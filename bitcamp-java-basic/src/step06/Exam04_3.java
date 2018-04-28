@@ -1,10 +1,6 @@
 // 메서드 : 인스턴스와 Heap 메모리 영역
 package step06;
 
-class MyObject {
-    int a;
-    int b;
-}
 public class Exam04_3 {
 
     static MyObject getMyObject() {
