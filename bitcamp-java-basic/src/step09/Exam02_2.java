@@ -25,8 +25,10 @@ public class Exam02_2 {
         System.out.printf("77 = %s, %s, %s\n", s1, s2 , s3);
         ///////////////////////////////////////////////
         Integer x1 = Integer.valueOf("44");  // 문자열에 있는 수를 10진수로 간주한다
-        Integer x2 = Integer.valueOf("44", 16); // 16진수라고 지정한다.
-        System.out.printf("%d, %d\n", x1, x2);
+        Integer x2 = Integer.valueOf("44", 16); // 16진수 44를 10진수로 표현하면 68이다.
+        Integer x3 = Integer.valueOf("100", 2); // 2진수 100을 10진수로 표현하면 4이다.
+        Integer x4 = Integer.valueOf("100", 8); // 8진수 100을 10진수로 표현하면 64 이다.
+        System.out.printf("%d, %d, %d, %d\n", x1, x2, x3, x4);
         ///////////////////////////////////////////////
         float f = Float.parseFloat("3.14f");
         boolean b = Boolean.parseBoolean("true");
