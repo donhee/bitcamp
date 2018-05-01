@@ -13,13 +13,13 @@
 
   <select id="selectList" 
           resultMap="MemberMap" parameterType="map"> 
-    select mid,email from pms_member
+    select mid,email from pms2_member
     <!-- limit #{startIndex}, #{pageSize} -->    
   </select>
   
   <insert id="insert" parameterType="Member" 
         useGeneratedKeys="true" keyColumn="mid" keyProperty="id"> <!-- 자동증가된 PK값을 Member 객체에 담아준다. -->
-    insert into pms_member(mid,email,pwd) 
+    insert into pms2_member(mid,email,pwd) 
     values(#{id},#{email},sha2(#{password},224))
   </insert>
   
@@ -28,18 +28,18 @@
   -->
   <select id="selectOne" resultMap="MemberMap" parameterType="string">
     select mid,email 
-    from pms_member 
+    from pms2_member 
     where mid=#{value}
   </select>
   
   <update id="update" parameterType="Member">
-    update pms_member set 
+    update pms2_member set 
     email=#{email}, pwd=sha2(#{password},224) 
     where mid=#{id}
   </update>
   
   <delete id="delete" parameterType="string">
-    delete from pms_member where mid=#{value}
+    delete from pms2_member where mid=#{value}
   </delete>
   
   
