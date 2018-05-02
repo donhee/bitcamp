@@ -30,7 +30,7 @@ public class BoardListController implements Controller {
                     board.getNo(), board.getTitle(), board.getCreatedDate());
             }
         } catch (Exception e) {
-            System.out.println("목록 가져오기 실패!");
+            out.println("목록 가져오기 실패!");
             e.printStackTrace(out);
         }
     }
