@@ -37,6 +37,7 @@
         <servlet-name>I am okok</servlet-name>
         <!-- 클라이언트가 요청할 때 사용할 서블릿 이름 -->
         <url-pattern>/step02/exam02</url-pattern>
+        <url-pattern>/step02/exam02.html</url-pattern> <!-- 겉으로 봤을땐 .html 파일인거 같지만, 실제로는 프로그램명이름이다. -->
     </servlet-mapping>
 
     <!-- 클라이언트가 요청한 자원을 찾을 수 없을 때
