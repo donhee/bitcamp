@@ -45,7 +45,7 @@ public class Exam04 extends GenericServlet {
         //    UTF-8 : "AB가각" (41 42 ea b0 80 ea b0 81)
         //    String 객체(UTF-16) : "AB가각" (0041 0042 AC00 AC01)
         // GET 명령으로 보낸 데이터의 경우(톰캣 서버의 예시이다)
-        // => server.xml 설정 파일에서 다음과 같이 태그에 URLEncoding 속성을 추가하라!
+        // => server.xml 설정 파일에서 다음과 같이 태그에 URIEncoding 속성을 추가하라!
         //    <Connector 
         //      connectionTimeout="20000" 
         //      port="8888" 

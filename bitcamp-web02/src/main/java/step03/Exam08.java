@@ -38,7 +38,7 @@ public class Exam08 extends GenericServlet {
             }
             out.println();
         }
-        // http://localhost:8888/bitcamp-web01/step03/exam08?name=aaa&tel=111&age=20&address=서울&name=bbb&tel=222&age=30&address=부산
+        // http://localhost:8888/bitcamp-web02/step03/exam08?name=aaa&tel=111&age=20&address=서울&name=bbb&tel=222&age=30&address=부산
     }
     
 }

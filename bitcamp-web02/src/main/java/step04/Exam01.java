@@ -16,7 +16,7 @@ public class Exam01 extends GenericServlet {
     private static final long serialVersionUID = 1L;
 
     // 테스트 방법:
-    // http://localhost:8888/bitcamp-web01/step04/exam01_test.html
+    // http://localhost:8888/bitcamp-web02/step04/exam01_test.html
     @Override
     public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
         

@@ -31,7 +31,7 @@ public class Exam07 extends GenericServlet {
             String name = names.nextElement();
             out.printf("%s=%s\n", name, request.getParameter(name)); 
         }
-        // ex) http://localhost:8888/bitcamp-web01/step03/exam07?name=aaa&tel=111&age=20&address=seoul
+        // ex) http://localhost:8888/bitcamp-web02/step03/exam07?name=aaa&tel=111&age=20&address=seoul
     }
     
 }

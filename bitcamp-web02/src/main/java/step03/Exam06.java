@@ -14,7 +14,7 @@ import javax.servlet.annotation.WebServlet;
 public class Exam06 extends GenericServlet {
 
     private static final long serialVersionUID = 1L;
-
+    // http://localhost:8888/bitcamp-web02/step03/exam06?name=aaa&name=bbb&name=한돈희
     @Override
     public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
         

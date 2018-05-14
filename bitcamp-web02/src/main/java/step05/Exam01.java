@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 // 웹브라우저에서 파일을 보낼 때 POST 방식으로 보내기 때문에
 // 서블릿에서는 POST 요청을 처리해야 한다.
-// 그래서 HttpServlet을 상속 받앗 만들고,
+// 그래서 HttpServlet을 상속 받아서 만들고,
 // doPost()를 재정의 한다.
 @WebServlet("/step05/exam01")
 public class Exam01 extends HttpServlet {
@@ -36,7 +36,7 @@ public class Exam01 extends HttpServlet {
         out.printf("이름=%s\n", name);
         out.printf("나이=%s\n", age);
         out.printf("사진=%s\n", photo);
-        // => 에러가 안뜬상태로 실행하기 위해 int age를 String 으로 바굼
+        // => 에러가 안뜬상태로 실행하기 위해 int age를 String 으로 바꿈.
         // 출력 결과를 보면 name, age, photo의 값이 null이다.
         // 이유?
         // - multipart/form-data 형식으로 전송된 데이터는
