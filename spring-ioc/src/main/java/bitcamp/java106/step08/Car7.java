@@ -11,27 +11,24 @@ public class Car7 {
     String model;
     String maker;
     int cc;
-    boolean auto; 
+    boolean auto;
     Date createdDate;
     
-    // @Autowired, @Qualifier 합치는것
-    // 이 애노에티션은 스프링 프레임워크가 아닌 자바에서 제공한다.
+    //이 애노테이션은 스프링 프레임워크가 아닌 자바에서 제공한다.
     @Resource(name="e1")
-    Engine engine; 
-    
+    Engine engine;
     
     @Override
     public String toString() {
         return "Car [model=" + model + ", maker=" + maker + ", cc=" + cc + ", auto=" + auto + ", createdDate="
                 + createdDate + ", engine=" + engine + "]";
     }
-
     public Engine getEngine() {
         return engine;
     }
     
     public void setEngine(Engine engine) {
-        System.out.println("Car.setEngine() 호출됨!");
+        System.out.println("Car.setEngine()");
         this.engine = engine;
     }
     
@@ -62,11 +59,9 @@ public class Car7 {
     public int getCc() {
         return cc;
     }
-    public void setCc(int i) {
-        this.cc = i;
+    public void setCc(int cc) {
+        this.cc = cc;
     }
-    
-    
     
     
 }
