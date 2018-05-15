@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 // 웹브라우저에서 파일을 보낼 때 POST 방식으로 보내기 때문에
 // 서블릿에서는 POST 요청을 처리해야 한다.
-// 그래서 HttpServlet을 상속 받앗 만들고,
+// 그래서 HttpServlet을 상속 받아서 만들고,
 // doPost()를 재정의 한다.
 @WebServlet("/step05/exam01")
 public class Exam01 extends HttpServlet {
