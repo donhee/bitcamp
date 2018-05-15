@@ -39,7 +39,7 @@ ALTER TABLE `pms2_board`
 CREATE TABLE `pms2_member` (
     `mid`   VARCHAR(20)  NOT NULL COMMENT '아이디', -- 아이디
     `email` VARCHAR(255) NOT NULL COMMENT '이메일', -- 이메일
-    `pwd`   VARCHAR(20)  NOT NULL COMMENT '암호' -- 암호
+    `pwd`   VARCHAR(100)  NOT NULL COMMENT '암호' -- 암호
 )
 COMMENT '회원';
 
