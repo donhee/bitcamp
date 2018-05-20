@@ -1,4 +1,4 @@
-// 자동으로 페이지를 이동하는 방법 - Refresh(HTML 페이지에 삽입하는 방법)
+//  실행 위임 하는 방법 - forward
 package step08.ex02;
 
 import java.io.IOException;
