@@ -1,7 +1,7 @@
 # 자바 프로젝트
 
 ## src39 - forward, include 기술 적용
-학습목표
+학습목표 
     - forward와 include의 용도를 이해하고 적용할 수 있다.
 작업내용
     - 오류 처리 코드를 별도의 서블릿으로 분리하여 forward 한다.
