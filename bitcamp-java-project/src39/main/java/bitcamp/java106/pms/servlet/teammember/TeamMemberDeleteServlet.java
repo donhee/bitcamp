@@ -42,6 +42,8 @@ public class TeamMemberDeleteServlet extends HttpServlet {
             if (count == 0) {
                 throw new Exception("해당 팀원이 존재하지 않습니다.");
             }
+            // 개발자가 요청이나 응답헤더를 직접 작성하여 값을 주고 받으려 한다면,
+            // URL 인코딩과 URL 디코딩을 손수 해줘야 한다.(직접 해줘야 한다. 자동x)
             response.sendRedirect("../view?name=" + URLEncoder.encode(teamName, "UTF-8"));
             
         } catch (Exception e) {

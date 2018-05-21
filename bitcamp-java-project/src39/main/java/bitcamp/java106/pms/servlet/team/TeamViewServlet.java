@@ -3,7 +3,6 @@ package bitcamp.java106.pms.servlet.team;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bitcamp.java106.pms.dao.TeamDao;
-import bitcamp.java106.pms.dao.TeamMemberDao;
-import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.servlet.InitServlet;
 
@@ -23,12 +20,10 @@ import bitcamp.java106.pms.servlet.InitServlet;
 public class TeamViewServlet extends HttpServlet {
 
     TeamDao teamDao;
-    TeamMemberDao teamMemberDao;
     
     @Override
     public void init() throws ServletException {
         teamDao = InitServlet.getApplicationContext().getBean(TeamDao.class);
-        teamMemberDao = InitServlet.getApplicationContext().getBean(TeamMemberDao.class);
     }
     
     @Override
@@ -90,29 +85,10 @@ public class TeamViewServlet extends HttpServlet {
             out.println("</p>");
             out.println("</form>");
             
-            List<Member> members = teamMemberDao.selectListWithEmail(name);
-            
-            out.println("<h2>회원 목록</h2>");
-            out.println("<form action='member/add' method='post'>");
-            out.println("<input type='text' name='memberId' placeholder='회원 아이디'>");
-            // 값은 서버에 보내야 하는데 화면에는 안보이게 하고 싶다면 hidden 
-            out.printf("<input type='hidden' name='teamName' value='%s'>\n", name); 
-            out.println("<button>추가</button>");
-            out.println("</form>");
-            out.println("<table border='1'>");
-            out.println("<tr><th>아이디</th><th>이메일</th><th> </th></tr>");
-            for (Member member : members) {
-                out.printf("<tr>"
-                        + "<td>%s</td>"
-                        + "<td>%s</td>"
-                        + "<td><a href='member/delete?teamName=%s&memberId=%s'>삭제</a></td>"
-                        + "</tr>\n",
-                        member.getId(), 
-                        member.getEmail(),
-                        name,
-                        member.getId());
-            }
-            out.println("</table>");
+            // 팀 회원의 목록을 출력하는 것은 TeamMemberListServlet에게 맡긴다.
+            RequestDispatcher rd = request.getRequestDispatcher("/team/member/list");
+            rd.include(request, response); 
+            // TeamMemberListServlet이 작업을 수행한 후 이 서블릿으로 되돌아 온다.
             
         } catch (Exception e) {
             RequestDispatcher rd = request.getRequestDispatcher("/error");
@@ -126,7 +102,7 @@ public class TeamViewServlet extends HttpServlet {
         out.println("</html>");
     }
 }
-
+// ver 39 - forward, include 적용
 //ver 37 - selectListWithEmail() 추가 
 //ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경

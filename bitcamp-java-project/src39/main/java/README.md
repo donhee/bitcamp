@@ -6,5 +6,8 @@
 - ClassroomUpdateServlet 변경
 - ClassroomDeleteServlet 변경
 
+- TeamMemberListServlet 추가
+- TeamViewServlet 변경
+
 
 
