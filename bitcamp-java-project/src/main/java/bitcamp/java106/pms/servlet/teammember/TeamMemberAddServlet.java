@@ -1,4 +1,3 @@
-// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.servlet.teammember;
 
 import java.io.IOException;
@@ -11,12 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.servlet.InitServlet;
+import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
 @SuppressWarnings("serial")
 @WebServlet("/team/member/add")
@@ -28,9 +29,11 @@ public class TeamMemberAddServlet extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-        teamDao = InitServlet.getApplicationContext().getBean(TeamDao.class);
-        memberDao = InitServlet.getApplicationContext().getBean(MemberDao.class);
-        teamMemberDao = InitServlet.getApplicationContext().getBean(TeamMemberDao.class);
+        ApplicationContext iocContainer = WebApplicationContextUtils.getWebApplicationContext(
+                this.getServletContext());
+        teamDao = iocContainer.getBean(TeamDao.class);
+        memberDao = iocContainer.getBean(MemberDao.class);
+        teamMemberDao = iocContainer.getBean(TeamMemberDao.class);
     }
     
     @Override
@@ -38,7 +41,6 @@ public class TeamMemberAddServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
-        request.setCharacterEncoding("UTF-8");
         String teamName = request.getParameter("teamName");
         
         try {
@@ -71,6 +73,7 @@ public class TeamMemberAddServlet extends HttpServlet {
         
     }
 }
+//ver 40 - 필터 적용  request.setCharacterEncoding("UTF-8"); 제거
 // ver 37 - TeamMemberController를 TeamMemberServlet으로 변경
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - TeamMemberController에서 add() 메서드를 추출하여 클래스로 정의.

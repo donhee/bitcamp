@@ -1,4 +1,3 @@
-// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.servlet.team;
 
 import java.io.IOException;
@@ -11,9 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.servlet.InitServlet;
+import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
 @SuppressWarnings("serial")
 @WebServlet("/team/view")
@@ -23,7 +24,9 @@ public class TeamViewServlet extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-        teamDao = InitServlet.getApplicationContext().getBean(TeamDao.class);
+        ApplicationContext iocContainer = WebApplicationContextUtils.getWebApplicationContext(
+                this.getServletContext());
+        teamDao = iocContainer.getBean(TeamDao.class);
     }
     
     @Override
@@ -31,7 +34,6 @@ public class TeamViewServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8");
         String name = request.getParameter("name");
         
         response.setContentType("text/html;charset=UTF-8");
@@ -102,6 +104,7 @@ public class TeamViewServlet extends HttpServlet {
         out.println("</html>");
     }
 }
+//ver 40 - 필터 적용  request.setCharacterEncoding("UTF-8"); 제거
 // ver 39 - forward, include 적용
 //ver 37 - selectListWithEmail() 추가 
 //ver 31 - JDBC API가 적용된 DAO 사용
