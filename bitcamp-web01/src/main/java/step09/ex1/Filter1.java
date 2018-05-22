@@ -33,7 +33,17 @@ import javax.servlet.annotation.WebFilter;
 // 첫번째 방법) 애노테이션으로 필터를 배치하기
 // => @WebFilter(필터를 적용할 URL)
 // 두번째 방법) DD file(web.xml)에 필터를 배치하기
-// => web.xml 파일 25번째 라인 ~ 39번째 라인
+// - 필터 등록
+// <filter>
+//   <filter-name>filter1</filter-name>
+//   <filter-class>step09.ex1.Filter1</filter-class>
+// </filter>
+// - 필터를 적용할 URL 지정
+// <filter-mapping>
+//   <filter-name>filter1</filter-name>
+//   <url-pattern>/step09/ex1/*</url-pattern>
+// </filter-mapping>
+//
 
 @WebFilter("/step09/ex1/*")
 public class Filter1 implements Filter {

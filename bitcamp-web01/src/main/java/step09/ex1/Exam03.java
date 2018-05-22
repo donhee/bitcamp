@@ -31,7 +31,7 @@ public class Exam03 extends HttpServlet {
         out.println("<h1>Exam03 실행!</h1>\n");
         
         // init()의 파라미터로 받은 ServletConfig 객체를 이용하여
-        // web.ml 파일에 설정된 init-param 태그의 값을 가져올 수 있다.
+        // web.xml 파일에 설정된 init-param 태그의 값을 가져올 수 있다.
         ServletConfig config = this.getServletConfig();
         String name = config.getInitParameter("name");
         String age = config.getInitParameter("age");
