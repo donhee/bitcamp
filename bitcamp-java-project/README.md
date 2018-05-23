@@ -5,6 +5,7 @@
     - 필터의 구동 원리를 이해하고 적용할 수 있다.
     - FilterConfig 객체를 사용하여 web.xml에 있는 init-param 값을 사용할 수 있다.
     - 리스너의 구동 원리를 이해하고 적용할 수 있다.
+    - 컨텍스트 파라미터<context-param>를 설정하고 사용할 수 있다.
 작업내용
     - Filter에서 클라이언트 데이터 인코딩 지정을 수행한다.(CharacterEncodingFilter)
     - ServletContextListener 구현체에서 Spring IoC 컨테이너 준비(ContextLoaderListener, WebApplicationContextUtils)
