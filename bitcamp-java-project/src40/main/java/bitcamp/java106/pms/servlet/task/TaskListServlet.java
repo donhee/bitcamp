@@ -44,13 +44,20 @@ public class TaskListServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<meta charset='UTF-8'>");
+        out.println("<title>작업 목록</title>");
+        out.println("</head>");
+        out.println("<body>");
+        
+        out.printf("<h1>'%s'의 작업 목록</h1>", teamName);
         try {
             Team team = teamDao.selectOne(teamName);
             if (team == null) {
                 throw new Exception(teamName + " 팀은 존재하지 않습니다.");
             }
-            response.sendRedirect("list");
-            
             List<Task> list = taskDao.selectList(team.getName());
             
             out.printf("<p><a href='add?teamName=%s'>새 작업</a></p>", teamName);
@@ -80,6 +87,8 @@ public class TaskListServlet extends HttpServlet {
             // 이전까지 버퍼로 출력한 데이터를 버린다.
             rd.forward(request, response);
         }
+        out.println("</body>");
+        out.println("</html>");
     }
 
 }

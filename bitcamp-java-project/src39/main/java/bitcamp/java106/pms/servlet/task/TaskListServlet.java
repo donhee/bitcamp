@@ -1,4 +1,3 @@
-// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.servlet.task;
 
 import java.io.IOException;
@@ -12,11 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.servlet.InitServlet;
+import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
 @SuppressWarnings("serial")
 @WebServlet("/task/list")
@@ -27,8 +28,10 @@ public class TaskListServlet extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-        teamDao = InitServlet.getApplicationContext().getBean(TeamDao.class);
-        taskDao = InitServlet.getApplicationContext().getBean(TaskDao.class);
+        ApplicationContext iocContainer = WebApplicationContextUtils.getWebApplicationContext(
+                this.getServletContext());
+        teamDao = iocContainer.getBean(TeamDao.class);
+        taskDao = iocContainer.getBean(TaskDao.class);
     }
     
     @Override
@@ -36,19 +39,24 @@ public class TaskListServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
-        request.setCharacterEncoding("UTF-8");
         String teamName = request.getParameter("teamName");
         
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<meta charset='UTF-8'>");
+        out.println("<title>작업 목록</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.printf("<h1>'%s'의 작업 목록</h1>", teamName);
         try {
             Team team = teamDao.selectOne(teamName);
             if (team == null) {
                 throw new Exception(teamName + " 팀은 존재하지 않습니다.");
             }
-            response.sendRedirect("list");
-            
             List<Task> list = taskDao.selectList(team.getName());
             
             out.printf("<p><a href='add?teamName=%s'>새 작업</a></p>", teamName);
@@ -78,9 +86,12 @@ public class TaskListServlet extends HttpServlet {
             // 이전까지 버퍼로 출력한 데이터를 버린다.
             rd.forward(request, response);
         }
+        out.println("</body>");
+        out.println("</html>");
     }
 
 }
+//ver 40 - 필터 적용  request.setCharacterEncoding("UTF-8"); 제거
 // ver 37 - 컨트롤러를 서블릿으로 변경
 //ver 31 - JDBC API
 //ver 28 - 네트워크 버전으로 변경
