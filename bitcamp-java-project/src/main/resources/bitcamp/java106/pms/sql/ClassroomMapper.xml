@@ -30,12 +30,6 @@
     from pms2_classroom
     <!-- limit #{startIndex}, #{pageSize} -->    
   </select>
-
-  <select id="selectOne" resultMap="ClassroomMap" parameterType="int">
-    select crno,titl,sdt,edt,room 
-    from pms2_classroom 
-    where crno=#{value}
-  </select>
   
   <insert id="insert" parameterType="Classroom" 
         useGeneratedKeys="true" keyColumn="crno" keyProperty="no"> <!-- 자동증가된 PK값을 Classroom 객체에 담아준다. -->
@@ -43,7 +37,11 @@
     values(#{title},#{startDate},#{endDate},#{room})
   </insert>
   
-  
+  <select id="selectOne" resultMap="ClassroomMap" parameterType="int">
+    select crno,titl,sdt,cdt,room 
+    from pms2_classroom 
+    where crno=#{value}
+  </select>
   
   <update id="update" parameterType="Classroom">
     update pms2_classroom set 

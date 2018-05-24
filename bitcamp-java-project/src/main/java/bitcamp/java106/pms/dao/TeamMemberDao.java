@@ -7,8 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Component;
 
-import bitcamp.java106.pms.domain.Member;
-
 @Component
 public class TeamMemberDao {
     
@@ -44,31 +42,11 @@ public class TeamMemberDao {
         }
     }
     
-    public int delete(String teamName) throws Exception {
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            HashMap<String,Object> paramMap = new HashMap<>();
-            paramMap.put("teamName", teamName);
-            
-            int count = sqlSession.delete(
-                    "bitcamp.java106.pms.dao.TeamMemberDao.delete", paramMap);
-            sqlSession.commit();
-            return count;
-        }
-    }
-    
     public List<String> selectList(String teamName) throws Exception {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             
             return sqlSession.selectList(
                     "bitcamp.java106.pms.dao.TeamMemberDao.selectList", teamName);
-        }
-    }
-    
-    public List<Member> selectListWithEmail(String teamName) throws Exception {
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            
-            return sqlSession.selectList(
-                    "bitcamp.java106.pms.dao.TeamMemberDao.selectListWithEmail", teamName);
         }
     }
     

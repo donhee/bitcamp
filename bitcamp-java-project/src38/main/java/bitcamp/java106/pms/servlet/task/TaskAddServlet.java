@@ -1,8 +1,8 @@
-// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.servlet.task;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class TaskAddServlet extends HttpServlet {
     TeamDao teamDao;
     TaskDao taskDao;
     TeamMemberDao teamMemberDao;
-    
+
     @Override
     public void init() throws ServletException {
         teamDao = InitServlet.getApplicationContext().getBean(TeamDao.class);
@@ -36,7 +36,10 @@ public class TaskAddServlet extends HttpServlet {
     }
     
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) throws ServletException, IOException {
+        
         request.setCharacterEncoding("UTF-8");
         String teamName = request.getParameter("teamName");
         
@@ -50,19 +53,17 @@ public class TaskAddServlet extends HttpServlet {
         out.println("<title>작업 등록</title>");
         out.println("</head>");
         out.println("<body>");
-        out.printf("<h1>'%s' 팀의 작업 등록</h1>", teamName);
-
+        out.printf("<h1>'%s' 팀의 작업 등록</h1>\n", teamName);
+        
         try {
             Team team = teamDao.selectOne(teamName);
             if (team == null) {
                 throw new Exception(teamName + " 팀은 존재하지 않습니다.");
             }
-            
             List<Member> members = teamMemberDao.selectListWithEmail(teamName);
             
-            
             out.println("<form action='add' method='post'>");
-            out.printf("<input type='hidden' name='teamName' value='%s'>\n", teamName); // 눈에는 안보이지만 서버에 보내야할 데이터
+            out.printf("<input type='hidden' name='teamName' value='%s'>\n", teamName);
             out.println("<table border='1'>");
             out.println("<tr>");
             out.println("    <th>작업명</th><td><input type='text' name='title'></td>");
@@ -89,7 +90,7 @@ public class TaskAddServlet extends HttpServlet {
             out.println("</table>");
             out.println("<button>등록</button>");
             out.println("</form>");
-        
+
         } catch (Exception e) {
             out.printf("<p>%s</p>\n", e.getMessage());
             e.printStackTrace(out);
@@ -104,6 +105,7 @@ public class TaskAddServlet extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8");
+
         String teamName = request.getParameter("teamName");
         
         try {
@@ -111,15 +113,16 @@ public class TaskAddServlet extends HttpServlet {
             task.setTitle(request.getParameter("title"));
             task.setStartDate(Date.valueOf(request.getParameter("startDate")));
             task.setEndDate(Date.valueOf(request.getParameter("endDate")));
-            task.setTeam(new Team().setName(request.getParameter("teamName")));
+            task.setTeam(new Team().setName(teamName));
             task.setWorker(new Member().setId(request.getParameter("memberId")));
-
+            
             Team team = teamDao.selectOne(task.getTeam().getName());
             if (team == null) {
                 throw new Exception(task.getTeam().getName() + " 팀은 존재하지 않습니다.");
             }
-            if(task.getWorker().getId().length() > 0 &&
-                    !teamMemberDao.isExist(
+            
+            if (task.getWorker().getId().length() > 0 &&
+                !teamMemberDao.isExist(
                     task.getTeam().getName(), task.getWorker().getId())) {
                 throw new Exception(task.getWorker().getId() + "는 이 팀의 회원이 아닙니다.");
             }
@@ -127,6 +130,9 @@ public class TaskAddServlet extends HttpServlet {
             taskDao.insert(task);
             response.sendRedirect("list?teamName=" + 
                     URLEncoder.encode(teamName, "UTF-8"));
+            // 응답 헤더의 값으로 한글을 포함할 때는 
+            // 서블릿 컨테이너가 자동으로 URL 인코딩 하지 않는다.
+            // 위와 같이 개발자가 직접 URL 인코딩 해야 한다.
             
         } catch (Exception e) {
             response.setContentType("text/html;charset=UTF-8");
@@ -138,11 +144,10 @@ public class TaskAddServlet extends HttpServlet {
             out.println("<meta charset='UTF-8'>");
             out.printf("<meta http-equiv='Refresh' content='1;url=list?teamName=%s'>\n",
                     teamName);
-            
             out.println("<title>작업 등록</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>작업 등록 실패!</h1>");
+            out.println("<h1>작업 등록 결과</h1>");
             out.println("<pre>");
             e.printStackTrace(out);
             out.println("</pre>");
@@ -150,9 +155,11 @@ public class TaskAddServlet extends HttpServlet {
             out.println("</html>");
         }
     }
-
 }
-// ver 31 - JDBC API
+
+//ver 38 - redirect 적용
+//ver 37 - 컨트롤러를 서블릿으로 변경
+//ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - TaskController에서 add() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.

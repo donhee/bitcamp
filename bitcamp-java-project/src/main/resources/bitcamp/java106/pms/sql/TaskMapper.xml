@@ -13,15 +13,10 @@
 
   <resultMap type="Task" id="TaskMap">
     <id column="tano" property="no" />
-    
     <result column="titl" property="title" />
-    
     <result column="sdt" property="startDate" />
-    
     <result column="edt" property="endDate" />
-    
     <result column="stat" property="state" />
-    
     <association property="worker" javaType="Member">
       <id column="mid" property="id" />
       <!-- 
@@ -50,16 +45,9 @@
   
   <insert id="insert" parameterType="Task" 
         useGeneratedKeys="true" keyColumn="tano" keyProperty="no"> <!-- 자동증가된 PK값을 Task 객체에 담아준다. -->
-    <choose>
-	    <when test="worker.id != ''">
-		    insert into pms2_task(titl,sdt,edt,mid,tnm) 
-		    values(#{title},#{startDate},#{endDate},#{worker.id},#{team.name})
-	    </when>
-	    <otherwise>
-	        insert into pms2_task(titl,sdt,edt,tnm) 
-            values(#{title},#{startDate},#{endDate},#{team.name})
-	    </otherwise>
-    </choose>
+    insert into pms2_task(titl,sdt,edt,mid,tnm) 
+    values(#{title},#{startDate},#{endDate},#{worker.id},#{team.name})
+                                          <!-- getWorker().getId() / getTeam().getName() -->
   </insert>
   
   <select id="selectOne" resultMap="TaskMap" parameterType="int">
@@ -70,27 +58,13 @@
   
   <update id="update" parameterType="Task">
     update pms2_task set 
-    titl=#{title}, sdt=#{startDate}, edt=#{endDate}, stat=#{state}, 
-    <choose>
-        <when test="worker.id != ''">
-            mid=#{worker.id},
-        </when>
-        <otherwise>
-            mid=null,
-        </otherwise>
-    </choose> 
-    tnm=#{team.name} 
+    titl=#{title}, sdt=#{startDate}, edt=#{endDate}, mid=#{worker.id}, tnm=#{team.name} 
     where tano=#{no}
   </update>
   
   <delete id="delete" parameterType="int">
     delete from pms2_task 
     where tano=#{value}
-  </delete>
-  
-  <delete id="deleteByTeam" parameterType="String">
-    delete from pms2_task 
-    where tnm=#{value}
   </delete>
   
   <update id="updateState" parameterType="map">
