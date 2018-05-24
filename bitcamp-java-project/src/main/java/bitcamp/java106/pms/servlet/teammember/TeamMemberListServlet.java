@@ -1,6 +1,7 @@
 package bitcamp.java106.pms.servlet.teammember;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -39,18 +40,37 @@ public class TeamMemberListServlet extends HttpServlet {
         // 이미 getParameter()를 호출했을 것이기 때문에 다음 코드는 의미가 없다.
         // => request.setCharacterEncoding("UTF-8");
         
+        String name = request.getParameter("name");
         
         // including 하기 전의 이전 서블릿에서 콘텐트 타입을 설정했을 것이기 때문에 다음 코드는 의미가 없다.
         // => response.setContentType("text/html;charset=UTF-8");
         
+        PrintWriter out = response.getWriter();
         
         try {
-            String name = request.getParameter("name");
             List<Member> members = teamMemberDao.selectListWithEmail(name);
             
-            request.setAttribute("list", members);
-            response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("/teammember/list.jsp").include(request, response);
+            out.println("<h2>회원 목록</h2>");
+            out.println("<form action='member/add' method='post'>");
+            out.println("<input type='text' name='memberId' placeholder='회원 아이디'>");
+            // 값은 서버에 보내야 하는데 화면에는 안보이게 하고 싶다면 hidden 
+            out.printf("<input type='hidden' name='teamName' value='%s'>\n", name); 
+            out.println("<button>추가</button>");
+            out.println("</form>");
+            out.println("<table border='1'>");
+            out.println("<tr><th>아이디</th><th>이메일</th><th> </th></tr>");
+            for (Member member : members) {
+                out.printf("<tr>"
+                        + "<td>%s</td>"
+                        + "<td>%s</td>"
+                        + "<td><a href='member/delete?teamName=%s&memberId=%s'>삭제</a></td>"
+                        + "</tr>\n",
+                        member.getId(), 
+                        member.getEmail(),
+                        name,
+                        member.getId());
+            }
+            out.println("</table>");
             
         } catch (Exception e) {
             RequestDispatcher rd = request.getRequestDispatcher("/error");

@@ -2,6 +2,7 @@ package bitcamp.java106.pms.servlet.task;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.util.List;
 
@@ -127,7 +128,7 @@ public class TaskAddServlet extends HttpServlet {
             }
             
             taskDao.insert(task);
-            response.sendRedirect("list?teamName=" + teamName);
+            response.sendRedirect("list?teamName=" + URLEncoder.encode(teamName, "UTF-8"));
             
         } catch (Exception e) {
             RequestDispatcher rd = request.getRequestDispatcher("/error");

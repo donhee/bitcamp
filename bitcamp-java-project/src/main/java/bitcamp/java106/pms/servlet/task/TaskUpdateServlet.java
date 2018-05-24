@@ -1,6 +1,7 @@
 package bitcamp.java106.pms.servlet.task;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -56,7 +57,8 @@ public class TaskUpdateServlet extends HttpServlet {
             if (count == 0) {
                 throw new Exception("해당 작업이 없습니다.");
             }
-            response.sendRedirect("list?teamName=" + teamName);
+            response.sendRedirect("list?teamName=" + 
+                    URLEncoder.encode(teamName, "UTF-8"));
                 
         } catch (Exception e) {
             RequestDispatcher rd = request.getRequestDispatcher("/error");

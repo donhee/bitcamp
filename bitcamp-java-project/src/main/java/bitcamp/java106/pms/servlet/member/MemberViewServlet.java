@@ -1,6 +1,7 @@
 package bitcamp.java106.pms.servlet.member;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,29 +34,57 @@ public class MemberViewServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
 
+        String id = request.getParameter("id");
         
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<meta charset='UTF-8'>");
+        out.println("<title>멤버 보기</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>멤버 보기</h1>");
+        out.println("<form action='update' method='post'>");
         
         try {
-            String id = request.getParameter("id");
             Member member = memberDao.selectOne(id);
     
             if (member == null) {
                 throw new Exception("유효하지 않은 멤버 아이디입니다.");
             }
-            request.setAttribute("member", member);
             
-            response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("/member/view.jsp").include(request, response);
-            
+            out.println("<table border='1'>");
+            out.println("<tr><th>아이디</th><td>");
+            out.printf("    <input type='text' name='id' value='%s' readonly></td></tr>\n", 
+                    member.getId());
+            out.println("<tr><th>이메일</th>");
+            out.printf("    <td><input type='email' name='email' value='%s'></td></tr>\n",
+                    member.getEmail());
+            out.println("<tr><th>암호</th>");
+            out.println("    <td><input type='password' name='password'></td></tr>\n");
+            out.println("</table>");
+               
         } catch (Exception e) {
             RequestDispatcher rd = request.getRequestDispatcher("/error");
             request.setAttribute("error", e);
             request.setAttribute("title", "회원 상세조회 실패!");
+            // 다른 서블릿으로 실행을 위임할 때,
+            // 이전까지 버퍼로 출력한 데이터를 버린다.
             rd.forward(request, response);
         }
+        out.println("<p>");
+        out.println("<a href='list'>목록</a>");
+        out.println("<button>변경</button>");
+        out.printf("<a href='delete?id=%s'>삭제</a>\n", id);
+        out.println("</p>");
+        out.println("</form>");
+        out.println("</body>");
+        out.println("</html>");
     }
 }
-// ver 42 - JSP 적용
 //ver 40 - 필터 적용  request.setCharacterEncoding("UTF-8"); 제거
 //ver 37 - 컨트롤러를 서블릿으로 변경
 //ver 31 - JDBC API가 적용된 DAO 사용
