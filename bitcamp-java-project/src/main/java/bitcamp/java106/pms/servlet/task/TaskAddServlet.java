@@ -1,3 +1,4 @@
+// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.servlet.task;
 
 import java.io.IOException;
@@ -13,15 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
-
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.support.WebApplicationContextUtils;
+import bitcamp.java106.pms.servlet.InitServlet;
 
 @SuppressWarnings("serial")
 @WebServlet("/task/add")
@@ -33,15 +32,14 @@ public class TaskAddServlet extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-        ApplicationContext iocContainer = WebApplicationContextUtils.getWebApplicationContext(
-                this.getServletContext());
-        teamDao = iocContainer.getBean(TeamDao.class);
-        taskDao = iocContainer.getBean(TaskDao.class);
-        teamMemberDao = iocContainer.getBean(TeamMemberDao.class);
+        teamDao = InitServlet.getApplicationContext().getBean(TeamDao.class);
+        taskDao = InitServlet.getApplicationContext().getBean(TaskDao.class);
+        teamMemberDao = InitServlet.getApplicationContext().getBean(TeamMemberDao.class);
     }
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String teamName = request.getParameter("teamName");
         
         response.setContentType("text/html;charset=UTF-8");
@@ -107,6 +105,7 @@ public class TaskAddServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
+        request.setCharacterEncoding("UTF-8");
         String teamName = request.getParameter("teamName");
         
         try {
@@ -128,7 +127,8 @@ public class TaskAddServlet extends HttpServlet {
             }
             
             taskDao.insert(task);
-            response.sendRedirect("list?teamName=" + URLEncoder.encode(teamName, "UTF-8"));
+            response.sendRedirect("list?teamName=" + 
+                    URLEncoder.encode(teamName, "UTF-8"));
             
         } catch (Exception e) {
             RequestDispatcher rd = request.getRequestDispatcher("/error");
@@ -141,7 +141,6 @@ public class TaskAddServlet extends HttpServlet {
     }
 
 }
-//ver 40 - 필터 적용  request.setCharacterEncoding("UTF-8"); 제거
 // ver 31 - JDBC API
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - TaskController에서 add() 메서드를 추출하여 클래스로 정의.

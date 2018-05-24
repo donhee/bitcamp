@@ -11,11 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
-
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.support.WebApplicationContextUtils;
+import bitcamp.java106.pms.servlet.InitServlet;
 
 @SuppressWarnings("serial")
 @WebServlet("/team/list")
@@ -25,9 +23,7 @@ public class TeamListServlet extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-        ApplicationContext iocContainer = WebApplicationContextUtils.getWebApplicationContext(
-                this.getServletContext());
-        teamDao = iocContainer.getBean(TeamDao.class);
+        teamDao = InitServlet.getApplicationContext().getBean(TeamDao.class);
     }
 
 
@@ -80,7 +76,7 @@ public class TeamListServlet extends HttpServlet {
         out.println("</html>");
     }
 }
-//ver 40 - 필터 적용  request.setCharacterEncoding("UTF-8"); 제거
+
 //ver 37 - 컨트롤러를 서블릿으로 변경
 //ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경

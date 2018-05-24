@@ -1,7 +1,7 @@
-// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.servlet.task;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -35,7 +35,9 @@ public class TaskUpdateServlet extends HttpServlet {
     }
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(
+            HttpServletRequest request, 
+            HttpServletResponse response) throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8");
         String teamName = request.getParameter("teamName");
@@ -52,23 +54,28 @@ public class TaskUpdateServlet extends HttpServlet {
             
             int count = taskDao.update(task);
             if (count == 0) {
-                throw new Exception("해당 작업이 없습니다.");
+                throw new Exception("<p>해당 작업이 없습니다.</p>");
             }
-            response.sendRedirect("list?teamName=" + teamName);
-                
+            response.sendRedirect("list?teamName=" + 
+                    URLEncoder.encode(teamName, "UTF-8"));
+            // 응답 헤더의 값으로 한글을 포함할 때는 
+            // 서블릿 컨테이너가 자동으로 URL 인코딩 하지 않는다.
+            // 위와 같이 개발자가 직접 URL 인코딩 해야 한다.
+            
         } catch (Exception e) {
-            RequestDispatcher rd = request.getRequestDispatcher("/error");
+            RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
             request.setAttribute("error", e);
             request.setAttribute("title", "작업 변경 실패!");
-            // 다른 서블릿으로 실행을 위임할 때,
-            // 이전까지 버퍼로 출력한 데이터를 버린다.
-            rd.forward(request, response);
+            요청배달자.forward(request, response);
         }
     }
-
+    
 }
-// ver 37 - 컨트롤러를 서블릿으로 변경
-//ver 31 - JDBC API
+
+//ver 39 - forward 적용
+//ver 38 - redirect 적용
+//ver 37 - 컨트롤러를 서블릿으로 변경
+//ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - TaskController에서 update() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.

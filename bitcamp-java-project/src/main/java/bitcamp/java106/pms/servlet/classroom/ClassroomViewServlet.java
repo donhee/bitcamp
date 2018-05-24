@@ -1,3 +1,4 @@
+// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.servlet.classroom;
 
 import java.io.IOException;
@@ -10,11 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
-
 import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.domain.Classroom;
-import bitcamp.java106.pms.support.WebApplicationContextUtils;
+import bitcamp.java106.pms.servlet.InitServlet;
 
 @SuppressWarnings("serial")
 @WebServlet("/classroom/view")
@@ -24,9 +23,7 @@ public class ClassroomViewServlet extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-        ApplicationContext iocContainer = WebApplicationContextUtils.getWebApplicationContext(
-                this.getServletContext());
-        classroomDao = iocContainer.getBean(ClassroomDao.class);
+        classroomDao = InitServlet.getApplicationContext().getBean(ClassroomDao.class);
     }
     
     @Override

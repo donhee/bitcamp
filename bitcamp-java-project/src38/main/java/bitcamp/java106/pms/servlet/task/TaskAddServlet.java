@@ -125,7 +125,8 @@ public class TaskAddServlet extends HttpServlet {
             }
             
             taskDao.insert(task);
-            response.sendRedirect("list?teamName=" + teamName);
+            response.sendRedirect("list?teamName=" + 
+                    URLEncoder.encode(teamName, "UTF-8"));
             
         } catch (Exception e) {
             response.setContentType("text/html;charset=UTF-8");

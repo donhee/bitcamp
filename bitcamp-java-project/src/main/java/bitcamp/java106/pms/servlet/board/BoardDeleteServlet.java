@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
-
 import bitcamp.java106.pms.dao.BoardDao;
-import bitcamp.java106.pms.support.WebApplicationContextUtils;
+import bitcamp.java106.pms.servlet.InitServlet;
 
 @SuppressWarnings("serial")
 @WebServlet("/board/delete")
@@ -21,9 +19,7 @@ public class BoardDeleteServlet extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-        ApplicationContext iocContainer = WebApplicationContextUtils.getWebApplicationContext(
-                this.getServletContext());
-        this.boardDao = iocContainer.getBean(BoardDao.class);
+        this.boardDao = InitServlet.getApplicationContext().getBean(BoardDao.class);
     }
     
     @Override
@@ -47,8 +43,6 @@ public class BoardDeleteServlet extends HttpServlet {
         }
     }
 }
-//ver 40 - 필터 적용  request.setCharacterEncoding("UTF-8"); 제거
-// ver 39 - forward 적용
 // ver 38 - redirect 적용
 // ver 37 - BoardDeleteController를 서블릿으로 변경
 //          결과를 HTML로 출력

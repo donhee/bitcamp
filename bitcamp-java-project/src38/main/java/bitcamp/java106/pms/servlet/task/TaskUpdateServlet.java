@@ -1,8 +1,8 @@
-// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.servlet.task;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Date;
 
 import javax.servlet.ServletException;
@@ -35,7 +35,9 @@ public class TaskUpdateServlet extends HttpServlet {
     }
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(
+            HttpServletRequest request, 
+            HttpServletResponse response) throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8");
         String teamName = request.getParameter("teamName");
@@ -52,24 +54,28 @@ public class TaskUpdateServlet extends HttpServlet {
             
             int count = taskDao.update(task);
             if (count == 0) {
-                throw new Exception("해당 작업이 없습니다.");
+                throw new Exception("<p>해당 작업이 없습니다.</p>");
             }
-            response.sendRedirect("list?teamName=" + teamName);
-                
+            response.sendRedirect("list?teamName=" + 
+                    URLEncoder.encode(teamName, "UTF-8"));
+            // 응답 헤더의 값으로 한글을 포함할 때는 
+            // 서블릿 컨테이너가 자동으로 URL 인코딩 하지 않는다.
+            // 위와 같이 개발자가 직접 URL 인코딩 해야 한다.
+            
         } catch (Exception e) {
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
-
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<meta charset='UTF-8'>");
-            out.printf("<meta http-equiv='Refresh' content='1;url=list?teamName=%s'>\n",
+            out.printf("<meta http-equiv='Refresh' content='5;url=list?teamName=%s'>\n",
                     teamName);
             out.println("<title>작업 변경</title>");
             out.println("</head>");
             out.println("<body>");
-            out.printf("<h1>'%s' 팀의 작업 변경 실패!</h1>", teamName);
+            out.printf("<h1>'%s' 팀의 작업 변경</h1>\n", teamName);
             out.println("<pre>");
             e.printStackTrace(out);
             out.println("</pre>");
@@ -77,10 +83,11 @@ public class TaskUpdateServlet extends HttpServlet {
             out.println("</html>");
         }
     }
-
 }
-// ver 37 - 컨트롤러를 서블릿으로 변경
-//ver 31 - JDBC API
+
+//ver 38 - redirect 적용
+//ver 37 - 컨트롤러를 서블릿으로 변경
+//ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - TaskController에서 update() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.
