@@ -36,6 +36,12 @@ public class LoginServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        
+        // 이 서블릿을 요청하기 전 페이지의 URL을 세션에 보관한다.
+        // => 이 URL은 로그인을 처리한 후에 refresh 할 때 사용할 것이다.
+        session.setAttribute("refererUrl", request.getHeader("Referer"));
         
         // 웹브라우저가 "id"라는 쿠키를 보냈으면 입력폼을 출력할 때 사용한다.
         String id = "";
@@ -104,9 +110,18 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             
             if (member != null) { // 로그인 성공!
-                // 루트가 바뀔수 있기 때문에 request.getContextPath()로 꺼낸다.
-                response.sendRedirect(request.getContextPath()); // => "/bitcamp-java-project" 이다.
                 session.setAttribute("loginUser", member); // 로그인 성공시 loginUser 이름으로 member객체 저장
+                
+                // 로그인 하기 전의 페이지로 이동한다.
+                String refererUrl = (String) session.getAttribute("refererUrl");
+                if (refererUrl == null) { // 이전 페이지가 없다면 메인 화면으로 이동시킨다.
+                    // 루트가 바뀔수 있기 때문에 request.getContextPath()로 꺼낸다.
+                    response.sendRedirect(request.getContextPath()); // => "/bitcamp-java-project" 이다.
+                } else {
+                    // 이전 페이지가 있다면 그 페이지로 이동시킨다.
+                    response.sendRedirect(refererUrl);
+                }
+                return;
                 
             } else { // 로그인 실패!
                 session.invalidate(); // 무효화 
