@@ -33,6 +33,13 @@ public class ClassroomDao {
         }
     }
     
+    public Classroom selectOne(int no) throws Exception {
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
+            return sqlSession.selectOne(
+                    "bitcamp.java106.pms.dao.ClassroomDao.selectOne", no);
+        }
+    }
+    
     public int insert(Classroom classroom) throws Exception {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
             int count = sqlSession.insert(

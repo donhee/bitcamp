@@ -1,5 +1,6 @@
 package bitcamp.java106.pms.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -57,7 +58,19 @@ public class MemberDao {
                     "bitcamp.java106.pms.dao.MemberDao.selectOne", id);
         }    
     }
+    
+    public Member selectOneWithPassword(String id, String password) throws Exception {
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
+            HashMap<String,String> params = new HashMap<>();
+            params.put("id", id);
+            params.put("password", password);
+            
+            return sqlSession.selectOne(
+                    "bitcamp.java106.pms.dao.MemberDao.selectOneWithPassword", params);
+        }    
+    }
 }
+// ver 41 - 로그인을 위한 selectOneWithPassword(id, password) 메서드 추가
 //ver 32 - DB Connection Pool 적용
 // ver 31 - JDBC API 적용
 //ver 23 - @Component 애노테이션을 붙인다.
