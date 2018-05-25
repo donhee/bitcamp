@@ -4,19 +4,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>exam01</title>
+<title>exam02</title>
 </head>
 <body>
 <h1>JSP 전용 태그 : forward()</h1>
 <pre>
 jsp:forward()
   RequestDispatcher의 forward() 와 같다.
-  
 </pre>
 
-<%--
+<h2>포워딩 테스트</h2>
 error 라는 파라미터가 있을때 다른 JSP 페이지로 포워딩시켜보자!
- --%>
 
+- forward() 할땐 이전의 출력이 지워진다.
+<%
+if (request.getParameter("error") != null) {%>
+  <jsp:forward page="exam02_error.jsp"></jsp:forward>
+<%}%>
 </body>
 </html>
