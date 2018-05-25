@@ -10,8 +10,11 @@
 </head>
 <body>
 
-<div id='header'>
-<a href='/bitcamp-java-project/auth/login'>로그인</a></div>
+<%
+out.flush();
+request.getRequestDispatcher("/header.jsp").include(request,response);
+%>
+
 <h1>게시물 보기(MVC)</h1>
 <%
 Board board = (Board) request.getAttribute("board");

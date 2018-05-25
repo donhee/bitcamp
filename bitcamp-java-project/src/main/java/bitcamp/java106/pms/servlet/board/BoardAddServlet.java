@@ -2,7 +2,6 @@ package bitcamp.java106.pms.servlet.board;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,21 +41,14 @@ public class BoardAddServlet extends HttpServlet {
             response.sendRedirect("list");
             
         } catch (Exception e) {
-            // 예외가 발생하면 ErrorServlet으로 예외 내용을 출력하도록 실행을 위임한다.
-            // 1) 실행을 위임할 객체를 준비한다.
-            RequestDispatcher rd = request.getRequestDispatcher("/error");
-            
-            // 2) 다른 서블릿에게 실행을 위임하기 전에 그 서블릿에 전달한 데이터가 있다면,
-            //    ServletRequest 보관소에 담아라.
             request.setAttribute("error", e);
             request.setAttribute("title", "게시물 등록 실패!");
-
-            // 3) 다른 서블릿으로 실행을 위임한다.
-            rd.forward(request, response);
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
 
 }
+// ver 42 - JSP 적용
 // ver 40 - 필터 적용  request.setCharacterEncoding("UTF-8"); 제거
 // ver 39 -
 //ver 38 - redirect 적용 

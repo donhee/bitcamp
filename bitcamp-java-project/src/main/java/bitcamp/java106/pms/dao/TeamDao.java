@@ -57,8 +57,17 @@ public class TeamDao {
                     "bitcamp.java106.pms.dao.TeamDao.selectOne", name);
         }      
     }
+    
+    public Team selectOneWithMembers(String name) throws Exception {
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
+            return sqlSession.selectOne(
+                    "bitcamp.java106.pms.dao.TeamDao.selectOneWithMembers", name);
+        }      
+    }
+    
 }
-
+// ver 42 - JSP 적용에 따라 Team 정보를 가져올 때 그 팀의 Member 정보도 함께 가져온다.
+//          selectOneWithMembers() 추가
 //ver 23 - @Component 애노테이션을 붙인다.
 //ver 22 - 추상 클래스 AbstractDao를 상속 받는다.
 //ver 19 - 우리 만든 ArrayList 대신 java.util.LinkedList를 사용하여 목록을 다룬다. 

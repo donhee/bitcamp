@@ -10,9 +10,13 @@
 <title>게시물 목록</title>
 </head>
 <body>
+
+<%
+out.flush();
+request.getRequestDispatcher("/header.jsp").include(request,response);
+%>
+
 <h1>게시물 목록(MVC)</h1>
-<div id='header'>
-<a href='/bitcamp-java-project/auth/login'>로그인</a></div>
 <p><a href='form.html'>새 글 등록</a></p>
 <table border='1'>
 <tr>

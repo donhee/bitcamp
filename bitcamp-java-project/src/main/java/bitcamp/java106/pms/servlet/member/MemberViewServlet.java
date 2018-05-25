@@ -69,12 +69,9 @@ public class MemberViewServlet extends HttpServlet {
             out.println("</table>");
                
         } catch (Exception e) {
-            RequestDispatcher rd = request.getRequestDispatcher("/error");
             request.setAttribute("error", e);
             request.setAttribute("title", "회원 상세조회 실패!");
-            // 다른 서블릿으로 실행을 위임할 때,
-            // 이전까지 버퍼로 출력한 데이터를 버린다.
-            rd.forward(request, response);
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
         out.println("<p>");
         out.println("<a href='list'>목록</a>");

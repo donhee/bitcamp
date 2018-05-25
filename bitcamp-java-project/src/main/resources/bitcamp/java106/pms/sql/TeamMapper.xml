@@ -11,6 +11,10 @@
     <result column="max_qty" property="maxQty" />
     <result column="sdt" property="startDate" />
     <result column="edt" property="endDate" />
+    <collection property="members" ofType="Member"> <!-- Team.java List<Member> members 객체에 넣기 -->
+        <id column="mid" property="id"/>
+        <result column="email" property="email" />
+    </collection>
   </resultMap>
 
   <select id="selectList" 
@@ -33,7 +37,7 @@
   
   
   <insert id="insert" parameterType="Team" 
-        useGeneratedKeys="true" keyColumn="name" keyProperty="name"> <!-- 자동증가된 PK값을 Team 객체에 담아준다. -->
+        useGeneratedKeys="true" keyColumn="name" keyProperty="name"> <!-- 자동증가된 PK값을 Team 객체에 저장한다. -->
     insert into pms2_team(name,dscrt,max_qty,sdt,edt) 
     values(#{name},#{description},#{maxQty},#{startDate},#{endDate})
   </insert>
@@ -45,6 +49,15 @@
     select name,dscrt,max_qty,sdt,edt 
     from pms2_team 
     where name=#{value}
+  </select>
+  
+  <select id="selectOneWithMembers" resultMap="TeamMap" parameterType="string">
+    select 
+        t.name, t.dscrt, t.sdt, t.edt, t.max_qty, tm.mid, m.email 
+    from pms2_team t 
+	    left outer join pms2_team_member tm on t.name=tm.tnm
+	    left outer join pms2_member m on tm.mid=m.mid
+    where t.name=#{value}
   </select>
   
   <update id="update" parameterType="Team">
