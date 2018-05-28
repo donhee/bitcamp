@@ -6,17 +6,6 @@
 if (refererUrl != null && !refererUrl.endsWith("/auth/login")) {
     session.setAttribute("refererUrl", refererUrl);
 }
-	String id = "";
-	Cookie[] cookies = request.getCookies();
-	                            // an array of all the Cookies included with this request, or null if the request has no cookies
-	if (cookies != null) { // 쿠키가 null이 아닐때만 반복문을 돌려야 한다. 중요! 
-	    for (Cookie cookie : cookies) {
-	        if (cookie.getName().equals("id")) {
-	            id = cookie.getValue(); 
-	            break;
-	        }
-	    }
-	}
 %>
 <!DOCTYPE html>
 <html>
@@ -25,11 +14,11 @@ if (refererUrl != null && !refererUrl.endsWith("/auth/login")) {
 <title>로그인</title>
 </head>
 <body>
-<h1>로그인(MVC)</h1>
+<h1>로그인(MVC + JSP 전용 태그 + EL)</h1>
 <form action='login' method='post'>
 <table border='1'>
 <tr>
-    <th>아이디</th><td><input type='text' name='id' value='<%=id%>'></td>
+    <th>아이디</th><td><input type='text' name='id' value='${cookie.id.value}'></td>
 </tr>
 <tr>
     <th>암호</th><td><input type='password' name='password'></td>

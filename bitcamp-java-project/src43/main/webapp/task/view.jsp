@@ -14,7 +14,7 @@
 
 <jsp:include page="/header.jsp"/>
 
-<h1>작업 보기(MVC)</h1>
+<h1>작업 보기(MVC + JSP 전용 태그)</h1>
 <jsp:useBean id="task" class="bitcamp.java106.pms.domain.Task" scope="request"/>
 <form action='update' method='post'>
 <input type='hidden' name='no' value='<%=request.getParameter("no")%>'>

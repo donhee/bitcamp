@@ -8,7 +8,7 @@
     <%
 List<Member> members = team.getMembers();
 %>
-<h2>회원 목록(MVC)</h2>
+<h2>회원 목록(MVC + JSP 전용 태그)</h2>
 <form action='member/add' method='post'>
 <input type='text' name='memberId' placeholder='회원 아이디'>
 <input type='hidden' name='teamName' value='<%=request.getParameter("name")%>'>

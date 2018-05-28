@@ -14,7 +14,7 @@
 
 <jsp:include page="/header.jsp"/>
 
-<h1>팀 목록</h1>
+<h1>팀 목록(MVC + JSP 전용 태그)</h1>
 <p><a href='form.html'>새 팀</a></p>
 <table border='1'>
 <tr>

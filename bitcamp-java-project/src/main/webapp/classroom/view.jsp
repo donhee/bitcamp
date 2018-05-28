@@ -12,32 +12,31 @@
 
 <jsp:include page="/header.jsp"/>
     
-<h1>강의 보기</h1>
-<jsp:useBean id="classroom" class="bitcamp.java106.pms.domain.Classroom" scope="request"/>
+<h1>강의 보기(MVC + JSP 전용 태그 + EL)</h1>
 <form action='update' method='post'>
-<input type='hidden' name='no' value='1'>
+<input type='hidden' name='no' value='${classroom.no}'>
 <table border='1'>
 <tr>
     <th>강의명</th>
-    <td><input type='text' name='title' value='hihi2'></td>
+    <td><input type='text' name='title' value='${classroom.title}'></td>
 </tr>
 <tr>
     <th>시작일</th>
-    <td><input type='date' name='startDate' value='2018-05-14'></td>
+    <td><input type='date' name='startDate' value='${classroom.startDate}'></td>
 </tr>
 <tr>
     <th>종료일</th>
-    <td><input type='date' name='endDate' value='2018-05-15'></td>
+    <td><input type='date' name='endDate' value='${classroom.endDate}'></td>
 </tr>
 <tr>
     <th>강의실</th>
-    <td><input type='text' name='room' value='200'></td>
+    <td><input type='text' name='room' value='${classroom.room}'></td>
 </tr>
 </table>
 <p>
 <a href='list'>목록</a>
 <button>변경</button>
-<a href='delete?no=1'>삭제</a>
+<a href='delete?no=${classroom.no}'>삭제</a>
 </p>
 </form>
 </body>

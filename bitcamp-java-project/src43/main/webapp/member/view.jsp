@@ -12,7 +12,7 @@
 
 <jsp:include page="/header.jsp"/>
 
-<h1>멤버 보기(MVC)</h1>
+<h1>멤버 보기(MVC + JSP 전용 태그)</h1>
 <jsp:useBean id="member" class="bitcamp.java106.pms.domain.Member" scope="request"/>
 <form action='update' method='post'>
 <table border='1'>
