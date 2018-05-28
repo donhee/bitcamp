@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bitcamp.java106.pms.dao.TeamDao">
+  
+  <resultMap type="Team" id="TeamMap">
+    <id column="name" property="name" />
+    <result column="dscrt" property="description" />
+    <result column="max_qty" property="maxQty" />
+    <result column="sdt" property="startDate" />
+    <result column="edt" property="endDate" />
+    <collection property="members" ofType="Member"> <!-- Team.java List<Member> members 객체에 넣기 -->
+        <id column="mid" property="id"/>
+        <result column="email" property="email" />
+    </collection>
+  </resultMap>
+
+  <select id="selectList" 
+          resultMap="TeamMap" parameterType="map"> 
+    select name,max_qty,sdt,edt 
+    from pms2_team
+    <!-- limit #{startIndex}, #{pageSize} -->    
+  </select>
+  <!-- 
+    ArrayList<Task> list = new ArrayList<>();
+    while (rs.next()) {
+        Task task = new Task();
+        task.setName(rs.getString("name"));
+        task.setStartDate(rs.getDate("sdt"));
+        .......
+        list.add(task);
+    }
+  
+   -->
+  
+  
+  <insert id="insert" parameterType="Team" 
+        useGeneratedKeys="true" keyColumn="name" keyProperty="name"> <!-- 자동증가된 PK값을 Team 객체에 저장한다. -->
+    insert into pms2_team(name,dscrt,max_qty,sdt,edt) 
+    values(#{name},#{description},#{maxQty},#{startDate},#{endDate})
+  </insert>
+  
+  <!-- 파라미터의 타입이 primitive type이나 wrapper 클래스, String 클래스인 경우
+        값을 꺼낼 때 프로퍼티 이름을 마음대로 해도 된다.
+  -->
+  <select id="selectOne" resultMap="TeamMap" parameterType="string">
+    select name,dscrt,max_qty,sdt,edt 
+    from pms2_team 
+    where name=#{value}
+  </select>
+  
+  <select id="selectOneWithMembers" resultMap="TeamMap" parameterType="string">
+    select 
+        t.name, t.dscrt, t.sdt, t.edt, t.max_qty, tm.mid, m.email 
+    from pms2_team t 
+	    left outer join pms2_team_member tm on t.name=tm.tnm
+	    left outer join pms2_member m on tm.mid=m.mid
+    where t.name=#{value}
+  </select>
+  
+  <update id="update" parameterType="Team">
+    update pms2_team set 
+    dscrt=#{description}, max_qty=#{maxQty}, sdt=#{startDate}, edt=#{endDate} 
+    where name=#{name}
+  </update>
+  
+  <delete id="delete" parameterType="string">
+    delete from pms2_team where name=#{value}
+  </delete>
+  
+  
+</mapper>
