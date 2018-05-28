@@ -1,4 +1,3 @@
-<%@page import="bitcamp.java106.pms.domain.Team"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,7 +10,7 @@
 <body>
 <jsp:include page="/header.jsp"/>
 
-<h1>팀 보기(MVC + JSP 전용 태그 + EL)</h1>
+<h1>팀 보기(MVC + JSP 전용 태그 + EL + JSTL)</h1>
 <form action='update' method='post'>
 <table border='1'>
 <tr>

@@ -1,12 +1,11 @@
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-    String refererUrl = request.getHeader("Referer");
-if (refererUrl != null && !refererUrl.endsWith("/auth/login")) {
-    session.setAttribute("refererUrl", refererUrl);
-}
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:if test="${header.referer != null and !header.referer.endsWith('/auth/login')}">
+    <c:set var="refererUrl" value="${header.referer}" scope="session"/>
+</c:if>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +13,8 @@ if (refererUrl != null && !refererUrl.endsWith("/auth/login")) {
 <title>로그인</title>
 </head>
 <body>
-<h1>로그인(MVC + JSP 전용 태그 + EL)</h1>
+
+<h1>로그인(MVC + EL + JSTL)</h1>
 <form action='login' method='post'>
 <table border='1'>
 <tr>
