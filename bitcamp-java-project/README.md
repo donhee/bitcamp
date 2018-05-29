@@ -1,5 +1,14 @@
 # 자바 프로젝트
 
+## src45 - Facade 패턴을 적용하여 Front Controller를 구현한다.
+학습목표
+    - Facade(퍼사드) 패턴을 이해한다.
+    - Front Controller를 도입하고 적용할 수 있다.
+    - 서블릿 오류에 대한 전용 페이지 설정할 수 있다. (web.xml)
+작업내용
+    - 컨트롤러들의 공통 기능을 모아 Front Controller에게 위임한다.
+    
+    
 ## src44 - EL과 JSTL 적용
 학습목표
     - EL과 JSTL을 사용할 수 있다.
