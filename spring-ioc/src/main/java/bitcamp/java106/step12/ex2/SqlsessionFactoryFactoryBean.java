@@ -1,0 +1,30 @@
+package bitcamp.java106.step12.ex2;
+
+import java.io.InputStream;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.beans.factory.FactoryBean;
+
+public class SqlsessionFactoryFactoryBean implements FactoryBean<SqlSessionFactory> {
+
+    String configLocation;
+    
+    public void setConfigLocation(String configLocation) {
+        this.configLocation = configLocation;
+    }
+    
+    @Override
+    public SqlSessionFactory getObject() throws Exception {
+        InputStream in = Resources.getResourceAsStream(this.configLocation);
+        return new SqlSessionFactoryBuilder().build(in);
+    }
+
+    @Override
+    public Class<?> getObjectType() {
+        return SqlSessionFactory.class;
+    }
+
+    
+}
