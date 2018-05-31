@@ -9,11 +9,8 @@ public interface TeamMemberDao {
     
     public int insert(Map<String,Object> params);    
     public int delete(Map<String,Object> params);    
-    public int delete(String teamName);
-    
     public List<String> selectList(String teamName);
     public List<Member> selectListWithEmail(String teamName);
-    
     public boolean isExist(Map<String,Object> params);
 }
 // ver 50 - 클래스를 인터페이스로 변경

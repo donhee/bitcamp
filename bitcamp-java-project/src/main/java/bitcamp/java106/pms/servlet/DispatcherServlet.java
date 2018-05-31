@@ -105,7 +105,8 @@ public class DispatcherServlet extends HttpServlet {
                 request.getRequestDispatcher(viewUrl).include(request, response);
             }
         } catch (Exception e) {
-            throw new ServletException("페이지 컨트롤러 실행 중 오류 발생!");
+            e.printStackTrace();
+            throw new ServletException(e);
         } 
         
     }

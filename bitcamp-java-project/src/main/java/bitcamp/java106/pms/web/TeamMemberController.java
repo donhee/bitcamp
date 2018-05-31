@@ -29,7 +29,8 @@ public class TeamMemberController {
     @RequestMapping("/add")
     public String add(
             @RequestParam("teamName") String teamName,
-            @RequestParam("memberId") String memberId) throws Exception {
+            @RequestParam("memberId") String memberId,
+            Map<String,Object> map) throws Exception {
         
         Team team = teamDao.selectOne(teamName);
         if (team == null) {
@@ -37,7 +38,8 @@ public class TeamMemberController {
         }
         Member member = memberDao.selectOne(memberId);
         if (member == null) {
-            throw new Exception(memberId + " 회원이 없습니다.");
+            map.put("message", "해당 회원이 없습니다!");
+            return "/team/member/fail.jsp";
         }
         
         // ver 50 - map 추가
@@ -46,7 +48,8 @@ public class TeamMemberController {
         params.put("memberId", memberId);
         
         if (teamMemberDao.isExist(params)) {
-            throw new Exception("이미 등록된 회원입니다.");
+            map.put("message", "이미 등록된 회원입니다!");
+            return "/team/member/fail.jsp";
         }
         teamMemberDao.insert(params);
 
@@ -56,7 +59,8 @@ public class TeamMemberController {
     @RequestMapping("/delete")
     public String delete(
             @RequestParam("teamName") String teamName,
-            @RequestParam("memberId") String memberId) throws Exception {
+            @RequestParam("memberId") String memberId,
+            Map<String,Object> map) throws Exception {
         
         // ver 50 - map 추가
         HashMap<String,Object> params = new HashMap<>();
@@ -65,7 +69,8 @@ public class TeamMemberController {
         
         int count = teamMemberDao.delete(params);
         if (count == 0) {
-            throw new Exception("해당 팀원이 존재하지 않습니다.");
+            map.put("message", "해당 회원이 없습니다!");
+            return "/team/member/fail.jsp";
         }
 
         return "redirect:../view.do?name=" + URLEncoder.encode(teamName, "UTF-8");
