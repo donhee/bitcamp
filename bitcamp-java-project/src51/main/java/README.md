@@ -15,3 +15,5 @@
   
 - XxxController 변경
   - 페이지 컨트롤러는 @Controller 애노테이션을 써서 정확히 명시해줘라. (@Component 애노테이션을 써도 되지만)
+  
+- Date 객체 넘어가는 것을 에러남.
