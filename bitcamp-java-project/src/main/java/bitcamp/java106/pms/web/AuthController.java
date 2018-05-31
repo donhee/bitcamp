@@ -1,6 +1,8 @@
 // 로그인 폼 출력과 사용자 인증처리 서블릿
 package bitcamp.java106.pms.web;
 
+import java.util.HashMap;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,7 +46,11 @@ public class AuthController {
         }
         response.addCookie(cookie);
         
-        Member member = memberDao.selectOneWithPassword(id, password);
+        // ver 50 - map 추가
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("id", id);
+        params.put("password", password);
+        Member member = memberDao.selectOneWithPassword(params);
         
         if (member != null) { // 로그인 성공!
             session.setAttribute("loginUser", member);

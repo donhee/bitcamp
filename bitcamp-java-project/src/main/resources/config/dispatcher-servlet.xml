@@ -10,20 +10,32 @@
 
     <context:component-scan base-package="bitcamp.java106.pms"/>
     
-    <!-- Mybatis SqlSessionFactory 준비하기 -->
-    <bean id="mybatisConfigInputStream" 
-            class="org.apache.ibatis.io.Resources"
-            factory-method="getResourceAsStream">
-        <constructor-arg value="bitcamp/java106/pms/sql/mybatis-config.xml"/>
+    <bean id="sqlSessionFactory" 
+            class="org.mybatis.spring.SqlSessionFactoryBean">
+       <property name="dataSource" ref="dataSource" />
+       <property name="mapperLocations" 
+            value="classpath*:bitcamp/java106/pms/sql/*Mapper.xml" />
+       <property name="typeAliasesPackage" value="bitcamp.java106.pms.domain" /> <!-- 패키지 지정한다. 패키지에 있는 객체를 찾아서 별명을 자동으로 지정해준다  -->
     </bean>
     
-    <bean id="SqlSessionFactoryBuilder" 
-            class="org.apache.ibatis.session.SqlSessionFactoryBuilder" />
+    <bean id="dataSource" 
+        class="org.apache.commons.dbcp.BasicDataSource" 
+        destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
     
-    <bean id="SqlSessionFactory" 
-            factory-bean="SqlSessionFactoryBuilder"
-            factory-method="build">
-        <constructor-arg ref="mybatisConfigInputStream"/>
+    <context:property-placeholder location="bitcamp/java106/pms/sql/jdbc.properties"/>
+    
+    <!-- DAO 구현체를 자동으로 만들어주는 객체를 준비 
+        => 개발자는 DAO를 직접 구현할 필요가 없다.
+        => 단지 인터페이스만 선언하면 된다.
+    -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+      <!-- DAO 인터페이스가 선언된 패키지를 지정한다. -->
+      <property name="basePackage" value="bitcamp.java106.pms.dao" />
     </bean>
     
 </beans>

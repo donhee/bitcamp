@@ -1,6 +1,7 @@
 package bitcamp.java106.pms.web;
 
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,9 +41,13 @@ public class TaskController {
             throw new Exception(task.getTeam().getName() + " 팀은 존재하지 않습니다.");
         }
         
+        // ver 50 - map 추가
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("teamName", task.getTeam().getName());
+        params.put("memberId", task.getWorker().getId());
+        
         if (task.getWorker().getId().length() > 0 &&
-            !teamMemberDao.isExist(
-                task.getTeam().getName(), task.getWorker().getId())) {
+            !teamMemberDao.isExist(params)) {
             throw new Exception(task.getWorker().getId() + "는 이 팀의 회원이 아닙니다.");
         }
         
