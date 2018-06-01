@@ -4,6 +4,10 @@
 - web.xml이 아닌 클래스를 통해 프론트 컨트롤러 설정하기
 - 작업내용
   - web.xml 에서 프론트 컨트롤러 지정하는 부분을 제거한다.
+  - MyWebApplicationInitializaer 생성
+학습
+  - 서블릿 컨테이너에서  MyWebApplicationInitializaer까지 호출되는 과정을 이해한다.
+  - 자바 코드로 프론트 컨트롤러(DispatcherServlet)를 웹 애플리케이션에 등록하는 방법을 이해한다. 
   
 ## src04 - 스프링 설정 파일의 경로 지정하기
 - 기본 경로나(/WEB-INF)가 아닌 다른 경로에 있는 설정 파일 지정하기
