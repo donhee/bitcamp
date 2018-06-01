@@ -1,5 +1,11 @@
 # 버전 별 주제
 
+## src06 - 프론트 컨트롤러가 사용할 IoC 컨테이너를 자바로 설정하기 
+- mvc-servlet.xml 대신 AppConfig로 설정
+- 작업
+  - bitcamp.mvc.web.AppConfig 생성
+
+
 ## src05 - 설정 클래스를 사용하여 프론트 컨트롤러 설정(중요)
 - web.xml이 아닌 클래스를 통해 프론트 컨트롤러 설정하기
 - 작업내용
