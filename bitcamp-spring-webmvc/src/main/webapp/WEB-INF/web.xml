@@ -12,18 +12,35 @@
     <description>웹 애플리케이션에 대한 설명을 적는 태그이다.</description>
     
     <display-name>spring-webmvc</display-name>
-    
-    <!-- src03 - 프론트 컨트롤러들이 공통으로 사용할 객체를 관리해주는 ContextLoaderListener 등록 -->
-    <!-- => ServletContextListener의 구현체이다. -->
-    <!-- => 즉 웹 애플리케이션이 시작되거나 종료될 때 실행되는 클래스이다. -->
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <!-- ContextLoaderListener의 IoC 컨트롤러를 위한 설정 파일 지정 -->
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring/app-context.xml</param-value>
     </context-param>
+    
+    <servlet>
+        <servlet-name>mvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 기본 경로가 아니면 다음과 같이 설정 파일의 위치를 지정해야 한다. -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring/mvc-servlet.xml</param-value>
+            
+            <!-- 만약 CLASSPATH에 설정파일이 있다면 경로 앞에 classpath: 접두어를 붙인다. -->
+            <!--  
+            <param-value>classpath:bitcamp/mvc/config/mvc-servlet.xml</param-value>
+            -->
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>mvc</servlet-name>
+        <url-pattern>/mvc/*</url-pattern>
+    </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
@@ -31,5 +48,5 @@
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    
+
 </web-app>
