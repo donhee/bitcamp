@@ -70,6 +70,22 @@ public class ClassroomController{
         return "/classroom/view.jsp";
     }
     
+    // GlobalBindingInitializer 클래스에 등록했기 때문에 따로 설정할 필요가 없다.
+    /*
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(
+                java.sql.Date.class, 
+                new PropertyEditorSupport() {
+                    @Override
+                    public void setAsText(String text) throws IllegalArgumentException {
+                        this.setValue(java.sql.Date.valueOf(text));
+                    }
+                });
+    }
+    */
+    
 }
+// ver 51 - Spring WebMVC 
 //ver 40 - 필터 적용  request.setCharacterEncoding("UTF-8"); 제거
 // ver 37 - 컨트롤러를 서블릿으로 변경

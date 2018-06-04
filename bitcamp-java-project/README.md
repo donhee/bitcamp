@@ -4,10 +4,17 @@
 학습목표
     - Spring WebMVC를 사용하여 웹 애플리케이션을 만들 수 있다.
     - Spring WebMVC의 구동 원리를 이해한다.
+    - 스프링 WebMVC 프론트 컨트롤러를 프로젝트에 적용할 수 있다.
+    - 스프링 WebMVC 규칙에 따라 페이지 컨트롤러를 만들 수 있다.
+    - @InitBinder 애노테이션을 사용할 수 있다.
+    - 커스텀 프로퍼티 에디터를 사용하여 클라이언트 파라미터 값을 요청 핸들러의 파라미터 값으로 변환할 수 있다.
+    - @ControllerAdvice 애노테이션을 사용할 수 있다.
+    
 작업내용
     - 기존에 작성했던 프론트 컨트롤러인 DispatcherServlet을 Spring WebMVC 클래스로 대체한다.
     - 기존에 작성했던 필터인 CharacterEncodingFilter를 Spring WebMVC 클래스로 대체한다.
     - @RequestParam, @RequestMapping 애노테이션을 Spring WebMVC 애노테이션으로 대체한다.
+    - 문자열 파라미터 값을 java.sql.Date 객체로 변환시키는 커스텀 프로퍼티 에디터(GlobalBindingInitializer)를 등록한다.
 
 ## src50 - Mybatis와 Spring IoC 컨테이너 연동하기
 학습목표
