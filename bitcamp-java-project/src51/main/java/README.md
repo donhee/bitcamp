@@ -16,4 +16,16 @@
 - XxxController 변경
   - 페이지 컨트롤러는 @Controller 애노테이션을 써서 정확히 명시해줘라. (@Component 애노테이션을 써도 되지만)
   
-- Date 객체 넘어가는 것을 에러남.
+- Date 객체 넘어가는 것을 에러남.(add 할 때)
+- TeamController, TaskController, ClassroomController에 밑의 코드 적용
+    - @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(
+                java.sql.Date.class, 
+                new PropertyEditorSupport() {
+                    @Override
+                    public void setAsText(String text) throws IllegalArgumentException {
+                        this.setValue(java.sql.Date.valueOf(text));
+                    }
+                });
+    }
