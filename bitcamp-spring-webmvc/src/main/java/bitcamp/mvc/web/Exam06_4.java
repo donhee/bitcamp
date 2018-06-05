@@ -1,53 +1,43 @@
-// 요청 핸들러의 리턴 값 - view 컴포넌트 URL 또는 이름 리턴하기
+// view resolver 다루기 - 기본 뷰 리졸버를 InternalResourceViewResolver로 대체한다.
 package bitcamp.mvc.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller 
-@RequestMapping("/exam06_3") 
+@RequestMapping("/exam06_4") 
 public class Exam06_4 {
     
-    // request handler에서 view URL을 리턴하면
-    // 프론트 컨트롤러는 그 URL을 include한다.
     @GetMapping(value="m1")  
-    public String m1() {
-        // 리턴 값으로 JSP의 URL을 알려주면 된다.
-        return "/exam06_3.jsp";
+    public String m1(Model model) {
+        model.addAttribute("name", "홍길동");
+        model.addAttribute("age", 20);
+        
+        // InternalResourceViewResolver를 사용하면
+        // view URL을 리턴할 때 다음과 같이 간결해진다.
+        return "exam06_4";
     }
     
     @GetMapping(value="m2")  
-    public View m2() {
-        // view 컴포넌트 URL을 View 구현체에 담어서 리턴 할 수 있다.
-        return new JstlView("/exam06_3.jsp");
-    }
-    
-    @GetMapping(value="m3")  
-    public View m3() {
-        // view 컴포넌트 URL을 View 구현체에 담어서 리턴 할 수 있다.
-        return new RedirectView("../exam06_1/m1");
-    }
-    
-    @GetMapping(value="m4")  
-    public String m4() {
-        // 보통 redirect는 URL에 "redirect:"라는 접두어를 붙여서 문자열로 리턴한다.
-        return "redirect:../exam06_1/m2";
-    }
-    
-    @GetMapping(value="m5")  
-    public ModelAndView m5() {
-        // 데이터와 함께 view URL을 리턴할 때는 ModelAndView 객체를 사용하기도 한다.
-        // => ModelAndView에 저장된 데이터는 프론트 컨트롤러가 ServletRequest 보관소로 복사한다.
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("name", "홍길동");
-        mv.addObject("age", 20);
-        mv.setViewName("/exam06_3.jsp");
-        return mv;
+    public void m2(Model model) {
+        model.addAttribute("name", "홍길동");
+        model.addAttribute("age", 20);
+        
+        // view URL을 리턴하지 않으면 
+        // 프론트 컨트롤러는 요청 URL을 기준으로 view URL을 계산한다.
+        // 예) http://localhost:8888/bitcamp-spring-webmvc/mvc/exam06_4/m2
+        // 프론트 컨트롤러에 전달되는 기본 URL을 제외하면 다음과 같다.
+        //   exam06_4/m2
+        // 이 URL을 가지고 InternalResourceViewResolver는 view URL을 계산한다.
+        //   prefix + 페이지 컨트롤러 url + suffix
+        //   = "/WEB-INF/jsp/" + "exam06_4/m2" + ".jsp"
+        //   = "/WEB-INF/jsp/exam06_4/m2.jsp"
+        //
+        // 이 방식의 장점은
+        // JSP를 request handler의 URL에 맞춰서 만들면
+        // request handler에서 따로 view URL을 리턴할 필요가 없어 편리하다.
     }
 }
 

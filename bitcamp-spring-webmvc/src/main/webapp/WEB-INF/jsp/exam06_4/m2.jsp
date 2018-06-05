@@ -8,8 +8,14 @@
 <title>view</title>
 </head>
 <body>
-<h1>Exam06_3의 실행결과</h1>
-name: ${requestScope.name}<br>
-age: ${requestScope.age}<br>
+
+<jsp:include page="../header.jsp" />
+
+<h1>Exam06_4의 실행결과</h1>
+name: ${name}<br>
+age: ${age}<br>
+
+<jsp:include page="../footer.jsp" />
+
 </body>
 </html>
