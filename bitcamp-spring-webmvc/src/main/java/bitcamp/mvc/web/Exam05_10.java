@@ -1,6 +1,11 @@
 // 요청 핸들러의 파라미터 - multipart/from-data 형식으로 넘어온 값 꺼내기
 package bitcamp.mvc.web;
 
+import java.io.File;
+
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,16 +21,24 @@ public class Exam05_10 {
     // => Spring WebMVC에 멀티파트 형식의 데이터를 처리하는 객체를 등록해야 한다.
     //    또한 그 객체가 의존하는 아파치의 commons-fileupload 라이브러리도 추가해야 한다.
     
+    @Autowired ServletContext sc;
+    
     // 테스트 방법 : http://localhost:8888/bitcamp-spring-webmvc/exam05_10.html
     @PostMapping(value="m1", produces="text/plain;charset=UTF-8")
     @ResponseBody
     public String m1(
             String name, // <input type="text"...> 
             int age,     // <input type="number" ...>
-            MultipartFile photo) { // <input type="file" ...> type이 file일땐 MultipartFile 타입으로 받아야한다.
+            MultipartFile photo) // <input type="file" ...> type이 file일땐 MultipartFile 타입으로 받아야한다.
+                    throws Exception { 
+
+        String filePath = sc.getRealPath("/" + photo.getOriginalFilename());
+        photo.transferTo(new File(filePath));
+        
         return String.format("m1(): name=%s, age=%d, photo=%s", name, age, photo.getOriginalFilename());
     }
 
-    
+    // 이미지 업로드 파일 찾기
+    // http://localhost:8888/bitcamp-spring-webmvc/180411_step22_ex02_Exam01_2.PNG
     
 }
