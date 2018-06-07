@@ -29,7 +29,7 @@ public class TeamMemberController {
         this.teamMemberDao = teamMemberDao;
     }
     
-    @RequestMapping("/add")
+    @RequestMapping("add")
     public String add(
             @RequestParam("teamName") String teamName,
             @RequestParam("memberId") String memberId,
@@ -42,7 +42,7 @@ public class TeamMemberController {
         Member member = memberDao.selectOne(memberId);
         if (member == null) {
             map.put("message", "해당 회원이 없습니다!");
-            return "/team/member/fail.jsp";
+            return "team/member/fail";
         }
         
         // ver 50 - map 추가
@@ -52,14 +52,14 @@ public class TeamMemberController {
         
         if (teamMemberDao.isExist(params)) {
             map.put("message", "이미 등록된 회원입니다!");
-            return "/team/member/fail.jsp";
+            return "team/member/fail";
         }
         teamMemberDao.insert(params);
 
-        return "redirect:../view.do?name=" + URLEncoder.encode(teamName, "UTF-8");
+        return "redirect:../" + URLEncoder.encode(teamName, "UTF-8");
     }
     
-    @RequestMapping("/delete")
+    @RequestMapping("delete")
     public String delete(
             @RequestParam("teamName") String teamName,
             @RequestParam("memberId") String memberId,
@@ -73,14 +73,14 @@ public class TeamMemberController {
         int count = teamMemberDao.delete(params);
         if (count == 0) {
             map.put("message", "해당 회원이 없습니다!");
-            return "/team/member/fail.jsp";
+            return "team/member/fail";
         }
 
-        return "redirect:../view.do?name=" + URLEncoder.encode(teamName, "UTF-8");
+        return "redirect:../" + URLEncoder.encode(teamName, "UTF-8");
     }
     
-    @RequestMapping("/list")
-    public String list(
+    @RequestMapping("list")
+    public void list(
             @RequestParam("teamName") String teamName,
             Map<String,Object> map) throws Exception {
 
@@ -88,7 +88,6 @@ public class TeamMemberController {
         
         map.put("members", members);
         
-        return "/team/member/list.jsp";
     }
     
 }

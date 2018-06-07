@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,14 +21,18 @@ public class MemberController {
         this.memberDao = memberDao;
     }
     
-    @RequestMapping("/add")
+    @RequestMapping("form")
+    public void form() {
+    }
+    
+    @RequestMapping("add")
     public String add(Member member) throws Exception {
 
         memberDao.insert(member);
-        return "redirect:list.do";
+        return "redirect:list";
     }
     
-    @RequestMapping("/delete")
+    @RequestMapping("delete")
     public String delete(@RequestParam("id") String id) throws Exception {
 
         int count = memberDao.delete(id);
@@ -35,18 +40,17 @@ public class MemberController {
             throw new Exception("해당 회원이 없습니다.");
         }
         
-        return "redirect:list.do";
+        return "redirect:list";
     }
     
-    @RequestMapping("/list")
-    public String list(Map<String,Object> map) throws Exception {
+    @RequestMapping("list")
+    public void list(Map<String,Object> map) throws Exception {
         List<Member> list = memberDao.selectList();
         map.put("list", list);
         
-        return "/member/list.jsp";
     }
     
-    @RequestMapping("/update")
+    @RequestMapping("update")
     public String update(Member member) throws Exception {
 
         int count = memberDao.update(member);
@@ -54,11 +58,11 @@ public class MemberController {
             throw new Exception("해당 회원이 존재하지 않습니다.");
         } 
         
-        return "redirect:list.do";
+        return "redirect:list";
     }
     
-    @RequestMapping("/view")
-    public String view(@RequestParam("id") String id, Map<String,Object> map) throws Exception {
+    @RequestMapping("{id}")
+    public String view(@PathVariable("id") String id, Map<String,Object> map) throws Exception {
         
         Member member = memberDao.selectOne(id);
         if (member == null) {
@@ -66,7 +70,7 @@ public class MemberController {
         }
         map.put("member", member);
         
-        return "/member/view.jsp";
+        return "member/view";
     }
     
 }

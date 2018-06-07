@@ -1,11 +1,11 @@
 package bitcamp.java106.pms.web;
 
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,7 +17,7 @@ import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
 
 @Controller
-@RequestMapping("/task")
+@RequestMapping("/team/{teamName}/task")
 public class TaskController {
     
     TeamDao teamDao;
@@ -30,10 +30,10 @@ public class TaskController {
         this.teamMemberDao = teamMemberDao;
     }
     
-    @RequestMapping("/add")
+    @RequestMapping("add")
     public String add(
             Task task,
-            @RequestParam("teamName") String teamName,
+            @PathVariable String teamName,
             @RequestParam("memberId") String memberId) throws Exception {
         
         task.setTeam(new Team().setName(teamName));
@@ -55,12 +55,12 @@ public class TaskController {
         }
         
         taskDao.insert(task);
-        return "redirect:list.do?teamName=" + URLEncoder.encode(teamName, "UTF-8");
+        return "redirect:list";
     }
     
-    @RequestMapping("/delete")
+    @RequestMapping("delete")
     public String delete(
-            @RequestParam("teamName") String teamName, 
+            @PathVariable String teamName, 
             @RequestParam("no") int no) throws Exception {
         
         int count = taskDao.delete(no);
@@ -68,14 +68,13 @@ public class TaskController {
             throw new Exception("해당 작업이 존재하지 않습니다.");
         }
         
-        return "redirect:list.do?teamName=" + URLEncoder.encode(teamName, "UTF-8");
+        return "redirect:list";
     }
     
-    @RequestMapping("/form")
+    @RequestMapping("form")
     public String form(
-            @RequestParam("teamName") String teamName, 
+            @PathVariable("teamName") String teamName, 
             Map<String,Object> map) throws Exception {
-        
         
         Team team = teamDao.selectOne(teamName);
         if (team == null) {
@@ -83,13 +82,14 @@ public class TaskController {
         }
         List<Member> members = teamMemberDao.selectListWithEmail(teamName);
         map.put("members", members);
+        map.put("teamName", teamName);
         
-        return "/task/form.jsp";
+        return "task/form";
     }
     
-    @RequestMapping("/list")
+    @RequestMapping("list")
     public String list(
-            @RequestParam("teamName") String teamName, 
+            @PathVariable("teamName") String teamName, 
             Map<String,Object> map) throws Exception {
         
         Team team = teamDao.selectOne(teamName);
@@ -98,13 +98,14 @@ public class TaskController {
         }
         List<Task> list = taskDao.selectList(team.getName());
         map.put("list", list);
+        map.put("teamName", teamName);
         
-        return "/task/list.jsp";
+        return "/task/list";
     }
     
-    @RequestMapping("/update")
+    @RequestMapping("update")
     public String update(
-            @RequestParam("teamName") String teamName,
+            @PathVariable String teamName,
             @RequestParam("memberId") String memberId, 
             Task task) throws Exception {
         
@@ -116,12 +117,13 @@ public class TaskController {
             throw new Exception("해당 작업이 없습니다.");
         }
         
-        return "redirect:list.do?teamName=" + URLEncoder.encode(teamName, "UTF-8");
+        return "redirect:list";
     }
     
-    @RequestMapping("/view")
+    @RequestMapping("{no}")
     public String view(
-            @RequestParam("no") int no, 
+            @PathVariable String teamName,
+            @PathVariable("no") int no, 
             Map<String,Object> map) throws Exception {
         
         Task task = taskDao.selectOne(no);
@@ -134,8 +136,9 @@ public class TaskController {
         
         map.put("task", task);
         map.put("members", members);
+        map.put("teamName", teamName);
         
-        return "/task/view.jsp";
+        return "task/view";
     }
     
     

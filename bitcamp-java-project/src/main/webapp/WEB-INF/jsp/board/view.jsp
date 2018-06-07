@@ -12,18 +12,18 @@
 <jsp:include page="../header.jsp"/>
 
 <h1>게시물 보기</h1>
-<form action='update.do' method='post'>
+<form action='update' method='post'>
 <table border='1'>
 <tr><th>번호</th><td>
 <input type='text' name='no' value='${board.no}' readonly></td></tr>
 <tr><th>제목</th><td><input type='text' name='title' value='${board.title}'></td></tr>
-<tr><th>내용</th><td><textarea name='content' row='10' cols='60'>${board.content}</textarea></td></tr>
+<tr><th>내용</th><td><textarea name='content' rows='10' cols='60'>${board.content}</textarea></td></tr>
 <tr><th>등록일</th><td>${board.createdDate}</td></tr>
 </table>
 <p>
-<a href='list.do'>목록으로 이동</a>
+<a href='list'>목록으로 이동</a>
 <button>변경</button>
-<a href='delete.do?no=${board.no}'>삭제</a></p>
+<a href='delete?no=${board.no}'>삭제</a></p>
 </form>
 </body>
 </html>

@@ -10,11 +10,11 @@
 </head>
 <body>
 
-<jsp:include page="/header.jsp"/>
+<jsp:include page="../header.jsp"/>
 
-<h1><a href='../team/view.do?name=${param.teamName}'>${param.teamName}</a>
-의 작업 목록(MVC + JSP 전용 태그 + EL + JSTL)</h1>
-<p><a href='form.do?teamName=${param.teamName}'>새작업</a></p>
+<h1><a href='../../${teamName}'>${teamName}</a>의 작업 목록</h1>
+
+<p><a href='form'>새작업</a></p>
 
 <table border='1'>
 <tr>
@@ -23,7 +23,7 @@
 <c:forEach items="${list}" var="task">
 <tr>
     <td>${task.no}</td>    
-    <td><a href='view.do?no=${task.no}'>${task.title}</a></td>    
+    <td><a href='${task.no}'>${task.title}</a></td>    
     <td>${task.startDate} ~ ${task.endDate}</td>    
     <td>${task.worker == null ? "" : task.worker.id}</td>
 </tr>

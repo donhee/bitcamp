@@ -10,17 +10,17 @@
 </head>
 <body>
 
-<jsp:include page="/header.jsp"/>
+<jsp:include page="../header.jsp"/>
 
-<h1>멤버 목록(MVC + JSP 전용 태그 + EL + JSTL)</h1>
-<p><a href='form.html'>새회원</a></p>
+<h1>멤버 목록</h1>
+<p><a href='form'>새회원</a></p>
 <table border='1'>
 <tr>
     <th>아이디</th><th>이메일</th>
 </tr>
 <c:forEach items="${list}" var="member">
 <tr>
-    <td><a href='view.do?id=${member.id}'>${member.id}</a></td>
+    <td><a href='${member.id}'>${member.id}</a></td>
     <td>${member.email}</td>
 </tr>
 </c:forEach>

@@ -25,6 +25,10 @@ public class AuthController {
         this.memberDao = memberDao;
     }
     
+    @RequestMapping("/form")
+    public void form() {
+    }
+    
     @RequestMapping("/login")
     public String login(
             @RequestParam("id") String id,
@@ -72,7 +76,7 @@ public class AuthController {
             
         } else { // 로그인 실패!
             session.invalidate();
-            return "/auth/fail.jsp";
+            return "auth/fail";
         }
     }
     

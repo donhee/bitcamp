@@ -1,6 +1,12 @@
 # 자바 프로젝트
 
-## src52 - 
+## src52 - Spring WebMVC 기타 설정
+학습목표
+    - view resolver의 역할을 이해하고 설정할 수 있다.
+    - Path Variable을 사용할 수 있다.(list나 view)
+작업내용
+    - 프론트 컨트롤러의 스프링 설정에 뷰 리졸버 설정을 추가한다.
+    - 프론트 컨트롤러의 URL 맵핑을 *.do 에서 /app/* 으로 변경한다.
 
 ## src51 - Spring WebMVC 적용
 학습목표

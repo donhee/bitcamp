@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,14 +28,18 @@ public class TeamController {
         this.taskDao = taskDao;
     }
     
-    @RequestMapping("/add")
+    @RequestMapping("form")
+    public void form() {
+    }
+    
+    @RequestMapping("add")
     public String add(Team team) throws Exception {
         
         teamDao.insert(team);
-        return "redirect:list.do";
+        return "redirect:list";
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping("delete")
     public String delete(@RequestParam("name") String name) throws Exception {
         HashMap<String,Object> params = new HashMap<>();
         params.put("teamName", name);
@@ -48,19 +53,18 @@ public class TeamController {
             throw new Exception("해당 팀이 없습니다.");
         }
         
-        return "redirect:list.do";
+        return "redirect:list";
     }
     
-    @RequestMapping("/list")
-    public String list(Map<String,Object> map) throws Exception {
+    @RequestMapping("list")
+    public void list(Map<String,Object> map) throws Exception {
         
         List<Team> list = teamDao.selectList();
         map.put("list", list);
         
-        return "/team/list.jsp";
     }
     
-    @RequestMapping("/update")
+    @RequestMapping("update")
     public String update(Team team) throws Exception {
         
         int count = teamDao.update(team);
@@ -68,11 +72,11 @@ public class TeamController {
             throw new Exception("<p>해당 팀이 존재하지 않습니다.</p>");
         }
         
-        return "redirect:list.do";
+        return "redirect:list";
     }
     
-    @RequestMapping("/view")
-    public String view(@RequestParam("name") String name, Map<String,Object> map) throws Exception {
+    @RequestMapping("{name}")
+    public String view(@PathVariable("name") String name, Map<String,Object> map) throws Exception {
 
         Team team = teamDao.selectOneWithMembers(name);
 
@@ -81,7 +85,7 @@ public class TeamController {
         }
         map.put("team", team);
         
-        return "/team/view.jsp";
+        return "team/view";
     }
     
     // GlobalBindingInitializer 클래스에 등록했기 때문에 따로 설정할 필요가 없다.
