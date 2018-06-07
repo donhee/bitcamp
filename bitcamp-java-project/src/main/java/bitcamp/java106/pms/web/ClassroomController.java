@@ -19,6 +19,19 @@ public class ClassroomController{
         this.classroomDao = classroomDao;
     }
     
+    @RequestMapping("/form")
+    public void form(/*Model model*/) {
+        // 입력 폼에서 사용할 데이터가 있다면 
+        // 이 request handler에서 준비하면 된다.
+        //model.addAttribute("프로퍼티명", "값");
+        
+        // 요청 URL
+        //  http://localhost:8888/bitcamp-java-project/classroom/form.do
+        // 리턴할 view URL
+        // = prefix + request handler의 URL + suffix
+        // = "/WEB-INF/jsp/" + "classroom/form" + ".jsp"
+    }
+    
     @RequestMapping("/add")
     public String add(Classroom classroom) throws Exception {
         
@@ -38,12 +51,10 @@ public class ClassroomController{
     }
     
     @RequestMapping("/list")
-    public String list(Map<String,Object> map) throws Exception {
+    public void list(Map<String,Object> map) throws Exception {
         
         List<Classroom> list = classroomDao.selectList();
         map.put("list", list);
-
-        return "/classroom/list.jsp";
     }
     
     @RequestMapping("/update")
@@ -58,7 +69,7 @@ public class ClassroomController{
     }
     
     @RequestMapping("/view")
-    public String view(@RequestParam("no") int no, Map<String,Object> map) throws Exception {
+    public void view(@RequestParam("no") int no, Map<String,Object> map) throws Exception {
 
         Classroom classroom = classroomDao.selectOne(no);
 
@@ -66,8 +77,6 @@ public class ClassroomController{
             throw new Exception("유효하지 않은 팀입니다.");
         }
         map.put("classroom", classroom);
-
-        return "/classroom/view.jsp";
     }
     
     // GlobalBindingInitializer 클래스에 등록했기 때문에 따로 설정할 필요가 없다.

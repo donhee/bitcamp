@@ -10,9 +10,9 @@
 </head>
 <body>
 
-<jsp:include page="/header.jsp"/>
+<jsp:include page="../header.jsp"/>
     
-<h1>강의 보기(MVC + JSP 전용 태그 + EL + JSTL)</h1>
+<h1>강의 보기</h1>
 <form action='update.do' method='post'>
 <input type='hidden' name='no' value='${classroom.no}'>
 <table border='1'>

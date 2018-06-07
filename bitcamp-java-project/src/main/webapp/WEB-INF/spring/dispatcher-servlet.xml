@@ -38,4 +38,15 @@
       <property name="basePackage" value="bitcamp.java106.pms.dao" />
     </bean>
     
+    
+    <!-- Spring WebMVC의 기본 뷰 리졸버를 교체한다. 
+         ==> JSP URL의 앞뒤 경로를 미리 설정해두면 페이지 컨트롤러에서 
+             view URL을 지정하기 쉽다.  ver 51
+    -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    
 </beans>
