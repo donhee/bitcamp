@@ -55,4 +55,12 @@
         <property name="suffix" value=".jsp"/>
     </bean>
     
+    <!-- 인터셉터 배치하기 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/auth/**"/>
+            <bean class="bitcamp.java106.pms.web.interceptor.AuthCheckInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

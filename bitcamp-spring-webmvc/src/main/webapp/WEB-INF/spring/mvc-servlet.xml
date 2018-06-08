@@ -29,6 +29,19 @@
 	    <property name="suffix" value=".jsp"/>
     </bean>
     
+    <!-- 인터셉터 배치하기 -->
+    <mvc:interceptors>
+        <!-- 모든 요청에 대해 인터셉터를 적용한다. -->
+        <!-- <bean class="bitcamp.mvc.web.Exam09_1_interceptor"/> -->
+        
+        <!-- 특정 URL에 대해서만 인터셉터 적용하기 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/exam09_1/**"/> 
+            <mvc:exclude-mapping path="/exam09_1/bbb/**"/> <!-- /bbb/** 뜻 : bbb뿐만 아니라 그 하위 경로도 제외 -->
+            <bean class="bitcamp.mvc.web.Exam09_1_interceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    
 </beans>
 
 
