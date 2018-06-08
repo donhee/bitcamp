@@ -1,4 +1,4 @@
-// AOP(Aspect-Oriented Programming) - AOP 필터 적용 위치
+// AOP(Aspect-Oriented Programming) - AOP 필터에서 타겟 객체의 메서드를 호출하기 전에 파라미터, 리턴 값, 예외 받기
 package bitcamp.java106.step13.ex04;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
