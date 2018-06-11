@@ -1,16 +1,17 @@
 package bitcamp.java106.pms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import bitcamp.java106.pms.domain.Classroom;
 
 public interface ClassroomDao {
     
-    public int delete(int no);
-    public List<Classroom> selectList();
-    public Classroom selectOne(int no);
-    public int insert(Classroom classroom);
-    public int update(Classroom classroom);
+    int delete(int no);
+    List<Classroom> selectList(Map<String,Object> params);
+    Classroom selectOne(int no);
+    int insert(Classroom classroom);
+    int update(Classroom classroom);
 
 }
 // ver 50 - 클래스를 인터페이스로 변경

@@ -7,12 +7,13 @@ import bitcamp.java106.pms.domain.Member;
 
 public interface MemberDao {
     
-    public int delete(String id);
-    public List<Member> selectList();
-    public int insert(Member member);
-    public int update(Member member);
-    public Member selectOne(String id);
-    public Member selectOneWithPassword(Map<String,Object> params);
+    int delete(String id);
+    List<Member> selectList(Map<String,Object> params);
+    int insert(Member member);
+    int update(Member member);
+    Member selectOne(String id);
+    Member selectOneWithPassword(Map<String,Object> params);
+    int count(Map<String,Object> params);
     
 }
 // ver 50 - 클래스를 인터페이스로 변경

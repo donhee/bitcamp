@@ -7,13 +7,13 @@ import bitcamp.java106.pms.domain.Task;
 
 public interface TaskDao {
     
-    public int delete(int no);    
-    public int deleteByTeam(String teamName);
-    public List<Task> selectList(String teamName);    
-    public int insert(Task task);
-    public int update(Task task);
-    public Task selectOne(int no);
-    public int updateState(Map<String,Object> map);
+    int delete(int no);    
+    int deleteByTeam(String teamName);
+    List<Task> selectList(Map<String, Object> params);    
+    int insert(Task task);
+    int update(Task task);
+    Task selectOne(int no);
+    int updateState(Map<String,Object> map);
     
 }
 // ver 50 - 클래스를 인터페이스로 변경

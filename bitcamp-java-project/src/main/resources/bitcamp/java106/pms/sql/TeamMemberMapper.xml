@@ -11,11 +11,10 @@
   </resultMap>
   
   <select id="selectList" 
-          resultType="String" parameterType="String"> 
-    select mid 
-    from pms2_team_member 
+          resultType="string" parameterType="string">
+    select mid from pms2_team_member 
     where tnm=#{value}
-    <!-- limit #{startIndex}, #{pageSize} -->    
+    order by mid asc
   </select>
   
   <select id="selectListWithEmail" 

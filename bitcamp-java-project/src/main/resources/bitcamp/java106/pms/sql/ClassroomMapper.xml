@@ -25,10 +25,11 @@
          그 메서드를 자동생성할 때 사용할 수 있다.
   -->  
   <select id="selectList" 
-          resultMap="ClassroomMap" parameterType="map"> 
+          resultMap="ClassroomMap" parameterType="map">
     select crno,titl,sdt,edt,room 
     from pms2_classroom
-    <!-- limit #{startIndex}, #{pageSize} -->    
+    order by titl asc
+    limit #{startRowNo}, #{pageSize}
   </select>
 
   <select id="selectOne" resultMap="ClassroomMap" parameterType="int">

@@ -12,9 +12,11 @@
   </resultMap>
 
   <select id="selectList" 
-          resultMap="MemberMap" parameterType="map"> 
-    select mid,email from pms2_member
-    <!-- limit #{startIndex}, #{pageSize} -->    
+          resultMap="MemberMap" parameterType="map">
+    select mid, email, pwd 
+    from pms2_member
+    order by mid asc
+    limit #{startRowNo}, #{pageSize}
   </select>
   
   <insert id="insert" parameterType="Member" 
@@ -34,6 +36,12 @@
   
   <select id="selectOneWithPassword" resultMap="MemberMap" parameterType="map">
     select mid,email 
+    from pms2_member 
+    where mid=#{id} and pwd=sha2(#{password},224)
+  </select>
+  
+  <select id="count" resultType="int" parameterType="map">
+    select count(*) 
     from pms2_member 
     where mid=#{id} and pwd=sha2(#{password},224)
   </select>

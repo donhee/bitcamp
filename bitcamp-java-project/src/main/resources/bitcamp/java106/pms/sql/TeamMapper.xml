@@ -18,10 +18,11 @@
   </resultMap>
 
   <select id="selectList" 
-          resultMap="TeamMap" parameterType="map"> 
-    select name,max_qty,sdt,edt 
+          resultMap="TeamMap" parameterType="map">
+    select name, sdt, edt, max_qty 
     from pms2_team
-    <!-- limit #{startIndex}, #{pageSize} -->    
+    order by name asc
+    limit #{startRowNo}, #{pageSize}
   </select>
   <!-- 
     ArrayList<Task> list = new ArrayList<>();

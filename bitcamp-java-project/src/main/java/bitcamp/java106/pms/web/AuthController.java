@@ -1,7 +1,5 @@
 package bitcamp.java106.pms.web;
 
-import java.util.HashMap;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,18 +9,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import bitcamp.java106.pms.dao.MemberDao;
-import bitcamp.java106.pms.domain.Member;
+import bitcamp.java106.pms.service.MemberService;
 
 // 페이지 컨트롤러는 @Controller 애노테이션을 써라 ( @Component를 써도 되지만)
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
     
-    MemberDao memberDao;
+    MemberService memberService;
     
-    public AuthController(MemberDao memberDao) {
-        this.memberDao = memberDao;
+    public AuthController(MemberService memberService) {
+        this.memberService = memberService;
     }
     
     @RequestMapping("/form")
@@ -52,14 +49,9 @@ public class AuthController {
         }
         response.addCookie(cookie);
         
-        // ver 50 - map 추가
-        HashMap<String,Object> params = new HashMap<>();
-        params.put("id", id);
-        params.put("password", password);
-        Member member = memberDao.selectOneWithPassword(params);
         
-        if (member != null) { // 로그인 성공!
-            session.setAttribute("loginUser", member);
+        if (memberService.isExist(id, password)) { // 로그인 성공!
+            session.setAttribute("loginUser", memberService.get(id));
 
             // 로그인 하기 전의 페이지로 이동한다.
             String refererUrl = (String)session.getAttribute("refererUrl");

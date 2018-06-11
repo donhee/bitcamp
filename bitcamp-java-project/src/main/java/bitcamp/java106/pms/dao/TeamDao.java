@@ -1,17 +1,18 @@
 package bitcamp.java106.pms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import bitcamp.java106.pms.domain.Team;
 
 public interface TeamDao {
     
-    public int delete(String name);    
-    public List<Team> selectList();
-    public int insert(Team team);
-    public int update(Team team);
-    public Team selectOne(String name);
-    public Team selectOneWithMembers(String name);
+    int delete(String name);    
+    List<Team> selectList(Map<String,Object> params);
+    int insert(Team team);
+    int update(Team team);
+    Team selectOne(String name);
+    Team selectOneWithMembers(String name);
     
 }
 // ver 50 - 클래스를 인터페이스로 변경

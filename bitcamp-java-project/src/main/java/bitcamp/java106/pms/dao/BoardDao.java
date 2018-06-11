@@ -7,11 +7,11 @@ import bitcamp.java106.pms.domain.Board;
 
 public interface BoardDao {
     
-    public int delete(int no);    
-    public List<Board> selectList(Map<String,Object> params);
-    public int insert(Board board);
-    public int update(Board board);
-    public Board selectOne(int no);
+    int delete(int no);    
+    List<Board> selectList(Map<String,Object> params);
+    int insert(Board board);
+    int update(Board board);
+    Board selectOne(int no);
 
 }
 // ver 52 - 페이지 단위로 데ㅣ터 가져오기

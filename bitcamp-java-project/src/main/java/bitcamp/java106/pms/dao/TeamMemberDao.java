@@ -7,11 +7,11 @@ import bitcamp.java106.pms.domain.Member;
 
 public interface TeamMemberDao {
     
-    public int insert(Map<String,Object> params);    
-    public int delete(Map<String,Object> params);    
-    public List<String> selectList(String teamName);
-    public List<Member> selectListWithEmail(String teamName);
-    public boolean isExist(Map<String,Object> params);
+    int insert(Map<String,Object> params);    
+    int delete(Map<String,Object> params);    
+    List<String> selectList(String teamName);
+    List<Member> selectListWithEmail(String teamName);
+    boolean isExist(Map<String,Object> params);
 }
 // ver 50 - 클래스를 인터페이스로 변경
 // ver 33 - Mybatis를 적용
