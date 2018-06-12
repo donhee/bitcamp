@@ -12,7 +12,7 @@
 
 <jsp:include page="../header.jsp"/>
 
-<h1><a href='../../${teamName}'>${teamName}</a>의 작업 목록</h1>
+<h1><a href='../../${teamName}'>${teamName}</a> 의 작업 목록</h1>
 
 <p><a href='form'>새작업</a></p>
 
