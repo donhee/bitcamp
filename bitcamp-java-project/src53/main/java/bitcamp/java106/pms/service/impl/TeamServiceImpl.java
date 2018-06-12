@@ -56,6 +56,12 @@ public class TeamServiceImpl implements TeamService {
     
     @Override
     public int delete(String name) {
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("teamName", name);
+        
+        teamMemberDao.delete(params);
+        taskDao.deleteByTeam(name);
+        
         return teamDao.delete(name);
     }
     
