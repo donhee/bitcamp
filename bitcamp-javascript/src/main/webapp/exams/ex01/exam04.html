@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex01</title>
+	<script>
+	  console.log("1111!");
+	  var v1 = "aaaa";
+	  // 자바스크립트 실행 중 오류가 발생하면 즉시 <script> 태그의 실행을 중단하고
+	  // 다음 <script> 태그로 간다.
+	  console.lag("오류 발생!"); // log() 함수의 이름을 잘못 작성하여 lag()로 작성하였다. 그래서 실행 오류 발생!
+	  var v2 = "bbbb"; // 그래서 v2는 실행 중단하고 다음 <script> 태그로 넘어간다.
+	  console.log("1111 okok");
+    </script>
+    <script>
+      console.log("2222!");
+      console.lag("오류 발생!");
+      console.log("2222 okok");
+    </script>
+</head>
+<body>
+    <script>
+      console.log("3333!");
+      console.lag("오류 발생!");
+      console.log("3333 okok");
+    </script>
+	<h1>자바스크립트 오류 발생 할때</h1>
+    <script>
+      console.log(v1);
+      console.log(v2);
+      console.log("44444!");
+      console.lag("오류 발생!");
+      console.log("4444 okok");
+    </script>
+
+
+</body>
+</html>
