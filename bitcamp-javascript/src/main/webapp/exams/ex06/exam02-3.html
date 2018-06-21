@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex06</title>
+</head>
+<body>
+<h1>이벤트 - 이벤트 정보 다루기 I</h1>
+<button id="btn1">버튼1</button><br>
+
+<script>
+"use strict"
+
+// 태그 객체의 onclick 프로퍼티에 리스너 등록하고 이벤트 정보 추출
+var e = document.querySelector("#btn1");
+
+e.onclick = function(event) {
+	console.log(
+		event.altKey, event.ctrlKey, event.button, 
+		event.offsetX, event.offsetY, 
+		event.clientX, event.clientY, 
+		event.screenX, event.screenY
+	)
+};
+// 실무 코드 =>
+/* 
+document.querySelector("#btn1").onclick = function(event) {
+    console.log(
+        event.altKey, event.ctrlKey, event.button, 
+        event.offsetX, event.offsetY, 
+        event.clientX, event.clientY, 
+        event.screenX, event.screenY
+    )
+};
+*/
+</script>
+</body>
+</html>
+
+
+
+
+
