@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex03</title>
+</head>
+<body>
+<h1>자바스크립트 글로벌 함수 - eval() II </h1>
+
+<textarea id="ta" rows="10" cols="80"></textarea>
+<button id="btn1">실행</button>
+
+<script>
+"use strict"
+
+// 텍스트로 된 자바스크립트를 실행하는 함수
+
+// => 실행 버튼을 누르면 textarea 상자에 입력한 자바스크립트를 실행하여
+//    객체를 리턴 받는다.
+// => 물론 입력 값은 자바스크립트 객체 생성 코드여야 한다.
+//
+var ta = document.querySelector("#ta");
+
+document.querySelector("#btn1").onclick = () => {
+    var str = ta.value;
+	var obj = eval(str);
+	console.log(obj);
+
+    // 1) 단일 객체 생성
+    // => 주의! 괄호 () 안에 객체 생성 문법인 중괄호 {} 를 넣어야 한다.
+    //    안그러면 실행오류이다!
+    /* 입력 값 예)
+    ({
+		"name":"hong",
+		"age": 20,
+		"tel":"1111-2222"
+	})
+    */
+    
+    // 2) 배열 객체 생성
+    // => 배열 코드는 괄호 안에 넣을 필요가 없다.
+    /* 입력 값 예)
+    ["hong","yooy",1000,true,null]
+    */
+    
+};
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
