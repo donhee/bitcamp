@@ -28,4 +28,3 @@
 
 </body>
 </html>
-<%System.out.println("exam10_1.jsp 실행!");%>
