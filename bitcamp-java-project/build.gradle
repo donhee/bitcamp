@@ -38,10 +38,11 @@ repositories {
 // => 다운로드할 의존 라이브러리를 지정한다.
 dependencies {
     // MySQL JDBC Driver 라이브러리
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.46'
     //compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
     // mysql -> mariadb 교체(180531)
     // Mariadb JDBC 라이브러리
-    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.2.5'
+    //compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.2.5'
     
     // Mybatis 라이브러리
     compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'

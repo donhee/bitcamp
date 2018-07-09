@@ -37,7 +37,9 @@
         <property name="password" value="${jdbc.password}" />
     </bean>
     
-    <context:property-placeholder location="classpath*:bitcamp/java106/pms/sql/jdbc.properties"/>
+    <context:property-placeholder 
+        location="classpath*:jdbc.properties,
+                  classpath*:aws.properties"/>
     
     <!-- DAO 구현체를 자동으로 만들어주는 객체를 준비 
         => 개발자는 DAO를 직접 구현할 필요가 없다.
