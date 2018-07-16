@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>게시물 보기</title>
+<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/common.css" type="text/css">
+</head>
+<body>
+
+<div class="container">
+<nav id="header" class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+
+<h1 class="detail-view">게시물 보기</h1>
+<h1 class="input-view">새 게시글</h1>
+<form>
+<table border='1'>
+<tbody>
+<tr class="detail-view">
+    <th>번호</th>
+    <td><input type='text' id='fNo' readonly></td>
+</tr>
+<tr>
+    <th>제목</th>
+    <td><input type='text' id='fTitle'></td>
+</tr>
+<tr>
+    <th>시작일</th>
+    <td><input type='Date' id='fStartDate'></td>
+    
+</tr>
+<tr>
+    <th>종료일</th>
+    <td><input type='Date' id='fEndDate'></td>
+</tr>
+</tbody>
+</table>
+<p>
+<a href='list.html' class="btn btn-primary btn-sm">목록으로 이동</a>
+<button id="addBtn" class="input-view btn btn-primary btn-sm" type="button">등록</button>
+<button id="resetBtn" class="input-view btn btn-primary btn-sm" type="reset">초기화</button>
+<button id="updBtn" class="detail-view btn btn-primary btn-sm" type="button">변경</button>
+<button id="delBtn" class="detail-view btn btn-primary btn-sm" type="button">삭제</button>
+</p>
+</form>
+
+</div>
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+<script>
+// 태그에 id를 지정하면 window 객체에 자동 등록한다.
+// 따라서 다음과 같이 태그를 찾는 코드를 작성하지 않아도 된다.
+/*
+var fNo = document.querySelector("#fNo"),
+    fTitle = document.querySelector("#fTitle"),
+    fContent = document.querySelector("#fContent"),
+    fCreatedDate = document.querySelector("#fCreatedDate");
+*/
+//console.log(window.fTitle);
+
+// 웹 브라우저가 기본으로 제공하는 객체
+//console.log(location.href.split("?")[1].split("=")[1]);  // no값 => 예) 24
+
+if (location.href.split("?").length > 1) {
+	var tags = $(".input-view");
+    tags.css("display", "none");
+    
+	var no = location.href.split("?")[1].split("=")[1];
+	
+    $.getJSON("../../json/classroom/" + no, function(data) {
+        $(fNo).val(data.no);
+        $(fTitle).val(data.title);
+        $(fStartDate).val(data.startDate);
+        $(fEndDate).val(data.endDate);
+    });	
+	
+	$("#updBtn").click(() => {
+		$.post("../../json/classroom/update", {
+			title: $(fTitle).val(),
+			startDate: $(fStartDate).val(),
+			endDate: $(fEndDate).val(),
+			no: $(fNo).val()
+		}, () => {
+			location.href = "list.html";
+		});
+	});
+	
+    $("#delBtn").click(() => {
+    	if (window.confirm("삭제하시겠습니까?") == false)
+    	   return;
+    	
+    	$.get("../../json/classroom/delete", {"no":no}, () => {
+    		window.location.href = "list.html";
+    	});
+    });
+	
+} else { // 새 글 등록시에는
+	var tags = $(".detail-view");
+	tags.css("display", "none");
+	
+	$("#addBtn").click(() => {
+		$.post("../../json/classroom/add", {
+			title: $(fTitle).val(),
+            startDate: $(fStartDate).val(),
+            endDate: $(fEndDate).val()
+		}, () => {
+			location.href = "list.html";
+		});
+	});
+}
+</script>
+
+
+</body>
+</html>
