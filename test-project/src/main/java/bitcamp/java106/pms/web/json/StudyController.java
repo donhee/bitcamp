@@ -36,7 +36,7 @@ public class StudyController {
     @RequestMapping("list{page}")
     public Object list(
             @MatrixVariable(defaultValue="1") int pageNo,
-            @MatrixVariable(defaultValue="3") int pageSize) {
+            @MatrixVariable(defaultValue="4") int pageSize) {
 
         return studyService.list(pageNo, pageSize);
     }
