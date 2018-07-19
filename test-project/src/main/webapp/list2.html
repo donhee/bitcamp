@@ -270,7 +270,7 @@
 
                 <div class="l-wrapper" style="margin: 0 auto">
 	                <ul id="lrow" class="l-row">
-	                    <li id="lcol" class="l-col">
+	                    <!-- <li id="lcol" class="l-col">
 	                        <div id="mystudy" class="study" style="background: #fff; border:solid 1px #d2d2d2">
 	                            <a href="#" style="display: block; width: 100%;">
 	                                <div class="ove" style="text-indent:-9999px">
@@ -287,51 +287,18 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                    </li>
+	                    </li> -->
 	                </ul>
                 </div>
             <script>
             $.getJSON("json/study/list", (data) => {
             	for (var item of data) {
-            		/* var lrow = $("<ul class='l-row'>");
-	            	var lcol = $("<li id='lli' class='l-col'>");
-	            	var study = $("<div id='mystudy' class='study'>");
-	            	var ove = $("<div class='ove'>");
-	            	var ovespan = $("<span class='ove_span'>");
-	            	var infoarea = $("<div class='info_area'>");
-	            	var infoareah2 = $("<h2 class='infoareah2'>");
-	            	var tagareaname = $("<span class='tag_area_name'>")        	
-	            	console.log(lrow);
-	            	console.log(lcol);
-	            	console.log(study);
-	            	
-	            	$(".l-row").append(lcol);
-	            	$(".l-col").append(study);
-	            	
-	            	$(".ove_span").text(item.no);
-            		$(".infoareah2").text(item.title);
-            		$(".tag_area_name").text(item.description); */
-            		
-            		/* $(function() {
-            			$(".l-row .l-col").html( function(idx,val){
-            				$(val).text(item.title);
-            			});
-            		}); */
-            		
-            		/* console.log(lcol);
-            		console.log(infoareah2);
-            		console.log(item.title); */
-            		
                      $("<li class='l-col'>").html("<div id='mystudy' class='study' style='background: #fff; border:solid 1px #d2d2d2'>" +
-                     "<a href='#' style='display: block; width: 100%;'>" +
-                     "<div class='ove'>" + item.no + "</div>" +
-                     "<div class='info_area'>" +
-                     "<h2 class='infoareah2'><a href='form.html?no=" + item.no +"'>" + item.title + "</a></h2>" +
-                     "<span class='tag_area_name'>" + item.description + "</span>").appendTo(lrow);
-                    //console.log(item);
-                    //let h2 = document.getElementsByClassName("infoareah2");
-                    //console.log(h2);
-                    //$(h2).append(item.title);
+                     "<a href='form.html?no=" + item.no +"' style='display: block; width: 100%;'>" +
+                     "<div class='ove'><span class='ove_span'></span></div></a>" +
+                     "<div class='info_area'><h2 class='infoareah2'>" + item.title + "</h2>" +
+                     "<div class='tags'><span class='tag_area_name'>" + item.description + "</span><span>#Servlet</span><span>#java</span><span>#자바</span></div>").appendTo(lrow);
+                    
                 }
             });
             
