@@ -12,4 +12,5 @@ public interface StudyDao {
     int insert(Study study);
     int update(Study study);
     Study selectOne(int no);
+    Study selectlimitOne();
 }

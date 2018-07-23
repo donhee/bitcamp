@@ -33,6 +33,7 @@ public class StudyServiceImpl implements StudyService {
         return studyDao.selectOne(no);
     }
 
+    
     @Override
     public int add(Study study) {
         return studyDao.insert(study);
@@ -46,6 +47,11 @@ public class StudyServiceImpl implements StudyService {
     @Override
     public int delete(int no) {
         return studyDao.delete(no);
+    }
+
+    @Override
+    public int getLimitOne() {
+        return studyDao.selectlimitOne().getNo();
     }
     
 }

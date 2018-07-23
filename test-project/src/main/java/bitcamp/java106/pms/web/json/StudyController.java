@@ -52,6 +52,10 @@ public class StudyController {
         return studyService.get(no);
     }
     
+    @RequestMapping("one")
+    public int one() throws Exception {
+        return studyService.getLimitOne();
+    }
 }
 
 // ver 55 - JSON 데이터를 출력하는 페이지 컨트롤러 추가

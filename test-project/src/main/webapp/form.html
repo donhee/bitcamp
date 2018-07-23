@@ -56,6 +56,8 @@ var fNo = document.querySelector("#fNo"),
 //console.log(window.fTitle);
 
 // 웹 브라우저가 기본으로 제공하는 객체
+//console.log(location.href.split("?")[0]);
+//console.log(location.href.split("?")[1]);
 //console.log(location.href.split("?")[1].split("=")[1]);  // no값 => 예) 24
 
 if (location.href.split("?").length > 1) {
@@ -63,7 +65,7 @@ if (location.href.split("?").length > 1) {
     tags.css("display", "none");
     
 	var no = location.href.split("?")[1].split("=")[1];
-	
+	//console.log(no);
     $.getJSON("json/study/" + no, function(data) {
         $(fNo).val(data.no);
         $(fTitle).val(data.title);

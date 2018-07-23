@@ -294,11 +294,10 @@
             $.getJSON("json/study/list", (data) => {
             	for (var item of data) {
                      $("<li class='l-col'>").html("<div id='mystudy' class='study' style='background: #fff; border:solid 1px #d2d2d2'>" +
-                     "<a href='form.html?no=" + item.no +"' style='display: block; width: 100%;'>" +
+                     "<a href='groupMain.html?no=" + item.no +"' style='display: block; width: 100%;'>" +
                      "<div class='ove'><span class='ove_span'></span></div></a>" +
                      "<div class='info_area'><h2 class='infoareah2'>" + item.title + "</h2>" +
                      "<div class='tags'><span class='tag_area_name'>" + item.description + "</span><span>#Servlet</span><span>#java</span><span>#자바</span></div>").appendTo(lrow);
-                    
                 }
             });
             

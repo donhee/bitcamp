@@ -13,4 +13,5 @@ public interface StudyService {
     int add(Study study);
     int update(Study study);
     int delete(int no);
+    int getLimitOne();
 }

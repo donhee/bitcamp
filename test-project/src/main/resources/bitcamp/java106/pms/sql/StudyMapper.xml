@@ -45,6 +45,10 @@
   where bno=#{value}
   </select>
   
+  <select id="selectlimitOne" resultMap="StudyMap">
+  select * from pms2_study order by bno desc limit 1
+  </select>
+  
   <update id="update" parameterType="Study">
     update pms2_study set 
     titl=#{title}, dscrt=#{description} 
