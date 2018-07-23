@@ -28,7 +28,7 @@
 }
 
 .container-fluid {
-	background-color: #f2f2f2;
+	/* background-color: #f2f2f2; */
 }
 
 .container {
@@ -67,11 +67,15 @@
 <!-- study list start -->
 <style>
 .box {
-	padding: 0px;
+	padding: 1rem;
 	background-color: white;
-	margin: 1rem;
+	/*margin: 1rem;*/
 }
-
+.container {
+    display:block;
+    clear: both;
+    content: "";
+}
 .studyImage {
 	height: 200px;
 }
@@ -193,11 +197,11 @@
 		</div>
 		
 		<!-- search end -->
-
+        
         
 
 		<div class="box resultCount">
-			총 <font color="#ef6c00"><bold>0</bold></font>개의 스터디가 검색되었습니다.
+			총 <font color="#ef6c00"><bold id="searchCnt">0</bold></font>개의 스터디가 검색되었습니다.
 		</div>
 		<div>
           검색 : <input type="text" id="keyword">
@@ -209,7 +213,7 @@
 		<div class="container">
 			<!-- list 1 start -->
 			<div class="row">
-				<div class="col-sm box">
+				<div class="col-sm-4 box">
 					<div class="imgWrap">
 						<a href="#"><img src="holder.js/100px200?auto=yes"></a>
 					</div>
@@ -222,9 +226,9 @@
 							</a> <br>
 						</div>
 						<div class="studyHashTag text-center">
-							<p>111</p>
-							<p>222</p>
-							<p>333</p>
+							<span>#자바1</span>
+							<span>#자바2</span>
+							<span>#자바3</span>
 						</div>
 						<hr>
 						<div class="list-details text-muted">
@@ -237,7 +241,7 @@
 					</div>
 				</div>
 
-				<div class="col-sm box">
+				<div class="col-sm-4 box">
 					<div class="imgWrap">
 						<a href="#"><img src="holder.js/100px200?auto=yes"></a>
 					</div>
@@ -248,9 +252,9 @@
 									웹개발 스터디</h6></a> <br>
 						</div>
 						<div class="studyHashTag text-center">
-							<p>444</p>
-                            <p>555</p>
-                            <p>666</p>
+							<span>#자바4</span>
+                            <span>#자바5</span>
+                            <span>#자바6</span>
 						</div>
 						<hr>
 						<div class="list-details text-muted">
@@ -263,7 +267,7 @@
 					</div>
 				</div>
 
-				<div class="col-sm box">
+				<div class="col-sm-4 box">
 					<div class="imgWrap">
 						<a href="#"><img src="holder.js/100px200?auto=yes"></a>
 					</div>
@@ -274,9 +278,9 @@
 									웹개발 스터디</h6></a> <br>
 						</div>
 						<div class="studyHashTag text-center">
-							<p>777</p>
-                            <p>888</p>
-                            <p>999</p>
+							<span>#자바7</span>
+                            <span>#자바8</span>
+                            <span>#자바9</span>
 						</div>
 						<hr>
 						<div class="list-details text-muted">
@@ -288,9 +292,167 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-sm-4 box">
+                    <div class="imgWrap">
+                        <a href="#"><img src="holder.js/100px200?auto=yes"></a>
+                    </div>
+                    <div class="studyDetail">
+                        <div>
+                            <a href="#">
+                                <h6 class="studyTitle text-center font-weight-bold">
+                                    강남 비트캠프 웹개발 스터디 <span class="badge badge-warning">모집중</span>
+                                </h6>
+                            </a> <br>
+                        </div>
+                        <div class="studyHashTag text-center">
+                            <span>#자바1</span>
+                            <span>#자바2</span>
+                            <span>#자바3</span>
+                        </div>
+                        <hr>
+                        <div class="list-details text-muted">
+                            <span class="float-left">
+                                <p>서울, 강남</p>
+                            </span> <span class="float-right"> <i class="fas fa-user"></i> <span>4
+                                    / 5</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 box">
+                    <div class="imgWrap">
+                        <a href="#"><img src="holder.js/100px200?auto=yes"></a>
+                    </div>
+                    <div class="studyDetail">
+                        <div>
+                            <a href="#"><h6
+                                    class="studyTitle text-center font-weight-bold">강남 비트캠프
+                                    웹개발 스터디</h6></a> <br>
+                        </div>
+                        <div class="studyHashTag text-center">
+                            <span>#자바4</span>
+                            <span>#자바5</span>
+                            <span>#자바6</span>
+                        </div>
+                        <hr>
+                        <div class="list-details text-muted">
+                            <span class="float-left">
+                                <p>서울, 강남</p>
+                            </span> <span class="float-right"> <i class="fas fa-user"></i> <span>4
+                                    / 5</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 box">
+                    <div class="imgWrap">
+                        <a href="#"><img src="holder.js/100px200?auto=yes"></a>
+                    </div>
+                    <div class="studyDetail">
+                        <div>
+                            <a href="#"><h6
+                                    class="studyTitle text-center font-weight-bold">강남 비트캠프
+                                    웹개발 스터디</h6></a> <br>
+                        </div>
+                        <div class="studyHashTag text-center">
+                            <span>#자바7</span>
+                            <span>#자바8</span>
+                            <span>#자바9</span>
+                        </div>
+                        <hr>
+                        <div class="list-details text-muted">
+                            <span class="float-left">
+                                <p>서울, 강남</p>
+                            </span> <span class="float-right"> <i class="fas fa-user"></i> <span>4
+                                    / 5</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 box">
+                    <div class="imgWrap">
+                        <a href="#"><img src="holder.js/100px200?auto=yes"></a>
+                    </div>
+                    <div class="studyDetail">
+                        <div>
+                            <a href="#">
+                                <h6 class="studyTitle text-center font-weight-bold">
+                                    강남 비트캠프 웹개발 스터디 <span class="badge badge-warning">모집중</span>
+                                </h6>
+                            </a> <br>
+                        </div>
+                        <div class="studyHashTag text-center">
+                            <span>#자바1</span>
+                            <span>#자바2</span>
+                            <span>#자바3</span>
+                        </div>
+                        <hr>
+                        <div class="list-details text-muted">
+                            <span class="float-left">
+                                <p>서울, 강남</p>
+                            </span> <span class="float-right"> <i class="fas fa-user"></i> <span>4
+                                    / 5</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 box">
+                    <div class="imgWrap">
+                        <a href="#"><img src="holder.js/100px200?auto=yes"></a>
+                    </div>
+                    <div class="studyDetail">
+                        <div>
+                            <a href="#"><h6
+                                    class="studyTitle text-center font-weight-bold">강남 비트캠프
+                                    웹개발 스터디</h6></a> <br>
+                        </div>
+                        <div class="studyHashTag text-center">
+                            <span>#자바4</span>
+                            <span>#자바5</span>
+                            <span>#자바6</span>
+                        </div>
+                        <hr>
+                        <div class="list-details text-muted">
+                            <span class="float-left">
+                                <p>서울, 강남</p>
+                            </span> <span class="float-right"> <i class="fas fa-user"></i> <span>4
+                                    / 5</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 box">
+                    <div class="imgWrap">
+                        <a href="#"><img src="holder.js/100px200?auto=yes"></a>
+                    </div>
+                    <div class="studyDetail">
+                        <div>
+                            <a href="#"><h6
+                                    class="studyTitle text-center font-weight-bold">강남 비트캠프
+                                    웹개발 스터디</h6></a> <br>
+                        </div>
+                        <div class="studyHashTag text-center">
+                            <span>#자바7</span>
+                            <span>#자바8</span>
+                            <span>#자바9</span>
+                        </div>
+                        <hr>
+                        <div class="list-details text-muted">
+                            <span class="float-left">
+                                <p>서울, 강남</p>
+                            </span> <span class="float-right"> <i class="fas fa-user"></i> <span>4
+                                    / 5</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
 			</div>
 			<!-- list 1 end -->
-
+            
 			
 		</div>
 	</div>
@@ -335,24 +497,28 @@
 	<script src="js/holder.min.js"></script>
 	<script>
 $(document).ready(function() {
-            $("#keyword").keyup(function() {
-                var k = $(this).val();
-                $(".row").hide();
-                var temp = $(".container .col-sm.box .studyHashTag > p:contains('" + k + "')");
-                $(".row").show();
-            });
+    $("#keyword").keyup(function() {
+        var k = $(this).val();
+        $(".container .col-sm-4.box .studyHashTag").hide();
+        
+        var temp = $(".container .col-sm-4.box .studyHashTag > span:contains('" + k + "')");
+        $(temp).parent().show();
+        $(".col-sm-4").hide();
+        $(temp).parents(".col-sm-4").show();
+        console.log($(temp).parents(".col-sm-4").length);
+        
+        var length = $(temp).parents(".col-sm-4").length;
+        $("#searchCnt").html(length);
     });
-</script>
-	<script>
-        Holder.addTheme("dark", {
-            background: "#000",
-            foreground: "#aaa",
-            size: 11,
-            font: "Monaco",
-            fontweight: "normal"
-        });
-    </script>
-	<script>
+
+    Holder.addTheme("dark", {
+        background: "#000",
+        foreground: "#aaa",
+        size: 11,
+        font: "Monaco",
+        fontweight: "normal"
+    });
+    
     function changes(fr) {
       if(fr==1) {
         //뿌려줄값을 배열로정렬
@@ -371,6 +537,7 @@ $(document).ready(function() {
         document.form.option2.options[i] = new Option(num[i],vnum[i]);
       }
     }
+});
     </script>
     
 </body>
