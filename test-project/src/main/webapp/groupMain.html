@@ -736,8 +736,8 @@
 	        var st
 	        $.getJSON("json/study/" + no, function(data) {
 	        	console.log(data);
+        		console.log(studyName);
 	        	for (var item in studyName) {
-	        		
 	                $(studyName[item]).text(data.title);
 	        	}
 	            $(fDescription).text(data.description);
