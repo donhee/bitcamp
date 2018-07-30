@@ -2,6 +2,7 @@ package bitcamp.java106.pms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 public class Member implements Serializable {
  
@@ -17,6 +18,7 @@ public class Member implements Serializable {
     private String tel;
     private char gender;
     private String interestedPlace;
+    private List<InterestField> interests;
     
     public String getProfile() {
         return profile;
@@ -78,12 +80,16 @@ public class Member implements Serializable {
     public void setInterestedPlace(String interestedPlace) {
         this.interestedPlace = interestedPlace;
     }
-    
+    public List<InterestField> getInterests() {
+        return interests;
+    }
+    public void setInterests(List<InterestField> interests) {
+        this.interests = interests;
+    }
     @Override
     public String toString() {
         return "Member [no=" + no + ", email=" + email + ", password=" + password + ", profile=" + profile
                 + ", introduce=" + introduce + ", name=" + name + ", birthday=" + birthday + ", tel=" + tel
-                + ", gender=" + gender + ", interestedPlace=" + interestedPlace + "]";
+                + ", gender=" + gender + ", interestedPlace=" + interestedPlace + ", interests=" + interests + "]";
     }
-   
 }

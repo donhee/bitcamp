@@ -19,13 +19,12 @@
     <!-- MatrixVariable 활성화시키기 -->
     <mvc:annotation-driven enable-matrix-variables="true"/>
     
-    <!--
-    <mvc:interceptors>
+    <!-- <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/auth/**"/>
             <bean class="bitcamp.java106.pms.web.interceptor.AuthCheckInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>
-    -->
+    </mvc:interceptors> -->
+    
 </beans>

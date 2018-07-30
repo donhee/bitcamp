@@ -7,8 +7,8 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
 	 crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	 crossorigin="anonymous"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	 crossorigin="anonymous"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
 	 crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
@@ -52,7 +52,7 @@
 	<header class="header">
 		<div class="headerWrap">
 			<h1 class="logo">
-				<a href="#">
+				<a href="index.html">
 					<img src="img/logo3.png" alt="로고" title="WeStudy">
 				</a>
 			</h1>
@@ -140,7 +140,7 @@
 					<div class="scheduleDescription">
 						<div class="row">
 							<div class="col-sm objective">
-								<h6 id="fTitle" class="studyName"></h6>
+								<h6 id="fName" class="studyName"></h6>
 								<br>
 								<div class="objective-sm">
 									<div class="studyLeader">
@@ -151,7 +151,7 @@
 										<span class="memberName">윤봉길</span>
 										<br>
 									</div>
-									<p id="fDescription"></p>
+									<p id="fInformation"></p>
 								</div>
 							</div>
 						</div>
@@ -728,21 +728,18 @@
 	    //console.log(window.fTitle);
 	    
 	    var studyName = document.querySelectorAll(".studyName");
-	    
-	    if (location.href.split("?").length > 1) {
-	        
-	        var no = location.href.split("?")[1].split("=")[1];
-	        //console.log(no);
-	        var st
-	        $.getJSON("json/study/" + no, function(data) {
-	        	console.log(data);
-        		console.log(studyName);
-	        	for (var item in studyName) {
-	                $(studyName[item]).text(data.title);
-	        	}
-	            $(fDescription).text(data.description);
-	        }); 
-	    }
+        var no = location.href.split("?")[1].split("=")[1];
+        //console.log(no);
+        
+        $.getJSON("json/studyInfo/" + no, function(data) {
+        	console.log(data);
+       		console.log(studyName);
+       		//console.log(data.no);
+        	for (var item in studyName) {
+                $(studyName[item]).text(data.name);
+      	        $(fInformation).text(data.information);
+        	}
+        }); 
 	</script>
 
 </body>

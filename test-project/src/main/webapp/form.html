@@ -87,6 +87,7 @@ if (location.href.split("?").length > 1) {
     	   return;
     	
     	$.get("json/study/delete", {"no":no}, () => {
+    		//console.log("delete success");
     		window.location.href = "list.html";
     	});
     });
