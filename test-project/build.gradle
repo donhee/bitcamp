@@ -92,6 +92,8 @@ dependencies {
 
     // 썸네일 라이브러리 추가
     compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
+    compile group: 'org.springframework', name: 'spring-context-support', version: '5.0.7.RELEASE'
+    compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.1'
     
     // 서블릿 라이브러리
     // => 어느 버전의 서블릿 규칙에 따라 만든 서버인지에 따라

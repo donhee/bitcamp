@@ -734,11 +734,9 @@
         $.getJSON("json/studyInfo/" + no, function(data) {
         	console.log(data);
        		console.log(studyName);
-       		//console.log(data.no);
-        	for (var item in studyName) {
-                $(studyName[item]).text(data.name);
-      	        $(fInformation).text(data.information);
-        	}
+       		console.log(data.no);
+            $(studyName).text(data.name);
+  	        $(fInformation).text(data.information);
         }); 
 	</script>
 

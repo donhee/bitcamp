@@ -11,6 +11,7 @@ import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,8 @@ import net.coobird.thumbnailator.Thumbnails;
 @RequestMapping("/member")
 public class MemberController {
     MemberService memberService;
+
+    @Autowired ServletContext sc;
     
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
@@ -60,16 +63,18 @@ public class MemberController {
         memberService.insert(seperateKeyValue);
     }
     
-    @RequestMapping("{id}")
-    public Member selectOne(String id) {
-        return memberService.selectOne(id);
+    @RequestMapping("{no}")
+    public Member view(@PathVariable int no) throws Exception {
+        return memberService.get(no);
     }
-    
-    @Autowired ServletContext sc;
 
-    
-    @PostMapping("upload04")
-    public Object upload04(
+    @RequestMapping("change/{no}")
+    public Object changePassword(@PathVariable int no, String nowPassword, String newPassword) {
+        return memberService.changePassword(no, nowPassword, newPassword);
+    }
+
+    @PostMapping("photoUpload")
+    public Object photoUpload(
             MultipartFile files) {
         
         HashMap<String,Object> jsonData = new HashMap<>();
@@ -85,10 +90,10 @@ public class MemberController {
             files.transferTo(path);
             
             // 써네일 이미지 생성
-            String thumbnailPath = path.getCanonicalPath() + "_50x50";
+            String thumbnailPath = path.getCanonicalPath() + "_300x300";
             System.out.println(thumbnailPath);
             Thumbnails.of(path)
-                      .size(50, 50)
+                      .size(300, 300)
                       .outputFormat("jpg")
                       .toFile(new File(thumbnailPath));
             
@@ -103,6 +108,4 @@ public class MemberController {
     public void update(Member member) throws Exception {
         memberService.update(member);
     }
-
-
 }

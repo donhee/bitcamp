@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/br_register.css">
 
-	<style>
-	   .container{
-	       width: 600px;
-	       margin-top: 150px;
-	       margin-bottom: 200px;
-	   }
-	
-	    #selectbox1 { display: none; }
+    <style>
+       .container{
+           width: 600px;
+           margin-top: 150px;
+           margin-bottom: 200px;
+       }
+    
+        #selectbox1 { display: none; }
         #selectbox1, div:#selectbox1 { display: none; }
         #selectbox1:checked ~ div:#selectbox1 { display: block; }
         #selectbox2 { display: none; }
@@ -114,67 +114,67 @@
         #signup {
             float : right;
         }
-	</style>
-	
-	<script src="node_modules/jquery/dist/jquery.js" > </script>
+    </style>
+    
+    <script src="node_modules/jquery/dist/jquery.js" > </script>
 </head>
 
 <script src="js/common.js"> </script>
 
 <script>
 
-	$(document).ready(function() {
+    $(document).ready(function() {
 
-		$(signup).click(function() {
-			let in_email = $(email);
-			let pass = $(password);
-			let checkpass = $(checkpassword);
-			let nm = $(memname);
-			let t = $(tel);
-			let interest = [];
+        $(signup).click(function() {
+            let in_email = $(email);
+            let pass = $(password);
+            let checkpass = $(checkpassword);
+            let nm = $(memname);
+            let t = $(tel);
+            let interest = [];
 
-			if( $(in_email).val() == "" || $(pass).val() == "" || $(checkpass).val() == ""
-						    || $(nm).val() == "" || $(tel).val() == "" ) {
-				alert("입력되지않은 항목이 있습니다.");
-				return;
-			}
+            if( $(in_email).val() == "" || $(pass).val() == "" || $(checkpass).val() == ""
+                            || $(nm).val() == "" || $(tel).val() == "" ) {
+                alert("입력되지않은 항목이 있습니다.");
+                return;
+            }
 
-			if( $(pass).val() != $(checkpass).val() ) {
-				alert("입력된 비밀번호가 다릅니다.");
-				return;
-			}
+            if( $(pass).val() != $(checkpass).val() ) {
+                alert("입력된 비밀번호가 다릅니다.");
+                return;
+            }
 
-			for(let c of $('input[type=checkbox]')) {
-				if($(c).is(":checked"))
-					interest.push( decodeURIComponent( $('.buttons label[for=' + $(c).attr("id") + ' ]').text() ));
-			}
+            for(let c of $('input[type=checkbox]')) {
+                if($(c).is(":checked"))
+                    interest.push( decodeURIComponent( $('.buttons label[for=' + $(c).attr("id") + ' ]').text() ));
+            }
 
-			$.post(serverRoot+"/json/member/add", {
-				email:decodeURIComponent( $(email).val() ),
-				password:decodeURIComponent($(password).val() ),
-				name:decodeURIComponent($(nm).val() ),
-				tel:decodeURIComponent($(t).val() ),
-				interests:interest
-			}, res => {
-				location.href="registerd.html"
-			});
-		});
-	});
+            $.post(serverRoot+"/json/member/add", {
+                email:decodeURIComponent( $(email).val() ),
+                password:decodeURIComponent($(password).val() ),
+                name:decodeURIComponent($(nm).val() ),
+                tel:decodeURIComponent($(t).val() ),
+                interests:interest
+            }, res => {
+                location.href="registerd.html"
+            });
+        });
+    });
 
-	function count_ck(obj){
-	    var chkbox = document.getElementsByName("chk");
-	    var chkCnt = 0;
-	    for(var i = 0; i < chkbox.length; i++){
-	        if(chkbox[i].checked){
-	            chkCnt++;
-	        }
-	    }
-	    if(chkCnt>3){
-	        alert("3개 이상 선택할 수 없습니다.");
-	        obj.checked = false;
-	        return false;
-	    }
-	}
+    function count_ck(obj){
+        var chkbox = document.getElementsByName("chk");
+        var chkCnt = 0;
+        for(var i = 0; i < chkbox.length; i++){
+            if(chkbox[i].checked){
+                chkCnt++;
+            }
+        }
+        if(chkCnt>3){
+            alert("3개 이상 선택할 수 없습니다.");
+            obj.checked = false;
+            return false;
+        }
+    }
 </script>
 
 
@@ -222,11 +222,11 @@
             </div>
                 
             <br><br>
-		    <h2>관심사 고르기</h2>
-		    <hr>
-		    <p>관심사는 총 3개까지 설정하실 수 있습니다.</p>
-		    
-		    <input id="selectbox1" type="checkbox" name="chk" onClick="count_ck(this);"/>
+            <h2>관심사 고르기</h2>
+            <hr>
+            <p>관심사는 총 3개까지 설정하실 수 있습니다.</p>
+            
+            <input id="selectbox1" type="checkbox" name="chk" onClick="count_ck(this);"/>
             <input id="selectbox2" type="checkbox" name="chk" onClick="count_ck(this);"/>
             <input id="selectbox3" type="checkbox" name="chk" onClick="count_ck(this);"/>
             <input id="selectbox4" type="checkbox" name="chk" onClick="count_ck(this);"/>
@@ -248,9 +248,9 @@
                 <label for="selectbox9">기타</label>
                 <label for="selectbox10">기타</label>
             </section>
-			<hr>
+            <hr>
             <div class="btn btn-primary btn-block" id="signup">가입하기</div>
-	</form>
+    </form>
     </div>
     <footer class="footer">
         <p>Logo</p>

@@ -11,30 +11,31 @@
     <result column="pwd" property="password"/>
     <result column="intrd" property="introduce"/>
     <result column="pfp" property="profile"/>
-    <result column="name" property="name"/>
+    <result column="mname" property="name"/>
     <result column="birth" property="birthday"/>
     <result column="tel" property="tel"/>
-    <result column="gen" property="gender"/>
     <result column="itrloc" property="interestedPlace"/>
+    <result column="auth" property="authCode"/>
   </resultMap>
     
   <insert id="insert_basic" parameterType="bitcamp.java106.pms.domain.Member">
-    insert into member( email, pwd, name, tel))
-    values(#{email}, password(#{password}), #{name}, #{tel} )
+    insert into member( email, pwd, mname, tel)
+        values(#{email}, password(#{password}), #{name}, #{tel} )
   </insert>
-  
-  <!-- 
-  <update id="update_additional">
-    update member
-  </update> -->
-    
+      
   <select id="selectOne" parameterType="String" resultMap="MemberMap">
     select *
     from member 
-    where email=#{id}
+    where email=#{value}
   </select>
   
-  <select id="selectOneSimpleCase" parameterType="String" resultType="bitcamp.java106.pms.domain.Member">
+  <select id="selectOneByNo" parameterType="int" resultMap="MemberMap">
+    select *
+    from member 
+    where memno = #{no}
+  </select>
+  
+  <select id="selectOneSimpleCase" parameterType="String" resultMap="MemberMap">
     select memno, email
     from member 
     where email=#{id}
@@ -45,6 +46,31 @@
         from member 
         where email=#{id} and pwd=password(#{password})
   </select>
+  
+  
+  <update id="changePassword" parameterType="map">
+    update member set pwd=password(#{newPassword})
+    where memno = #{no}
+  </update>
+  
+  <select id="validation" parameterType="map" resultMap="MemberMap">
+    select email
+    from member
+    where memno = #{no} and pwd = password(#{password})
+  </select>
+  
+  <update id="update" parameterType="Member">
+        update Member set
+        pfp=#{profile},
+        pwd=password(#{password}),
+        tel=#{tel},
+        itrloc=#{interestedPlace},
+        where email=#{id}
+    </update>
+      
+  <update id="userAuth" parameterType="map">
+    update member set auth = #{authCode} where memno = #{no}
+  </update>
 </mapper>
 
 

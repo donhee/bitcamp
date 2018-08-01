@@ -37,13 +37,13 @@ public class StudyInfoController {
     }
 
     @RequestMapping("listSearch")
-    public void listSearch(@RequestParam("city") String city, 
+    public Object listSearch(@RequestParam("city") String city, 
                             @RequestParam("county") String county,
                             @RequestParam("category") String category,
                             @RequestParam("hashtag") String hashtag) {
-        System.out.println("controller===>" + city + "," + county + "," + category + "," + hashtag );
+        System.out.println("controller===>" + city + "," + county + "," + category + "," + hashtag);
         
-        studyInfoService.listSearch(city,county,category,hashtag);
+        return studyInfoService.listSearch(city,county,category,hashtag);
         
     }
     

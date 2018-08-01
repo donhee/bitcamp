@@ -34,13 +34,14 @@ public class StudyInfoServiceImpl implements StudyInfoService {
     
     @Override
     public List<StudyInfo> listSearch(String city, String county, String category, String hashtag) {
-        System.out.println("service===>" + city + "," + county + "," + category + "," + hashtag );
-        HashMap<String,Object> listSearch = new HashMap<>();
-        listSearch.put("city", city);
-        listSearch.put("county", county);
-        listSearch.put("category", category);
-        listSearch.put("hashtag", hashtag);
-        return studyInfoDao.selectSearchList(listSearch);
+        System.out.println("service===>" + city + "," + county + "," + category + "," + hashtag);
+        HashMap<String,Object> searchs = new HashMap<>();
+        searchs.put("city", city);
+        searchs.put("county", county);
+        searchs.put("category", category);
+        searchs.put("hashtag", hashtag);
+        
+        return studyInfoDao.selectSearchList(searchs);
     }
     
     @Override

@@ -15,17 +15,12 @@ public class Member implements Serializable {
     private String introduce;
     private String name;
     private Date birthday;
+    private String photo;
     private String tel;
     private char gender;
     private String interestedPlace;
+    private String authCode;
     private List<InterestField> interests;
-    
-    public String getProfile() {
-        return profile;
-    }
-    public void setProfile(String profile) {
-        this.profile = profile;
-    }
     public int getNo() {
         return no;
     }
@@ -43,6 +38,12 @@ public class Member implements Serializable {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public String getProfile() {
+        return profile;
+    }
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
     public String getIntroduce() {
         return introduce;
@@ -62,6 +63,12 @@ public class Member implements Serializable {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+    public String getPhoto() {
+        return photo;
+    }
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
     public String getTel() {
         return tel;
     }
@@ -80,6 +87,12 @@ public class Member implements Serializable {
     public void setInterestedPlace(String interestedPlace) {
         this.interestedPlace = interestedPlace;
     }
+    public String getAuthCode() {
+        return authCode;
+    }
+    public void setAuthCode(String authCode) {
+        this.authCode = authCode;
+    }
     public List<InterestField> getInterests() {
         return interests;
     }
@@ -89,7 +102,11 @@ public class Member implements Serializable {
     @Override
     public String toString() {
         return "Member [no=" + no + ", email=" + email + ", password=" + password + ", profile=" + profile
-                + ", introduce=" + introduce + ", name=" + name + ", birthday=" + birthday + ", tel=" + tel
-                + ", gender=" + gender + ", interestedPlace=" + interestedPlace + ", interests=" + interests + "]";
+                + ", introduce=" + introduce + ", name=" + name + ", birthday=" + birthday + ", photo=" + photo
+                + ", tel=" + tel + ", gender=" + gender + ", interestedPlace=" + interestedPlace + ", authCode="
+                + authCode + ", interests=" + interests + "]";
     }
+    
+    
+    
 }

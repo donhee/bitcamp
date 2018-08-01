@@ -4,12 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import bitcamp.java106.pms.dao.EmailAuthDao;
 import bitcamp.java106.pms.dao.InterestFieldDao;
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.domain.InterestField;
 import bitcamp.java106.pms.domain.Member;
+import bitcamp.java106.pms.mail.MailHandler;
+import bitcamp.java106.pms.mail.TempKeyGenerator;
 import bitcamp.java106.pms.service.MemberService;
 
 @Service
@@ -17,15 +21,26 @@ public class MemberServiceImpl implements MemberService{
     MemberDao memberDao;
     InterestFieldDao interestFieldDao;
     
-    public MemberServiceImpl(MemberDao memberDao, InterestFieldDao interestFieldDao) {
+    EmailAuthDao emailDao;
+    
+    private JavaMailSender mailSender;
+    
+    public MemberServiceImpl(MemberDao memberDao, InterestFieldDao interestFieldDao, EmailAuthDao emailDao, JavaMailSender mailSender) {
         this.memberDao = memberDao;
         this.interestFieldDao = interestFieldDao;
-    }
+        this.emailDao = emailDao;
+        this.mailSender = mailSender;
+    }    
     
     @Override
     public Member selectOne(String id) {
       return memberDao.selectOne(id);
     };
+    
+    @Override
+    public Member get(int id) {
+        return memberDao.selectOneTypeInt(id);
+    }
     
     @Override
     public boolean isExist(String id, String password) {
@@ -58,8 +73,16 @@ public class MemberServiceImpl implements MemberService{
         
         memberDao.insert_basic(member);
         int refid = memberDao.selectOne(member.getEmail()).getNo(); // 기준 회원 선택
-        System.out.println("");
         
+        String personalAuthCode = new TempKeyGenerator().getKey(50, false);
+        
+        Map<String, Object> authInfo = new HashMap<>();
+        authInfo.put("no", refid);
+        authInfo.put("authCode", personalAuthCode);
+        emailDao.createAuthKey(authInfo);
+        
+        System.out.println("no:"+ refid);
+
         if(refid > 0) {
             for(Entry<String, String> entry : params.entrySet()) {
                 InterestField itr = new InterestField();
@@ -68,10 +91,50 @@ public class MemberServiceImpl implements MemberService{
                 interestFieldDao.insert(itr);
             }
         }
+        try {
+            MailHandler sendMail = new MailHandler(mailSender);
+            sendMail.setSubject("[Westudy] 서비스 이메일 인증 요청 메일입니다.");
+            sendMail.setText( new StringBuffer().append("<h1>서비스 이용을 위해 아래 링크를 클릭하여 메일 인증을 해주시기 바랍니다.</h1>")
+                                                .append("<a href='http://localhost:8888/test-project/json/auth/email/"+personalAuthCode)
+                                                .append("' target='_blank'> 이메일 인증하기 </a>")
+                                                .toString());
+            sendMail.setTo(member.getEmail());
+            sendMail.send();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Object changePassword(int no, String nowPassword, String newPassword) {
+        // TODO Auto-generated method stub
+        System.out.println("service run");
+        
+        Map<String, Object> validateParams = new HashMap<>();
+        validateParams.put("no", no);
+        validateParams.put("password", nowPassword);
+        
+        Member member = memberDao.validation(validateParams);
+        System.out.println(member);
+        
+        if(member == null)
+            return "fail";
+        
+        Map<String, Object> params = new HashMap<>();
+        params.put("no", no);
+        params.put("newPassword", newPassword);
+        
+        return memberDao.changePassword(params);
     }
 
     @Override
     public int update(Member member) {
         return memberDao.update(member);
+    }
+
+    public void createAuthKey(String email, String authCode) throws Exception {
+        Member member = new Member();
+        member.setEmail(email);
+        member.setAuthCode(authCode);
     }
 }
