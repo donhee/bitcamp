@@ -7,16 +7,13 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap core CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 
 <!-- Custom styles for this template -->
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/common.css">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
+<link href="node_modules/slidebars/dist/slidebars.css" rel="stylesheet">
 
 <style>
 .container {
@@ -102,36 +99,7 @@
 </head>
 
 <body>
-	<!-- navbar start -->
-	<header class="header">
-		<div class="headerWrap">
-			<h1 class="logo">
-				<a href="index.html"><img src="img/logo3.png" alt="로고"
-					title="WeStudy"></a>
-			</h1>
-			<div class="utilMenu">
-				<ul>
-					<li class="search"><a href="search.html">검색</a></li>
-					<li><a href="makeStudy.html">스터디 만들기</a></li>
-					<li><a id="login" style="" data-toggle="modal"
-						data-target="#myModal"> 로그인 </a></li>
-					<li><a id="signup" class="" data-toggle="modal"
-						data-target="#register">회원가입</a></li>
-					<li class="utilMenuMobile">스터디그룹 만들기</li>
-					<li class="utilMenuMobile">가입한 스터디 목록</li>
-					<li class="menu"><a href="myProfile.html">menu</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="menuToggle" style="display: none">
-			<div>
-				<div class="profile_img">
-					<a href="#" title="프로필 페이지로 이동">프로필 사진</a>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!-- navbar end -->
+	<div id="header"> </div>
 
 
 
@@ -200,7 +168,7 @@
 					<div class="col-sm-3 searchOption">
 						<div class="input-group mb-3">
 							<input id="tagText" type="text" name="hashtag" 
-							     class="form-control" placeholder="포함단어 입력">
+							     class="form-control" placeholder="해시태그 입력">
 							<div class="input-group-append">
 								<button id="searchBtn" type="button">검색</button>
 							</div>
@@ -218,9 +186,9 @@
 		<div class="box resultCount">
 			총 <font color="#ef6c00"><bold id="searchCnt">0</bold></font>개의 스터디가 검색되었습니다.
 		</div>
-		<div>
+		<!-- <div>
           검색 : <input type="text" id="keyword">
-        </div>
+        </div> -->
 	</div>
 
 	<!-- study list start -->
@@ -302,6 +270,9 @@
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 	<script src="js/holder.min.js"></script>
+	<script src="node_modules/slidebars/dist/slidebars.js"></script>
+    <script src="js/common.js"></script>
+    
 	<script>
 	function changes(fr) {
         if(fr==1) {
@@ -451,6 +422,8 @@
 
 	<script>
 $(document).ready(function() {
+        
+    $("#header").load(serverRoot + "/header.html");
     /* $("#keyword").keyup(function() {
         var k = $(this).val();
         $(".container .col-sm-4.box .studyHashTag").hide();
@@ -474,47 +447,50 @@ $(document).ready(function() {
     });
     
     var index = 0;
-    $.ajaxSetup({ async:false });
     $("#searchBtn").click(() => {
+    	
+    	$('#searchrow').html("");
+    	$('#searchCnt').html("0");
+    	
         $.post("json/studyInfo/listSearch", {
             city : $("#fCity option:checked").text(),
             county : $("#fCounty option:checked").text(),
             category : $("#fCategory option:checked").text(),
             hashtag : $("#tagText").val()
         }, function(data) {
-            console.log("Search success");
+        	
+        	if (data.length <= 0) {
+        		alert("검색 결과가 없습니다.");
+        	}
+        	
             for (var item of data) {
                 console.log(item);
-                $("<div class='col-sm-4 box'>").html("<div class='imgWrap'>" +
-                        "<a href='groupMain.html?no=" + item.no +"'><img src='img/searchtestimg.png'></a></div>" +
-                        "<div class='studyDetail'><div><a href='#'><h6 class='studyTitle text-center font-weight-bold'>" + item.name + " <span class='badge badge-warning'>" + "모집중" + "</span></h6></a></div></a>" +
-                        "<div class='studyHashTag text-center'></div><hr>" +
-                        "<div class='list-details text-muted'><span class='float-left'><p>" + item.city + " , " + item.county + "</p></span><span class='float-right'><i class='fas fa-user'></i><span>" + " 4" + " / " + item.maxPeople + "</span></span></div></div>").appendTo(searchrow);
+                $(`<div class='col-sm-4 box' data-no='${item.no}'>`).html(`<div class='imgWrap'>
+                        <a href='groupMain.html?no=${item.no}'><img src='img/searchtestimg.png'></a></div>
+                        <div class='studyDetail'><div><a href='#'><h6 class='studyTitle text-center font-weight-bold'>${item.name} <span class='badge badge-warning'>모집중</span></h6></a></div></a>
+                        <div class='studyHashTag text-center'></div><hr>
+                        <div class='list-details text-muted'><span class='float-left'><p>${item.city} , ${item.county}</p></span><span class='float-right'><i class='fas fa-user'></i><span> 4 / ${item.maxPeople}</span></span></div></div>`).appendTo(searchrow);
             
-                var hashtags = $(".studyHashTag");
-                var count = item.no;
-                (function(count) {
-                $.getJSON("json/studyInfo/listTag/" + count, (data2) => {
-                	
-                	for (var i of data2) {
-                		$(hashtags[index]).append($("<span class='hashtags' style='margin-right:5px'>" + i.hashtag + "</span>"));
-                	}
-                	index++;
+                let itemNo = item.no;
+                $.getJSON("json/studyInfo/listTag/" + itemNo, (data2) => {
+                    for (var i of data2) {
+                        $('div[data-no="' + itemNo + '"] div.studyHashTag.text-center').append($("<span class='hashtags' style='margin-right:5px'>" + i.hashtag + "</span>"));
+                    }
+                    index++;
+                    
+                    var k = $("#tagText").val();
+                    var temp = $(".container .col-sm-4.box .studyHashTag > span:contains('" + k + "')");
+                    console.log($(temp).parents(".col-sm-4").length);
+                    var length = $(temp).parents(".col-sm-4").length;
+                    searchCnt.innerHTML = length;
                 });
-                })(count);
+                
             }
             
-            var k = $(".hashtags").val();
             
-            var temp = $(".container .col-sm-4.box .studyHashTag > span:contains('" + k + "')");
-            
-            console.log($(temp).parents(".col-sm-4").length);
-            
-            var length = $(temp).parents(".col-sm-4").length;
-            $("#searchCnt").html(length);
            
         });
-        $.ajaxSetup({ async:true });
+        
     });
     
     

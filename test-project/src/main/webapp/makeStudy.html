@@ -9,7 +9,7 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-
+<link href="node_modules/slidebars/dist/slidebars.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/common.css">
@@ -64,36 +64,7 @@
 <title>makeStudy</title>
 </head>
 <body>
-	<!-- navbar start -->
-	<header class="header">
-		<div class="headerWrap">
-			<h1 class="logo">
-				<a href="index.html"><img src="img/logo3.png" alt="로고"
-					title="WeStudy"></a>
-			</h1>
-			<div class="utilMenu">
-				<ul>
-					<li class="search"><a href="search.html">검색</a></li>
-					<li><a href="makeStudy.html">스터디 만들기</a></li>
-					<li><a id="login" style="" data-toggle="modal"
-						data-target="#myModal"> 로그인 </a></li>
-					<li><a id="signup" class="" data-toggle="modal"
-						data-target="#register">회원가입</a></li>
-					<li class="utilMenuMobile">스터디그룹 만들기</li>
-					<li class="utilMenuMobile">가입한 스터디 목록</li>
-					<li class="menu"><a href="myProfile.html">menu</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="menuToggle" style="display: none">
-			<div>
-				<div class="profile_img">
-					<a href="#" title="프로필 페이지로 이동">프로필 사진</a>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!-- navbar end -->
+	<div id="header"> </div>
 
 	<!-- study make start -->
     <div class="container text-center">
@@ -210,10 +181,11 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
 	<!-- tagEditor start -->
-	<script src="https://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
 	<script src="js/jquery.caret.min.js"></script>
 	<script src="js/jquery.tag-editor.js"></script>
-	
+	<script src="node_modules/slidebars/dist/slidebars.js"></script>
+    <script src="js/common.js"></script>
+    
 	<script>
         $('#tagEditor').tagEditor({
             initialTags: [],
@@ -222,6 +194,16 @@
         });
     </script>
     <script>
+    var mnumber = 0;
+    $(document).ready( function () {
+    	
+    	$("#header").load(serverRoot + "/header.html");
+    	
+        $.get("json/auth/loginstat", (data) => {
+        	mnumber = data.no;
+        	console.log("loginstat=" + mnumber);
+        });    	
+    });
     function changes(fr) {
         if(fr==1) {
             //뿌려줄값을 배열로정렬
@@ -415,7 +397,7 @@ if (location.href.split("?").length > 1) {
             name: $(fName).val(),
             information: $(fInformation).val(),
             maxPeople: $(fMaxPeople).val(),
-            category: $("#fCategory option:checked").text()
+            category: $("#fCategory option:checked").text(),
         }, () => {
             console.log("add success");
             $.post("json/studyInfo/addTag", {
@@ -423,6 +405,13 @@ if (location.href.split("?").length > 1) {
             }, () => {
             	$.getJSON("json/studyInfo/one", function(data) {
                     console.log(data);
+                    
+                    $.post("json/joinedmember/add", {
+                    	mnumber: mnumber
+                    }, () => {
+                    	console.log("joinedmember success");
+                    });
+                    
                     location.href = "groupMain.html?no=" + data;
                 });
             });

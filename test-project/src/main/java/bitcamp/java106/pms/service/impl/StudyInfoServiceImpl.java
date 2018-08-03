@@ -55,7 +55,6 @@ public class StudyInfoServiceImpl implements StudyInfoService {
         return studyInfoDao.selectOne(no);
     }
 
-    
     @Override
     public int add(StudyInfo studyInfo) {
         return studyInfoDao.insert(studyInfo);
