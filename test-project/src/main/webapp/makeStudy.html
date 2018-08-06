@@ -334,62 +334,7 @@
         document.form.option2.options[i] = new Option(num[i],vnum[i]);
       }
     }
-// 태그에 id를 지정하면 window 객체에 자동 등록한다.
-// 따라서 다음과 같이 태그를 찾는 코드를 작성하지 않아도 된다.
-/*
-var fNo = document.querySelector("#fNo"),
-    fTitle = document.querySelector("#fTitle"),
-    fContent = document.querySelector("#fContent"),
-    fCreatedDate = document.querySelector("#fCreatedDate");
-*/
-//console.log(window.fTitle);
-
-// 웹 브라우저가 기본으로 제공하는 객체
-//console.log(location.href.split("?")[1].split("=")[1]);  // no값 => 예) 24
-
-if (location.href.split("?").length > 1) {
     
-    var no = location.href.split("?")[1].split("=")[1];
-    //console.log(no);
-    
-    $.getJSON("json/study/" + no, function(data) {
-        $(fNo).val(data.no);
-        $(fTitle).val(data.title);
-        $(fDescription).val(data.description);
-    });  
-    
-    $("#updBtn").click(() => {
-        $.post("json/study/update", {
-            title: $(fTitle).val(),
-            description: $(fDescription).val(),
-            no: $(fNo).val()
-        }, () => {
-            location.href = "list.html";
-        });
-    });
-    
-    $("#delBtn").click(() => {
-        if (window.confirm("삭제하시겠습니까?") == false)
-           return;
-        
-        $.get("json/study/delete", {"no":no}, () => {
-            window.location.href = "list.html";
-        });
-    });
-    
-} else { // 새 글 등록시에는
-    /* $("#addBtn").click(() => {
-    	$.post("json/study/add", {
-            title: $(fTitle).val(),
-            description: $(fDescription).val()
-        }, () => {
-            console.log("add success");
-            $.getJSON("json/study/one", function(data) {
-                console.log(data);
-                location.href = "groupMain.html?no=" + data;
-            });
-        });
-    }); */
 	$("#addBtn").click(() => {
         $.post("json/studyInfo/add", {
             city: $("#fCity option:checked").text(),
@@ -422,7 +367,6 @@ if (location.href.split("?").length > 1) {
         
     });
     
-}
 </script>
 
 </body>
