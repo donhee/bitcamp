@@ -22,6 +22,12 @@
     insert into member( email, pwd, mname, tel)
         values(#{email}, password(#{password}), #{name}, #{tel} )
   </insert>
+  
+  <insert id="add" parameterType="bitcamp.java106.pms.domain.Member" 
+        useGeneratedKeys="true" keyColumn="memno" keyProperty="no">
+    insert into member(email, pwd, mname, tel) 
+    values(#{email}, password(#{password}), #{name}, #{tel} )
+  </insert>
       
   <select id="selectOne" parameterType="String" resultMap="MemberMap">
     select *
@@ -71,6 +77,11 @@
   <update id="userAuth" parameterType="map">
     update member set auth = #{authCode} where memno = #{no}
   </update>
+  
+  <select id="findByEmail" parameterType="String" resultMap="MemberMap">
+        select * from member where email=#{email}
+    </select>
+  
 </mapper>
 
 

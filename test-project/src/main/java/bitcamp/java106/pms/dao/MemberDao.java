@@ -16,4 +16,6 @@ public interface MemberDao {
     void createAuthKey(String email, String key);
     void userAuth(Map<String, Object> params);
 	Member selectOneByNo(int user);
+	Member findByEmail(String email);
+	int add(Member member);
 }

@@ -137,4 +137,18 @@ public class MemberServiceImpl implements MemberService{
         member.setEmail(email);
         member.setAuthCode(authCode);
     }
+
+    
+    
+    
+    @Override
+    public Member get(String email) {
+        return memberDao.findByEmail(email);
+    }
+
+    @Override
+    public int add(Member member) {
+        return memberDao.add(member);
+    }
+
 }

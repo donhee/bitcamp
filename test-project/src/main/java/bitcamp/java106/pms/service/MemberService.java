@@ -12,5 +12,8 @@ public interface MemberService {
     Member selectOneSimpleCase(String id);
     Object changePassword(int no, String nowPassword, String newPassword);
     int update(Member member);
+    
+    Member get(String email);
+    int add(Member member);
 } 
  

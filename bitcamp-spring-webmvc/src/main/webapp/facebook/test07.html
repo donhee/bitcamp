@@ -24,6 +24,9 @@ function getUserInfo(accessToken) {
     // => '/me' : 현재 로그인 한 사용자의 정보를 가져오는 서비스이다.
     FB.api('/me?fields=id,name,email', function(response) {
         console.log(response);
+        console.log(response.id);
+        console.log(response.name);
+        console.log(response.email);
     });
 }
 
