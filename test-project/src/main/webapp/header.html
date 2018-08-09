@@ -86,7 +86,7 @@
                    <a class="right link-font" href="#">회원가입</a>
                    <div id="signin" class="btn btn-success text-center resizeWidth add-margin-top"> 로그인 </div> 
                    <div class="text-center resizeWidth add-margin-top or-text"> 또는 </div>
-                   <fb:login-button class="fb-login-button" data-width="500" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"scope="public_profile,email" onlogin="checkLoginState();"> 페이스북 계정으로 로그인하기 </fb:login-button>
+                   <div class="fb-login-button" data-width="466" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" scope="public_profile,email" onlogin="checkLoginState();">페이스북 계정으로 로그인하기</div>
                    <div class="btn btn-primary text-center resizeWidth add-margin-top"> 구글 계정으로 로그인하기 </div> 
                   </div>
                   <div class="modal-footer">
@@ -118,6 +118,7 @@
   </div>
  </div>
 <!-- 로그인 model End -->
+
 <script>
 let no = -1;
   ( function ( $ ) {
@@ -226,6 +227,7 @@ let no = -1;
     });
     
     
+
     /* 페이스북 로그인 */
     function autoServerLogin(accessToken) {
         $.getJSON(
@@ -233,7 +235,19 @@ let no = -1;
             {'accessToken': accessToken}, 
             function(result) {
               if (result.status == 'success') {
-                  location.href = 'index.html';
+            	  const toast = swal.mixin({
+            		  toast: true,
+            		  position: 'top-end',
+            		  showConfirmButton: false,
+            		  timer: 1000
+            		});
+
+            		toast({
+            		  type: 'success',
+            		  title: '로그인 성공'
+            		}).then(function() {
+            			  location.href = 'index.html';
+            		})
               } else {
                   window.alert('로그인 실패입니다!');
               }
@@ -265,15 +279,17 @@ let no = -1;
    	      version    : 'v3.0' 
    	    });
    	    FB.AppEvents.logPageView();  
+
    	};
 
    	(function(d, s, id) {
    	  var js, fjs = d.getElementsByTagName(s)[0];
-   	  if (d.getElementById(id)) return;
+   	  if (d.getElementById(id)) return; 
    	  js = d.createElement(s); js.id = id;
    	  js.src = "https://connect.facebook.net/en_US/sdk.js";
    	  fjs.parentNode.insertBefore(js, fjs);
    	}(document, 'script', 'facebook-jssdk'));
+    
 </script>
 
 <style>
@@ -281,6 +297,7 @@ let no = -1;
     padding: 2rem;
     border: 1px solid #dddddd;
 }
+
 .sidemenu:hover{
     color: #ef6c00;
 }
