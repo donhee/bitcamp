@@ -80,7 +80,7 @@
   
   <select id="findByEmail" parameterType="String" resultMap="MemberMap">
         select * from member where email=#{email}
-    </select>
+  </select>
   
 </mapper>
 

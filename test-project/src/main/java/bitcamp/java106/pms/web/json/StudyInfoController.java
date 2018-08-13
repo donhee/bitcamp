@@ -63,7 +63,6 @@ public class StudyInfoController {
     
     @RequestMapping("listTag/{no}")
     public Object listTag(@PathVariable int no) {
-        System.out.println(no);
         return studyInfoService.listTag(no);
     }
     

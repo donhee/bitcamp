@@ -10,7 +10,7 @@
     
     <!-- 로그인 후 시작-->
     <div class="text-center align-middle" id="login-after">
-        <i class="fas fa-user-circle fa-7x" style="margin-top:30px"></i>
+        <i id="pfp" class="fas fa-user-circle fa-7x" style="margin-top:30px"></i>
         <br>
         <span class="font-weight-bold" id="user" ></span>
         
@@ -87,7 +87,8 @@
                    <div id="signin" class="btn btn-success text-center resizeWidth add-margin-top"> 로그인 </div> 
                    <div class="text-center resizeWidth add-margin-top or-text"> 또는 </div>
                    <div class="fb-login-button" data-width="466" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" scope="public_profile,email" onlogin="checkLoginState();">페이스북 계정으로 로그인하기</div>
-                   <div class="btn btn-primary text-center resizeWidth add-margin-top"> 구글 계정으로 로그인하기 </div> 
+                   <a id="kakao-login-btn"></a>
+                   
                   </div>
                   <div class="modal-footer">
                   </div>
@@ -145,6 +146,7 @@ let no = -1;
             if(typeof(res) == "object" ) {
                 $('#login-before').css('display', 'none');
                 $('#user').text( res.email );
+                $('#pfp').text( res.profile_image );
                 $('#login-after').css('display', 'block');
                 $('#userPic').css('display', 'block');
                 $('#userLogout').css('display', 'block');
@@ -290,6 +292,40 @@ let no = -1;
    	  fjs.parentNode.insertBefore(js, fjs);
    	}(document, 'script', 'facebook-jssdk'));
     
+   	
+   	Kakao.init("5baa68115423befedc9982e7d24c8971");
+   	Kakao.Auth.createLoginButton({
+        container: '#kakao-login-btn',
+        success: function(authObj) {
+              console.log(authObj);
+              
+              $.getJSON(
+                      'json/auth/kakaoLogin', 
+                      {'accessToken': authObj.access_token}, 
+                      function(result) {
+                          console.log(result)
+                        if (result.status == 'success') {
+                        	const toast = swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1000
+                              });
+
+                              toast({
+                                type: 'success',
+                                title: '로그인 성공'
+                              }).then(function() {
+                                    location.href = 'index.html';
+                              })
+                        } else {
+                            console.log('로그인 실패입니다!');
+                        }
+                  });
+        }
+        });
+   	
+   	
 </script>
 
 <style>

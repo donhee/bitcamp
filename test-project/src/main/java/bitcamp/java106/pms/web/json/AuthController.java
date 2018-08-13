@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.service.FacebookService;
+import bitcamp.java106.pms.service.KakaoService;
 import bitcamp.java106.pms.service.MemberService;
 
 @RestController
@@ -22,10 +23,12 @@ public class AuthController {
     
     MemberService memberService;
     FacebookService facebookService;
+    KakaoService kakaoService;
     
-    public AuthController(MemberService memberService, FacebookService facebookService) {
+    public AuthController(MemberService memberService, FacebookService facebookService, KakaoService kakaoService) {
         this.memberService = memberService;
         this.facebookService = facebookService;
+        this.kakaoService = kakaoService;
     }
     
     @GetMapping("/loginstat")
@@ -63,21 +66,19 @@ public class AuthController {
         
         try {
             @SuppressWarnings("rawtypes")
-            Map userInfo = facebookService.me(accessToken, Map.class);
-            System.out.println("facebook="+accessToken);
+            Map userInfo = facebookService.fb(accessToken, Map.class);
+            //System.out.println("facebook="+accessToken);
+            //System.out.println("userInfo"+userInfo);
             Member member = memberService.get((String)userInfo.get("email"));
-            
             if (member == null) {
                 member = new Member();
                 member.setEmail((String)userInfo.get("email"));
                 member.setPassword("1111");
                 member.setName((String)userInfo.get("name"));
                 member.setTel("010-1111-1111");
-                
+                //System.out.println(member);
                 memberService.add(member);
-                
             }
-        
             // 회원 정보를 세션에 저장하여 자동 로그인 처리를 한다.
             session.setAttribute("loginUser", member);
         
@@ -92,6 +93,40 @@ public class AuthController {
         }
     }
     
+    
+    @RequestMapping("/kakaoLogin")
+    public Object kakaoLogin(
+            String accessToken, 
+            HttpSession session) {
+
+        try {
+            @SuppressWarnings("rawtypes")
+            Map userInfo = kakaoService.me(accessToken, Map.class);
+            System.out.println("userInfo"+userInfo);
+            Member member = memberService.get((String)userInfo.get("kaccount_email"));
+            System.out.println("kakao "+member);
+            if (member == null) {
+                member = new Member();
+                member.setName((String)((Map)userInfo.get("properties")).get("nickname"));
+                member.setEmail((String)userInfo.get("kaccount_email"));
+                member.setPassword("3333");
+                member.setTel("010-3333-3333");
+                memberService.add(member);
+            }
+
+            session.setAttribute("loginUser", member);
+
+            HashMap<String,Object> res = new HashMap<>();
+            res.put("status", "success");
+            return res;
+            
+        } catch (Exception e) {
+            HashMap<String,Object> res = new HashMap<>();
+            res.put("status", "fail");
+            res.put("exception", e.getStackTrace());
+            return res;
+        }
+    }
     
     @RequestMapping("/logout")
     public void logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
