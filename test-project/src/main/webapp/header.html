@@ -86,9 +86,8 @@
                    <a class="right link-font" href="#">회원가입</a>
                    <div id="signin" class="btn btn-success text-center resizeWidth add-margin-top"> 로그인 </div> 
                    <div class="text-center resizeWidth add-margin-top or-text"> 또는 </div>
-                   <div class="fb-login-button" data-width="466" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" scope="public_profile,email" onlogin="checkLoginState();">페이스북 계정으로 로그인하기</div>
-                   <a id="kakao-login-btn"></a>
-                   
+                   <a href="javascript:checkLoginState();" scope="public_profile,email"><img src="img/facebookbtn.png"></a>
+                   <a id="custom-login-btn" href="javascript:loginWithKakao()"><img src="img/kakaologin.png"></a>
                   </div>
                   <div class="modal-footer">
                   </div>
@@ -294,8 +293,8 @@ let no = -1;
     
    	
    	Kakao.init("5baa68115423befedc9982e7d24c8971");
-   	Kakao.Auth.createLoginButton({
-        container: '#kakao-login-btn',
+   	function loginWithKakao() {
+   	  Kakao.Auth.login({
         success: function(authObj) {
               console.log(authObj);
               
@@ -324,6 +323,7 @@ let no = -1;
                   });
         }
         });
+   	}
    	
    	
 </script>

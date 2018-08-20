@@ -76,7 +76,7 @@ public class AuthController {
                 member.setPassword("1111");
                 member.setName((String)userInfo.get("name"));
                 member.setTel("010-1111-1111");
-                //System.out.println(member);
+                System.out.println(member);
                 memberService.add(member);
             }
             // 회원 정보를 세션에 저장하여 자동 로그인 처리를 한다.
