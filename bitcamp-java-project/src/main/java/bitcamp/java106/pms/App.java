@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner keyScan = new Scanner(System.in);
-
+        
         String a;
         String b;
         int i;

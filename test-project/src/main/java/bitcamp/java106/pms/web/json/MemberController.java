@@ -40,8 +40,8 @@ public class MemberController {
         
         String[] seperateParameter = qs.split("&");
         Map<String, String> seperateKeyValue = new HashMap<>();
-        
-        int idx = 0;
+          
+        int idx = 0;  
         try {
             for(String param : seperateParameter) {
                 String[] keyVal = param.split("=");
