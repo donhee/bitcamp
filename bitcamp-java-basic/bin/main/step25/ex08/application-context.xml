@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="step25.ex08"/>
+    
+    <bean id="sqlSessionFactory" 
+            class="org.mybatis.spring.SqlSessionFactoryBean">
+       <property name="dataSource" ref="dataSource" />
+       <property name="mapperLocations" 
+            value="classpath*:step25/ex08/*Mapper.xml" />
+       <property name="typeAliases" value="step25.ex08.Board" />
+    </bean>
+    
+    <bean id="dataSource" 
+        class="org.apache.commons.dbcp.BasicDataSource" 
+        destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
+    
+    <context:property-placeholder location="classpath*:step25/ex08/jdbc.properties"/>
+    
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+      <!-- DAO 인터페이스가 선언된 패키지를 지정한다. -->
+      <property name="basePackage" value="step25.ex08" />
+    </bean>
+    
+</beans>
