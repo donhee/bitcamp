@@ -9,7 +9,6 @@ public class Exam02_4 {
     }
 
     public static void main(String[] args) {
-        
         // hello() 메소드를 실행하고, 그 리턴 값을 변수에 담는다.
         String r = hello("홍길동", 20);
         System.out.println(r);
