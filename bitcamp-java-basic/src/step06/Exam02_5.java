@@ -15,7 +15,6 @@ public class Exam02_5 {
     }
 
     public static void main(String[] args) {
-        
         hello(); // 이 경우 names 배열의 개수는 0이다.
         System.out.println("----------1----------");
 
