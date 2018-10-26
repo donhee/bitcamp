@@ -44,6 +44,6 @@ public class Exam02_3 {
         s2.compute(); // 이번에는 s2에 들어 있는 주소를 compute()에 전달된다.
         
         System.out.printf("%s, %d, %d, %d, %d, %.1f\n", s1.name, s1.kor, s1.eng, s1.math, s1.sum, s1.average);
-        System.out.printf("%s, %d, %d, %d, %d, %.1f\n", s2.name, s2.kor, s2.eng, s2.math, s2.sum, s2.average);
+        System.out.printf("%s, %d, %d, %d, %d, %.3f\n", s2.name, s2.kor, s2.eng, s2.math, s2.sum, s2.average);
     }
 }
