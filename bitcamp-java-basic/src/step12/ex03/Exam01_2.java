@@ -28,12 +28,11 @@ public class Exam01_2 {
         print(stack);
         stack.push(s5);
         print(stack);
-        
+
         String value;
         while (stack.size() > 0) {
             System.out.println(stack.pop());
         }
-    
     }
     
     static void print(Stack list) {

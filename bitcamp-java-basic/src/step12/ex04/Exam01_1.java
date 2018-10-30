@@ -32,7 +32,6 @@ public class Exam01_1 {
         while ((value = (String) queue.poll()) != null) {
             System.out.println(value);
         }
-    
     }
     
     static void print(LinkedList list) {

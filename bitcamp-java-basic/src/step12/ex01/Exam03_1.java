@@ -7,6 +7,7 @@ public class Exam03_1 {
         String s2 = new String("bbb");
         String s3 = new String("ccc");
         String s4 = new String("bbb"); // s2 != s4
+        String s5 = new String("ggg");
         
         ArrayList list = new ArrayList();
         list.add(s1);
@@ -14,7 +15,7 @@ public class Exam03_1 {
         list.add(s3);
         print(list);
         
-        System.out.println(list.indexOf(s4));
+        System.out.println(list.indexOf(s5));
     }
     
     static void print(ArrayList list) {

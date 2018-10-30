@@ -74,14 +74,11 @@ public class ArrayList {
     }
     
     private void increaseArray() {
-        if (cursor >= list.length) {
-            Object[] list2 = new Object[list.length + DEFAULT_CAPACITY];
-            for (int i = 0; i < list.length; i++) {
-                list2[i] = list[i];
-            }
-            list = list2; // 새 배열 주소를 기존에 있던 주소에 넣는다. 
-            // 
+        Object[] list2 = new Object[list.length + DEFAULT_CAPACITY];
+        for (int i = 0; i < list.length; i++) {
+            list2[i] = list[i];
         }
+        list = list2; // 새 배열 주소를 기존에 있던 주소에 넣는다. 
     }
     
     
