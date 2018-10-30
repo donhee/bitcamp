@@ -37,7 +37,7 @@ public class Exam02_1 {
         // => 값을 꺼내주는 객체를 통해 값을 꺼낸다.
         while (컬렉션에서값을꺼내주는객체.hasNext()) {
             // => 꺼낼 데이터가 있다면 값을 꺼내 달라고 명령한다.
-            System.out.print(컬렉션에서값을꺼내주는객체.next() + ", ");
+            System.out.print(컬렉션에서값을꺼내주는객체.next() + ",");
         }
         System.out.println();
     }
