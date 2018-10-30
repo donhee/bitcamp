@@ -28,5 +28,8 @@ public class Exam02_3 {
         for (Object value : values) {
             System.out.println(value);
         }
+        
+        
+        
     }
 }

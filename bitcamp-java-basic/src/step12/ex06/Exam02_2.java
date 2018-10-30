@@ -33,7 +33,7 @@ public class Exam02_2 {
             // 원래 타입으로 형변환 해야 한다
 
             Entry entry = (Entry) obj;
-            System.out.printf("%s ===> %s\n", entry.getKey(), entry.getValue());
+            System.out.printf("%s ==> %s\n", entry.getKey(), entry.getValue());
         }
     
     }
