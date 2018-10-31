@@ -13,7 +13,7 @@ public class Exam05 {
         Class clazz = Class.forName("step18.ex02.Exam05$D");
         
         // 해당 클래스가 구현한 인터페이스 정보를 가져온다.
-        // getInterfaces 
+        // getInterfaces()
         Class[] list = clazz.getInterfaces();
         for (Class c : list) {
             System.out.println(c.getName());
