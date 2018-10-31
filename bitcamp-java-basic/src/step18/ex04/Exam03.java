@@ -22,6 +22,7 @@ public class Exam03 {
         // 그래서 Exam03은 기본 생성자가 없기 때문에 실행 오류가 발생한다..
         //Exam03 obj = (Exam03) clazz.newInstance(); // 실행오류
         //obj.print();
+        // <init>() ----> 기본생성자가 없다는뜻    NoSuchMethodException이다.
         
         // 해결 -> 생성자를 준비한다.
         Constructor c = clazz.getConstructor(int.class);
@@ -31,4 +32,3 @@ public class Exam03 {
         obj.print();
     }
 }
-// <init>() ----> 기본생성자가 없다는뜻    NoSuchMethodException이다.
