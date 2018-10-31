@@ -15,7 +15,7 @@ public class Exam06 {
         // 해당 클래스의 패키지 정보를 가져온다.
         // getPackage()
         Package p = clazz.getPackage();
-            System.out.println(p.getName());
+        System.out.println(p.getName());
     }
 
 }
