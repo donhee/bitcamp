@@ -21,6 +21,9 @@ public class Exam01_1 {
         Member member = (Member) list.get(0);
         System.out.println(member.name);
         System.out.println(member.age);
+        
+        String str = list.get(1).toString();
+        System.out.println(str);
         // => 이렇게 값을 꺼낼 때 마다 그 객체의 원래 클래스로 형변환해야 하는 것은 매우 번거롭다.
     }
 }
