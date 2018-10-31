@@ -8,7 +8,6 @@ public class LinkedList {
         public Bucket prev;  
     }
 
-
     protected Bucket head; 
     protected Bucket tail; 
     
