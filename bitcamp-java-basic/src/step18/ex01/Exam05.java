@@ -8,11 +8,14 @@ public class Exam05 {
         int i_var = 200;
         
         static void s_m() {}
-        void i_m() {}
+        void i_m() {
+            System.out.println("aaa");
+        }
     
         static {
             System.out.println("A 클래스가 로딩되었다!");
         }
+
     }
     
     public static void main(String[] args) throws Exception {
