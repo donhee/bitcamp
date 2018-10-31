@@ -19,7 +19,7 @@ public class Exam02 {
         // 중첩 클래스는 "클래스명$중첩클래스명" 형식의 이름을 갖는다.
         // 확인법 : Navigator -> bin -> step18 -> ex01 -> Exam02$A
         Class clazz = Class.forName("step18.ex01.Exam02$A");
-        
+                                                // 클래스명$중첩클래스명
         // 클래스를 다루는 클래스는 :  Class
     }
 }
