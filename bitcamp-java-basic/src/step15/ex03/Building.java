@@ -15,7 +15,6 @@ public abstract class Building {
         System.out.println("건축이 완료되었습니다.");
         endEffect();
     }
-    
     // 템플릿 메서드
     // => 아직 구체적으로 어떤 명령을 실행할 지 정의되지 않은 상태
     //    즉 틀만 갖춘 상태
