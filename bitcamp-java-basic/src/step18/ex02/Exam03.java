@@ -19,11 +19,14 @@ public class Exam03 {
     public static void main(String[] args) throws Exception {
         Class clazz = Class.forName("step18.ex02.Exam03$A");
         
-        // public으로 공개된 중첩 클래스 및 인터페이스 정보를 가져온다.
         Class[] nestedList = clazz.getClasses();
         for (Class nested : nestedList) {
             System.out.println(nested.getName());
         }
+        // public으로 공개된 중첩 클래스 및 인터페이스 정보를 가져온다.
+        // getClasses() : Returns an array containing Class objects representing 
+        //                all the public classes and interfaces 
+        //                that are members of the class represented by this Class object.
     }
 
 }
