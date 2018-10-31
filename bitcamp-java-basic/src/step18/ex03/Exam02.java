@@ -13,7 +13,7 @@ public class Exam02 {
     public static void main(String[] args) {
         // 클래스 로딩
         Class clazz = Exam02.class;
-    
+        
         // => 현재 클래스에 정의된 모든 메서드 호출  getDeclaredMethods()
         Method[] list = clazz.getDeclaredMethods();
         for (Method m : list) {
