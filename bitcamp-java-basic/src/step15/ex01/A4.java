@@ -2,7 +2,7 @@
 package step15.ex01;
 
 public abstract class A4 {
-    // 추상 클래스의 용도는 서브 클래스들이 가져야할 공통 변수나 메서드를 제공하는 것이다.
+    // 추상 클래스의 용도는 서브 클래스들이 가져야할 공통 변수나 메서드를 제공하는 것이다. 
     // 그래서 일반 변수나 메서드를 정의할 수 있다.
     public static int value1;
     private int value2;
