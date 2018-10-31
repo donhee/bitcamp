@@ -22,7 +22,7 @@ public class Exam04 {
         Class clazz = Class.forName("step18.ex02.Exam04$A");
         
         // 접근 범위에 상관 없이 모든 중첩 클래스 및 인터페이스 정보를 가져온다.
-        // getDeclaredClasses 
+        // getDeclaredClasses
         Class[] nestedList = clazz.getDeclaredClasses();
         for (Class nested : nestedList) {
             System.out.println(nested.getName());
