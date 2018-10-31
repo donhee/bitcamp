@@ -13,5 +13,4 @@ package step15.ex01;
 public class A3 { // 컴파일 오류
     // 메서드 앞에 abstract를 붙인다.
     public abstract void m1();
-
 }
