@@ -9,7 +9,7 @@ public class Exam04 {
 
     public static void main(String[] args) throws Exception {
         // 1) 패키지 경로 준비
-        File packageDir = new File("C:\\Users\\doni\\git\\bitcamp\\bitcamp-java-basic\\bin\\step19");
+        File packageDir = new File("C:\\Users\\doni\\git\\bitcamp\\bitcamp-java-basic\\bin\\main\\step19");
         
         // 2) 해당 디렉토리에서 파일 목록을 가져오기
         ApplicationContext2 appContext = new ApplicationContext2(packageDir);

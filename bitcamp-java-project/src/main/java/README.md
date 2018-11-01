@@ -1,2 +1,2 @@
-# bitcamp
-비트캠프 강의 소스asdfasdf
+# 변경 내역
+- App.java 변경

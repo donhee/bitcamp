@@ -10,7 +10,7 @@ public class Exam02 {
 
     public static void main(String[] args) {
         // 1) 패키지 경로 준비
-        File packageDir = new File("C:\\Users\\doni\\git\\bitcamp\\bitcamp-java-basic\\bin\\step19\\ex01");
+        File packageDir = new File("C://Users//doni//git//bitcamp//bitcamp-java-basic//bin//main//step19//ex01");
         
         // 2) 해당 디렉토리에서 파일 목록을 가져오기
         List<File> files = findFiles(packageDir);
