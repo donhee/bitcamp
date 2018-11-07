@@ -28,4 +28,5 @@ public class Exam01 {
             System.out.println("MyAnnotation3.value=" + obj3.value());
         }
     }
+    
 }
