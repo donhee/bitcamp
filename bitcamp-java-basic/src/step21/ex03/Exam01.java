@@ -20,7 +20,8 @@ public class Exam01 {
         } catch (RuntimeException e) {
             // 예외가 발생하면 catch 블록에서 적절한 조치를 취한다.
             // 예를 들면, 다음과 같이 예외가 발생된 이유를 간단히 출력한다.
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         System.out.println("시스템을 종료합니다.");
     }
