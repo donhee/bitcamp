@@ -44,7 +44,6 @@ public class Exam02 extends GenericServlet {
         //    어떤 문자코드표를 사용할 것인지 설정해야 한다.
         // => 출력하기 전이 아니라 출력스트림을 꺼내기 전이다!
         
-        
     }
     
 }
