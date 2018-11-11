@@ -72,17 +72,3 @@ public class Exam04 extends GenericServlet {
 // => 원래는 메일을 보낼 때 콘텐츠의 타입을 알려주기 위해 만들었다.
 // => 그러나 지금은 메일 뿐만 아니라 다방면에서 콘텐츠의 타입을 지정하는 용도로 사용하고 있다.
 // => 예) text/html, text/plain, application/excel 등등 
-// 
-
-
-
-
-
-
-
-
-
-
-
-
-
