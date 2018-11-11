@@ -21,7 +21,7 @@ public class Exam05 extends HttpServlet {
         // 웹브라우저의 주소창에 URL을 집어넣고 엔터를 치면,
         // 해당 서버에 GET 요청을 보낸다.
         // 그러면 서블릿 컨테이너가 자바 클래스에 대해 service()를 호출할 것이고,
-        // 이 클래스는 HttpSErvlet을 상속 받았기 때문에
+        // 이 클래스는 HttpServlet을 상속 받았기 때문에
         // HttpSErvlet의 service(ServletRequest, ServletResponse)를 호출할 것이다.
         // 이 메서드는 다시 오버로딩 한 service(HttpServletRequest, HttpServletResponse)를
         // 호출할 것이다. 그리고 이 오버로딩한 메서드는 클라이언트가 요청한 명령에 따라 
