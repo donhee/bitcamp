@@ -37,8 +37,6 @@ public class Exam01 extends GenericServlet {
         out.println("Hello"); // 바로 클라이언트로 out해서 보여주는 것이 아니라. 내부 버퍼에 저장되는 것이다
         out.println("안녕하세요!");
         
-        
-        
     }
     
 }
