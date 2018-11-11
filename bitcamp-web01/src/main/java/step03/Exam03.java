@@ -28,7 +28,7 @@ public class Exam03 extends GenericServlet {
         out.printf("이름=%s\n", name); 
         out.printf("나이=%d\n", age);
         
-        
+        // 예) http://localhost:8888/bitcamp-web01/step03/exam03?name=홍길동&age=20
     }
     
 }
