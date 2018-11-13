@@ -1,2 +1,8 @@
 # 변경 내역
-- App.java 변경
+- AppServer.java 추가
+- ServerRequest.java 추가
+- ServerResdponse.java 추가
+- Controller.java 변경
+- BoardAddController.java 변경
+- AppClient.java 추가
+- BoardListController.java 변경

@@ -1,59 +1,53 @@
 package bitcamp.java106.pms.dao;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
 
 import bitcamp.java106.pms.annotation.Component;
 
 @Component
 public class TeamMemberDao {
     
-    private HashMap<String, ArrayList<String>> collection = new HashMap<>();
- 
+    private HashMap<String, ArrayList<String>> collection;
+    
     public TeamMemberDao() throws Exception {
         load();
     }
     
+    @SuppressWarnings("unchecked")
     public void load() throws Exception {
-        Scanner in = new Scanner(new FileReader("data/teammember.csv"));
-        while (true) {
+        try (
+                ObjectInputStream in = new ObjectInputStream(
+                               new BufferedInputStream(
+                               new FileInputStream("data/teammember.data")));
+            ) {
+            
             try {
-                String[] arr = in.nextLine().split(":");
-                String[] idList = arr[1].split(",");
-                ArrayList<String> list = new ArrayList<>();
-                for (String id : idList) {
-                    list.add(id);
-                }
-                collection.put(arr[0], list);
-            } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
-                //e.printStackTrace();
-                break; // 반복문을 나간다.
+                collection = (HashMap<String, ArrayList<String>>) in.readObject();
+            } catch (Exception e) {
+                // 데이터를 읽다가 오류가 발생하면 빈 해시맵 객체를 만든다.
+                collection = new HashMap<>();
             }
         }
-        in.close();
     }
     
     public void save() throws Exception {
-        PrintWriter out = new PrintWriter(new FileWriter("data/teammember.csv"));
-        Set<String> keyList = collection.keySet();
-        for (String key : keyList) {
-            List<String> idList = collection.get(key);
-            out.printf("%s:", key);
-            for (String id : idList) {
-                out.printf("%s,", id);
-            }
-            out.println();
+        try (
+                ObjectOutputStream out = new ObjectOutputStream(
+                                         new BufferedOutputStream(
+                                         new FileOutputStream("data/teammember.data")));
+            ) {
+            
+            out.writeObject(collection);
         }
-        out.close();
     }
-    
     
     public int addMember(String teamName, String memberId) {
         String teamNameLC = teamName.toLowerCase();
@@ -113,7 +107,6 @@ public class TeamMemberDao {
 // 메서드 시그너처(method signature) = 함수 프로토타입(function prototype)
 // => 메서드의 이름과 파라미터 형식, 리턴 타입에 대한 정보를 말한다.
 
-//ver 24 - File I/O 적용
 //ver 23 - @Component 애노테이션을 붙인다.
 //ver 19 - 우리 만든 ArrayList 대신 java.util.LinkedList를 사용하여 목록을 다룬다. 
 //ver 18 - ArrayList를 적용하여 객체(의 주소) 목록을 관리한다.
