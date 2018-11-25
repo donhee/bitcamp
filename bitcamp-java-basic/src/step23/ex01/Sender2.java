@@ -10,7 +10,7 @@ public class Sender2 {
     public static void main(String[] args) throws Exception {
         Scanner keyScan = new Scanner(System.in);
         
-        Socket socket = new Socket("192.168.0.49", 8888);
+        Socket socket = new Socket("192.168.219.112", 8888);
     
         PrintStream out = new PrintStream(socket.getOutputStream());
         Scanner in = new Scanner(socket.getInputStream());

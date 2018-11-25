@@ -9,7 +9,7 @@ public class Sender {
     
     public static void main(String[] args) throws Exception {
         // 1) 다른 컴퓨터와 네트워크로 연결한다.
-        Socket socket = new Socket("192.168.0.49", 8888);
+        Socket socket = new Socket("192.168.219.112", 8888);
     
         // 2) 소켓 객체를 통해 읽고 쓸 수 있도록 입출력 스트림을 준비한다.
         PrintStream out = new PrintStream(socket.getOutputStream());

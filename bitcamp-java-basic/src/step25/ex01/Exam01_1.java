@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 //- java-basic/lib 폴더에 붙여넣기
 //- 컴파일과 실행할 때 .jar 파일을 사용할 수 있도록 CLASSPATH에 추가한다.
 //project 컨텍스트 메뉴/build path/configure build path.../Libraries/Add Jars...
-//
 public class Exam01_1 {
     public static void main(String[] args) throws Exception {
         // 1) JDBC 드라이버 로딩
