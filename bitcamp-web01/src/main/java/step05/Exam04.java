@@ -77,10 +77,10 @@ public class Exam04 extends HttpServlet {
     private String newFilename(String originFilename) {
         // 파일 확장자 추출하기
         // 예) test_ok.png
-        int lastIndex = originFilename.lastIndexOf(".");
+        int lastIndex = originFilename.lastIndexOf("."); // 7
         String extName = "";
         if (lastIndex >= 0) {
-            extName = originFilename.substring(lastIndex);
+            extName = originFilename.substring(lastIndex); // png
         } 
         
         // 파일명: [현재업로드한시각의 밀리초]-[카운트].[확장자]
