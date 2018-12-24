@@ -20,25 +20,24 @@ public class Exam08 extends GenericServlet {
     @Override
     public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
         
-        // GET 요청의 데이터를 꺼낼 경우에는 다음 코드는 의미가 없다.
-        // 그러나 POST 요청의 데이터를 꺼낼 경우를 대비하기 위해 그냥 내비둔다.
-        request.setCharacterEncoding("UTF-8");
-        
-        Map<String,String[]> paramMap = request.getParameterMap();
-
         response.setContentType("text/plain; charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        Set<String> nameSet = paramMap.keySet();
+        Map<String, String[]> paramsMap = request.getParameterMap();
+
+        Set<String> nameSet = paramsMap.keySet();
         for (String name : nameSet) {
-            out.printf("%s=", name);
-            String[] values = paramMap.get(name);
+            out.printf("%s==", name);
+            String[] values = paramsMap.get(name);
             for (String value : values) {
-                out.printf("%s,", value);
+                out.printf("%s, ", value);
             }
             out.println();
         }
-        // http://localhost:8888/bitcamp-web01/step03/exam08?name=aaa&tel=111&age=20&address=서울&name=bbb&tel=222&age=30&address=부산
+        // ex) http://localhost:8888/bitcamp-web01/step03/exam08?name=홍길동&tel=111&age=20&address=서울&name=임꺽정&tel=222&age=30
+        
+        
+        
     }
     
 }
