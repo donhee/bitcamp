@@ -61,6 +61,9 @@ public class Exam02_test extends HttpServlet {
                     String savedPath = appEnvInfo.getRealPath("/");
                     out.println(savedPath);
                     
+                    // => FileItem.write(저장할 경로) 호출하여 클라이언트가 보낸 파일을 저장한다.
+                    // => 업로드한 파일은 임시 폴더에 저장되어 있다.
+                    //    이 파일을 우리가 원하는 경로로 옮기는 것이다.
                     item.write(new File(savedPath + "/" + item.getName()));
                 }
             }
