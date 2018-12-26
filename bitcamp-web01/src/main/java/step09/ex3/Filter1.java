@@ -18,8 +18,8 @@ public class Filter1 implements Filter {
             throws IOException, ServletException {
         
         ServletContext sc = request.getServletContext();
-        System.out.printf("step09.ex3.Filter1 ==> %s, %s\n",
-                sc.getInitParameter("p1"), sc.getInitParameter("p2"));
+        System.out.printf("step09.ex3.Filter1 ==> %s, %s, %s\n",
+                sc.getInitParameter("p1"), sc.getInitParameter("p2"), sc.getInitParameter("p3"));
         
         // 다음 필터나 서블릿을 실행한다.
         chain.doFilter(request, response);

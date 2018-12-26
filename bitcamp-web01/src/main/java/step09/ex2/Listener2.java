@@ -16,9 +16,11 @@ public class Listener2 implements ServletRequestListener {
         // 요청이 들어올 때 호출된다. 필터가 수행되기 전에 호출된다.
         HttpServletRequest request = (HttpServletRequest) sre.getServletRequest();
         System.out.println("Listener2.requestInitializaed()");
-        System.out.printf("[%s] %s\n", 
+        System.out.printf("[%s] %s, %d, %s\n", 
                 request.getRemoteAddr(), 
-                request.getServletPath());
+                request.getServletPath(),
+                request.getContentLength(),
+                request.getContextPath());
         System.out.printf("Client IP: %s\n", request.getRemoteAddr());
     }
     

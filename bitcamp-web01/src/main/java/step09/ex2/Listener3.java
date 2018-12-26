@@ -27,5 +27,4 @@ public class Listener3 implements ServletRequestAttributeListener {
                 srae.getValue()
                 );
     }
-    
 }

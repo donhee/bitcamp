@@ -30,6 +30,10 @@
         <param-name>p2</param-name>
         <param-value>20</param-value>
      </context-param>
+     <context-param>
+        <param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+     </context-param>
      
     <!-- 
     <request-character-encoding>UTF-8</request-character-encoding>
@@ -56,6 +60,10 @@
         <init-param> <!-- 값을 추가하고 싶으면 init-param 태그 추가 -->
             <param-name>v2</param-name>
             <param-value>bbb</param-value>
+        </init-param>
+        <init-param>
+            <param-name>v3</param-name>
+            <param-value>333</param-value>
         </init-param>
     </filter>
     <!-- 필터를 적용할 URL 지정 -->
@@ -93,6 +101,10 @@
         <init-param>
             <param-name>age</param-name>
             <param-value>20</param-value>
+        </init-param>
+        <init-param>
+            <param-name>address</param-name>
+            <param-value>충청북도 청주시</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

@@ -13,7 +13,7 @@ public class Listener1 implements ServletContextListener {
         // <context-param> 태그의 값을 꺼내려면 ServletContext 객체가 있어야 한다.
         ServletContext sc = sce.getServletContext();
         
-        System.out.printf("step09.ex3.Listener1 => %s, %s\n", 
-                sc.getInitParameter("p1"), sc.getInitParameter("p2"));
+        System.out.printf("step09.ex3.Listener1 => %s, %s, %s\n", 
+                sc.getInitParameter("p1"), sc.getInitParameter("p2"), sc.getInitParameter("p3"));
     }
 }

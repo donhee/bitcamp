@@ -35,7 +35,8 @@ public class Exam03 extends HttpServlet {
         ServletConfig config = this.getServletConfig();
         String name = config.getInitParameter("name");
         String age = config.getInitParameter("age");
-        out.printf("<p>name=%s, age=%s</p>\n", name, age);
+        String address = config.getInitParameter("address");
+        out.printf("<p>name=%s, age=%s, address=%s</p>\n", name, age, address);
         
         out.println("</body>");
         out.println("</html>");

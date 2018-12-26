@@ -23,5 +23,6 @@ public class Servlet1 extends HttpServlet {
         
         out.printf("p1=%s\n", sc.getInitParameter("p1"));
         out.printf("p2=%s\n", sc.getInitParameter("p2"));
+        out.printf("p3=%s\n", sc.getInitParameter("p3"));
     }
 }

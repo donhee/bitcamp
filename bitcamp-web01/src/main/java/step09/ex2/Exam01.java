@@ -22,15 +22,20 @@ public class Exam01 extends HttpServlet {
         // 1) 파라미터 값을 꺼낸다.
         String name = request.getParameter("name");
         String age = request.getParameter("age");
+        String addr = request.getParameter("address");
         
         // 2) ServletRequest에 저장한다.
         request.setAttribute("이름", name);
         request.setAttribute("나이", age);
+        request.setAttribute("주소", addr);
         System.out.println("---------------------------");
         
         // 3) ServletRequest에 저장된 값을 변경한다.
         request.setAttribute("이름", "우하하");
+        request.setAttribute("주소", addr + "1");
 
+        System.out.println("---------------------------");
+        System.out.printf("%s, %s, %s\n", name, age, addr);
         
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();

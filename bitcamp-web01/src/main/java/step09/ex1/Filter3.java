@@ -31,7 +31,10 @@ public class Filter3 implements Filter {
         // FilterConfig 도구를 사용하여 web.xml에 설정된 파라미터 값을 가져올 수 있다.
         String v1 = config.getInitParameter("v1");
         String v2 = config.getInitParameter("v2");
-        System.out.printf("v1=%s, v2=%s\n", v1, v2);
+        int v3 = Integer.parseInt(config.getInitParameter("v3"));
+        System.out.printf("v1=%s, v2=%s, v3=%d \n", v1, v2, v3);
+        
+        
         
         chain.doFilter(request, response);
     }
