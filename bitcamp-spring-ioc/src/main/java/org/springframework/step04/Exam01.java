@@ -1,6 +1,5 @@
 package org.springframework.step04;
 
-import org.springframework.BeanUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
