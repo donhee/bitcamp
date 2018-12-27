@@ -57,7 +57,6 @@
     -->
     <bean id="c4" class="org.springframework.step04.Car"
         p:model="아벤s" p:maker="람보르귀니" p:cc="7500" />
-    
 </beans>
 
 
