@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 컬렉션 타입의 프로퍼티 값 설정하기 -->
+    <bean id="c1" class="org.springframework.step05.Car">
+        <!-- List 프로퍼티 값 설정하기 : 배열과 같다 -->
+        <property name="model" value="rs7" />
+        <property name="maker" value="아우디" />
+        <property name="tires">
+            <array>
+                <bean class="org.springframework.step05.Tire"
+                    p:maker="금호타이어" p:width="100" p:ratio="100" p:wheel="100"/>
+                <bean class="org.springframework.step05.Tire"
+                    p:maker="금호타이어" p:width="110" />
+                <bean class="org.springframework.step05.Tire"
+                    p:maker="금호타이어" p:width="120" />
+                <bean class="org.springframework.step05.Tire"
+                    p:maker="금호타이어" p:width="130" />
+                <bean class="org.springframework.step05.Tire"
+                    p:maker="금호타이어" p:width="140" />
+            </array>
+        </property>
+    </bean>
+    
+    <bean id="c2" class="org.springframework.step05.Car">
+        <!-- List 프로퍼티 값 설정하기 : 배열과 같다 -->
+        <property name="tires">
+            <list> <!-- array 태그 대신에 list 태그 사용 가능 -->
+                <bean class="org.springframework.step05.Tire"
+                    p:maker="금호타이어" p:width="100" p:ratio="100" p:wheel="100"/>
+                <bean class="org.springframework.step05.Tire"
+                    p:maker="금호타이어" p:width="110" />
+                <bean class="org.springframework.step05.Tire"
+                    p:maker="금호타이어" p:width="120" />
+                <bean class="org.springframework.step05.Tire"
+                    p:maker="금호타이어" p:width="130" />
+                <bean class="org.springframework.step05.Tire"
+                    p:maker="금호타이어" p:width="140" />
+            </list>
+        </property>
+    </bean>
+    
+</beans>
+
+
+
+
+
+
+
