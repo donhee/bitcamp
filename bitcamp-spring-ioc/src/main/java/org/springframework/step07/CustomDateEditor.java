@@ -8,7 +8,6 @@ import java.sql.Date;
 // => 그러나 이 인터페이스를 직접 구현하려면 12개의 메서드를 모두 구현해야 한다.
 // => 그래서 자바는 PropertyEditor를 미리 구현한 PropertyEditorSupport 라는 클래스를 제공한다.
 //    따라서 인터페이스를 직접 구현하지 말고 이 클래스를 상속 받아라
-
 public class CustomDateEditor extends PropertyEditorSupport {
     // 이 메서드는 스프링 IoC 컨테이너가 String 타입의 프로퍼티 값을
     // 다른 타입의 값으로 바꿀 때 호출하는 메서드이다.
