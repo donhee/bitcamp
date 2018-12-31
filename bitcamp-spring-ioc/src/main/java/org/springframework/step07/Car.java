@@ -7,7 +7,7 @@ public class Car {
     String maker;
     int cc;
     boolean auto;
-    Date createDate;
+    Date createdDate;
     Engine engine;
     
     public Car() {
@@ -19,7 +19,6 @@ public class Car {
     }
 
     public void setModel(String model) {
-        System.out.println("Car.setModel()");
         this.model = model;
     }
 
@@ -28,7 +27,6 @@ public class Car {
     }
 
     public void setMaker(String maker) {
-        System.out.println("Car.setMaker()");
         this.maker = maker;
     }
 
@@ -37,7 +35,6 @@ public class Car {
     }
 
     public void setCc(int cc) {
-        System.out.println("Car.setCc()");
         this.cc = cc;
     }
 
@@ -46,17 +43,15 @@ public class Car {
     }
 
     public void setAuto(boolean auto) {
-        System.out.println("Car.setAuto()");
         this.auto = auto;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreateDate(Date createDate) {
-        System.out.println("Car.setCreateDate()");
-        this.createDate = createDate;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Engine getEngine() {
@@ -64,14 +59,15 @@ public class Car {
     }
 
     public void setEngine(Engine engine) {
-        System.out.println("Car.setEngine()");
         this.engine = engine;
     }
 
     @Override
     public String toString() {
-        return "Car [model=" + model + ", maker=" + maker + ", cc=" + cc + ", auto=" + auto + ", createDate="
-                + createDate + ", engine=" + engine + "]";
+        return "Car [model=" + model + ", maker=" + maker + ", cc=" + cc + ", auto=" + auto + ", createdDate="
+                + createdDate + ", engine=" + engine + "]";
     }
+
+    
    
 }
