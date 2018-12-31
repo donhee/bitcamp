@@ -12,6 +12,7 @@ public class Exam01 {
         
         // Car 객체를 꺼내 Engine 객체가 주입되었는지 확인해보자!
         System.out.println(iocContainer.getBean("c1"));
+        
     }
 
 }
