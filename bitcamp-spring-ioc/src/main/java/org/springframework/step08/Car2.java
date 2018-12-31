@@ -13,7 +13,7 @@ public class Car2 {
     Engine engine;
     
     public Car2() {
-        System.out.println("Car()");
+        System.out.println("Car2()");
     }
     
     @Override
