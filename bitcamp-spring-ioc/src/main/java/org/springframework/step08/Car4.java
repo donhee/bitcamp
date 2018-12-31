@@ -13,7 +13,7 @@ public class Car4 {
     Engine engine;
     
     // 만약 실행 중에 의존 객체를 교체해서는 안된다면
-    // 임의로 의존 객체를 교체하지 못하도록 final을 붙여라
+    // 임의로 의존 객체를 교체하지 못하도록 final을 붙여라!
     public Car4(final Engine engine) {
         System.out.println("Car4()");
         this.engine = engine;
