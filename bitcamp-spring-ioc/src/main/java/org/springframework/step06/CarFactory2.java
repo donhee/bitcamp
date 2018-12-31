@@ -1,7 +1,7 @@
 package org.springframework.step06;
 
 public class CarFactory2 {
-    public static Car create(String model) {
+    public Car create(String model) {
         Car c = new Car();
         switch (model) {
         case "티코":
