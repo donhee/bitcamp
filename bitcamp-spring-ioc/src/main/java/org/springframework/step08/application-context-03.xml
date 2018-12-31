@@ -8,7 +8,7 @@
 
     <bean class="org.springframework.step08.MyBeanPostProcessor" />
     
-    <bean id="c1" class="org.springframework.step08.Car3">
+    <bean id="c1" class="org.springframework.step08.Car2">
         <property name="model" value="티코"/>
         <property name="maker" value="비트자동차"/>
         <property name="cc" value="890"/>
