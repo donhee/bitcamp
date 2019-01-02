@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="BoardMapper">
+
+    <resultMap type="Board" id="BoardMap">
+        <id property="no" column="bno"/>
+        <result property="title" column="titl"/>
+        <result property="content" column="cont"/>
+        <result property="registeredDate" column="rdt"/>
+    </resultMap>
+
+    <select id="selectBoard" resultMap="BoardMap">
+        select 
+            bno,
+            titl,
+            cont,
+            rdt 
+        from ex_board
+    </select>
+</mapper>
