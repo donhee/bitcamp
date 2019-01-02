@@ -13,6 +13,5 @@ public class Exam01 {
                 new AnnotationConfigApplicationContext(AppConfig01.class);
         
         BeanUtils.printBeanNames(iocContainer);
-        
     }
 }
