@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+    
+    <context:component-scan base-package="org.springframework.step13.ex02"/>
+    
+    <!-- AOP 필터 객체 생성 -->
+    <bean id="myAdvice" class="org.springframework.step13.ex02.MyAdvice" />
+    
+    <!-- AOP 적용 -->
+    <aop:config>
+        <!-- 어느 pointcut에 어떤 advice를 끼워 넣을지 설정한다. -->
+        <aop:aspect id="aspect1" ref="myAdvice">
+            
+            <!-- 한 포인트 컷에 여러 개의 필터 꼽기 -->
+            <aop:before 
+                pointcut="execution(* org.springframework.step13.ex02.*.m2(..))" 
+                method="advice2" />
+            <aop:after 
+                pointcut="execution(* org.springframework.step13.ex02.*.m2(..))" 
+                method="advice1" />
+        </aop:aspect>
+    </aop:config>
+</beans>
+
+
+
+
+
+
