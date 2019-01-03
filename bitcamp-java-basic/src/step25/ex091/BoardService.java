@@ -1,0 +1,37 @@
+package step25.ex091;
+
+import org.springframework.stereotype.Service;
+
+import step25.ex091.Board;
+
+@Service
+public class BoardService {
+
+    BoardDao boardDao;
+    
+    public BoardService(BoardDao boardDao) {
+        this.boardDao = boardDao;
+    }
+
+    public void test1(Board b1, Board b2, Board b3) {
+        boardDao.insert(b1);
+        System.out.printf("%d번 게시물 입력\n", b1.getNo());
+        
+        boardDao.insert(b2);
+        System.out.printf("%d번 게시물 입력\n", b2.getNo());
+        
+        boardDao.insert(b3);
+        System.out.printf("%d번 게시물 입력\n", b3.getNo());
+    }
+
+    public void test2(Board b1, Board b2, Board b3) {
+        boardDao.insert(b1);
+        System.out.printf("%d번 게시물 입력\n", b1.getNo());
+        
+        boardDao.insert(b2);
+        System.out.printf("%d번 게시물 입력\n", b2.getNo());
+        
+        boardDao.insert(b3);
+        System.out.printf("%d번 게시물 입력\n", b3.getNo());
+    }
+}
