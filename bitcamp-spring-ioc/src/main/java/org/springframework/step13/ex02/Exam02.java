@@ -15,6 +15,5 @@ public class Exam02 {
         
         Caller caller = (Caller) iocContainer.getBean(Caller.class);
         caller.test();
-        
     }
 }

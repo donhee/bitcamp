@@ -21,12 +21,13 @@
         <!-- 어느 pointcut에 어떤 advice를 끼워 넣을지 설정한다. -->
         <aop:aspect id="aspect1" ref="myAdvice">
             
-            <!-- 필터를 끼워 넣을 위치를 지정한다. -->
-            <aop:pointcut id="pointcut1" expression="execution(* org.springframework.step13.ex02.*.m2(..))" />
-            <aop:pointcut id="pointcut2" expression="execution(* org.springframework.step13.ex02.*.m1(..))" />
-            <!-- 해당 포인트컷을 실행하기 전에 필터의 어떤 메서드를 먼저 실행할 것인지 지정한다. -->
-            <aop:before pointcut-ref="pointcut1" method="advice2" />
-            <aop:after pointcut-ref="pointcut2" method="advice1" />
+            <!-- 포인트컷과 메서드를 바로 연결할 수 있다. -->
+            <aop:before 
+                pointcut="execution(* org.springframework.step13.ex02.*.m2(..))" 
+                method="advice2" />
+            <aop:after 
+                pointcut="execution(* org.springframework.step13.ex02.*.m1(..))" 
+                method="advice1" />
         </aop:aspect>
     </aop:config>
 </beans>
