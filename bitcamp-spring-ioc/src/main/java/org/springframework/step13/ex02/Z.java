@@ -7,7 +7,7 @@ public class Z {
     public Z() {
         System.out.println("Z 객체 생성됨");
     }
-    public void m() {
-        System.out.println("Z.m() 호출");
+    public void m2() {
+        System.out.println("Z.m2() 호출");
     }
 }

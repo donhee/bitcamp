@@ -11,9 +11,9 @@ public class Caller {
     
     public void test() {
         System.out.println("test()...시작");
-        x.m();
-        y.m();
-        z.m();
+        x.m1();
+        y.m2();
+        z.m2();
         System.out.println("test()....끝");
     }
 }

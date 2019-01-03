@@ -8,7 +8,7 @@ public class Y {
         System.out.println("Y 객체 생성됨");
     }
     
-    public void m() {
-        System.out.println("Y.m() 호출");
+    public void m2() {
+        System.out.println("Y.m2() 호출");
     }
 }
