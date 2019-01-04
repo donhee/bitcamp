@@ -38,7 +38,6 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
         // 4) load-on-startup 값 설정
         registration.setLoadOnStartup(1);
         registration.addMapping("/mvc/*");
-        
     }
     
 }
