@@ -33,6 +33,7 @@ public class Exam05_10 {
             ) throws Exception {
         
         String filePath = sc.getRealPath("/" + photo.getOriginalFilename());
+        System.out.println("===>" + filePath);
         photo.transferTo(new File(filePath));
         
         return String.format("m1(): name=%s, age=%d, photo=%s", 
