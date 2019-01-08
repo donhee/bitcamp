@@ -3,10 +3,11 @@ package egovframework.example.vo;
 import java.sql.Date;
 
 public class Board {
-    private int no;
-    private String title;
-    private String content;
-    private Date createdDate;
+    int no;
+    String title;
+    String content;
+    Date createdDate;
+    Member user;
     
     public int getNo() {
         return no;
@@ -32,9 +33,16 @@ public class Board {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
-    
+    public Member getUser() {
+        return user;
+    }
+    public void setUser(Member user) {
+        this.user = user;
+    }
     @Override
     public String toString() {
-        return "Board [no=" + no + ", title=" + title + ", content=" + content + ", createdDate=" + createdDate + "]";
+        return "Board [no=" + no + ", title=" + title + ", content=" + content + ", createdDate=" + createdDate
+                + ", user=" + user + "]";
     }
+    
 }
