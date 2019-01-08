@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/exam05_7")
 public class Exam05_7 {
-
     // View 컴포넌트(JSP)에게 전달할 데이터가 있다면
     // 프론트 컨트롤러에게 Map 또는 Model 객체를 요구하라.
     // 그리고 이들 객체에 값을 담아 놓으면,

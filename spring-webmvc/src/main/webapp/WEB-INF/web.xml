@@ -8,7 +8,6 @@
     <!-- matadata-complete 값이 true이면 web.xml 파일에 등록된 정보만 유효하다.
          @WebServlet, @WebFilter 처럼 애노테이션으로도 지정할 수 있으려면,
          false 값으로 설정해야 한다. -->
-    
     <description>웹 애플리케이션에 대한 설명을 적는 태그이다.</description>
     
     <display-name>spring-webmvc</display-name>
