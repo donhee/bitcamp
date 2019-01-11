@@ -1,0 +1,22 @@
+{
+  "name": "fileupload",
+  "version": "1.0.0",
+  "description": "fileupload",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "bitcamp"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "blueimp-file-upload": "^9.28.0",
+    "bootstrap": "^4.2.1",
+    "jquery": "^1.12.4",
+    "popper.js": "^1.14.6"
+  }
+}
