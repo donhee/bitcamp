@@ -3,6 +3,7 @@ package bitcamp.java106.pms.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -33,15 +34,18 @@ public class StudyInfoServiceImpl implements StudyInfoService {
     }
     
     @Override
-    public List<StudyInfo> listSearch(String city, String county, String category, String hashtag) {
-        System.out.println("service===>" + city + "," + county + "," + category + "," + hashtag);
-        HashMap<String,Object> searchs = new HashMap<>();
+    public List<StudyInfo> listSearch(Map<String,Object> params) {
+       /* HashMap<String,Object> searchs = new HashMap<>();
+        String city = (String)params.get("city");
+        String county =(String)params.get("county");
+        String category=(String)params.get("category");
+        String hashtag =(String)params.get("hashtag");
         searchs.put("city", city);
         searchs.put("county", county);
         searchs.put("category", category);
         searchs.put("hashtag", hashtag);
-        
-        return studyInfoDao.selectSearchList(searchs);
+        */
+        return studyInfoDao.selectSearchList(params);
     }
     
     @Override

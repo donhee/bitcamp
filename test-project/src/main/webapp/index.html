@@ -345,8 +345,9 @@
         
         /* 내 주변 스터디 */
         $.getJSON("json/studyInfo/list", (data) => {
+            	console.log(data);
 	            for (var item of data) {
-	            	console.log(item);
+	            	 console.log(item);
 	                 $("<li class='l-col'>").html(`<div id='mystudy' data-no='${item.no}' class='study' style='background: #fff; border:solid 1px #d2d2d2'>
 	                   <a href='groupMain.html?no=${item.no}' style='display: block; width: 100%;'>
 	                   <div class='ove'><span class='ove_span'></span></div></a>

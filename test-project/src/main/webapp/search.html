@@ -119,7 +119,7 @@
 			<div class="headline">스터디 검색</div>
 		</div>
 		<div class="searchbar">
-			<form name="form">
+			<form id="searchForm" name="form" onsubmit="return false;">
 				<div class="row">
 					<div class="col-sm-3 searchOption">
 						<select id="fCity" name="city" onchange="changes(document.form.city.value)"
@@ -274,6 +274,26 @@
     <script src="js/common.js"></script>
     
 	<script>
+	
+	jQuery.fn.form2JSONObject = function() {
+	    var obj = null;
+	    try {
+	        if (this[0].tagName && this[0].tagName.toUpperCase() == "FORM") {
+	            var arr = this.serializeArray();
+	            if (arr) {
+	                obj = {};
+	                jQuery.each(arr, function() {
+	                    obj[this.name] = this.value;
+	                });
+	            }
+	        }
+	    } catch (e) {
+	        alert(e.message);
+	    } finally {
+	    }
+	    return obj;
+	}
+	
 	function changes(fr) {
         if(fr==1) {
             //뿌려줄값을 배열로정렬
@@ -451,42 +471,61 @@ $(document).ready(function() {
     	
     	$('#searchrow').html("");
     	$('#searchCnt').html("0");
+           	 
+    	var formObject = $('#searchForm').form2JSONObject();//form안에 값들 객체로 만들기
+    	//객체로 만들었지만 기본적으로 가져오는 값이 value값인데 우리는 또 따로 value는 1 2 이런형태고 따로 또 text값으로 가져옴
+    	//아래와같이 값 수정.
     	
-        $.post("json/studyInfo/listSearch", {
-            city : $("#fCity option:checked").text(),
-            county : $("#fCounty option:checked").text(),
-            category : $("#fCategory option:checked").text(),
-            hashtag : $("#tagText").val()
-        }, function(data) {
-        	
-        	if (data.length <= 0) {
-        		alert("검색 결과가 없습니다.");
-        	}
-        	
-            for (var item of data) {
-                console.log(item);
-                $(`<div class='col-sm-4 box' data-no='${item.no}'>`).html(`<div class='imgWrap'>
-                        <a href='groupMain.html?no=${item.no}'><img src='img/searchtestimg.png'></a></div>
-                        <div class='studyDetail'><div><a href='#'><h6 class='studyTitle text-center font-weight-bold'>${item.name} <span class='badge badge-warning'>모집중</span></h6></a></div></a>
-                        <div class='studyHashTag text-center'></div><hr>
-                        <div class='list-details text-muted'><span class='float-left'><p>${item.city} , ${item.county}</p></span><span class='float-right'><i class='fas fa-user'></i><span> 4 / ${item.maxPeople}</span></span></div></div>`).appendTo(searchrow);
-            
-                let itemNo = item.no;
-                $.getJSON("json/studyInfo/listTag/" + itemNo, (data2) => {
-                    for (var i of data2) {
+    	formObject.city = $("#fCity option:checked").text();
+    	formObject.county = $("#fCounty option:checked").text();
+    	formObject.category = $("#fCategory option:checked").text();
+    	
+    	var jsonString = JSON.stringify(formObject);//객체를 json스트링으로 변환
+    	
+    	$.ajax({
+            url:'json/studyInfo/listSearch',
+            type:'post',
+            contentType:'application/json; charset=UTF-8',
+            dataType:'json',
+            data:jsonString,
+            success:function(data){
+            	if (data.length <= 0) {
+                    alert("검색 결과가 없습니다.");
+                }
+               	console.log(data);
+                
+                for (var item of data) {
+                    console.log(item);
+                    $(`<div class='col-sm-4 box' data-no='${item.no}'>`).html(`<div class='imgWrap'>
+                            <a href='groupMain.html?no=${item.no}'><img src='img/searchtestimg.png'></a></div>
+                            <div class='studyDetail'><div><a href='#'><h6 class='studyTitle text-center font-weight-bold'>${item.name} <span class='badge badge-warning'>모집중</span></h6></a></div></a>
+                            <div class='studyHashTag text-center'></div><hr>
+                            <div class='list-details text-muted'><span class='float-left'><p>${item.city} , ${item.county}</p></span><span class='float-right'><i class='fas fa-user'></i><span> 4 / ${item.maxPeople}</span></span></div></div>`).appendTo(searchrow);
+                    let itemNo = item.no;
+                    
+                     
+                    for (var i of item.hashTagList) {
                         $('div[data-no="' + itemNo + '"] div.studyHashTag.text-center').append($("<span class='hashtags' style='margin-right:5px'>" + i.hashtag + "</span>"));
                     }
-                    index++;
-                    
+                        
+                        
                     var k = $("#tagText").val();
                     var temp = $(".container .col-sm-4.box .studyHashTag > span:contains('" + k + "')");
-                    console.log($(temp).parents(".col-sm-4").length);
+                    //console.log($(temp).parents(".col-sm-4").length);
                     var length = $(temp).parents(".col-sm-4").length;
                     searchCnt.innerHTML = length;
-                });
-                
+                    
+                    
+                    
+                }
+            },
+            error:function(){
+                console.log('json/studyInfo/listSearch 에러 :(');
             }
         });
+    	
+    	
+    	
         
     });
     
@@ -496,3 +535,7 @@ $(document).ready(function() {
     
 </body>
 </html>
+
+
+
+

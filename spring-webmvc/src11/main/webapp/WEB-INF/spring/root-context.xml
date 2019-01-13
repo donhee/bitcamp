@@ -8,7 +8,11 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
     
-    <context:component-scan base-package="egovframework.example.web" />
+    <context:component-scan base-package="egovframework.example">
+        
+        <!-- 프론트 컨트롤러가 관리하는 객체는 제외한다. -->
+        <context:exclude-filter type="regex" expression="egovframework.example.web.*"/>
+    </context:component-scan>
     
 </beans>
 

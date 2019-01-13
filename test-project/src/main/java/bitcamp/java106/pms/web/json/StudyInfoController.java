@@ -1,8 +1,11 @@
 package bitcamp.java106.pms.web.json;
 
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -37,13 +40,10 @@ public class StudyInfoController {
     }
 
     @RequestMapping("listSearch")
-    public Object listSearch(@RequestParam("city") String city, 
-                            @RequestParam("county") String county,
-                            @RequestParam("category") String category,
-                            @RequestParam("hashtag") String hashtag) {
-        System.out.println("controller===>" + city + "," + county + "," + category + "," + hashtag);
+    public Object listSearch(@RequestBody Map<String,Object> mapData) {
+        System.out.println("@RequestBody"+mapData);
         
-        return studyInfoService.listSearch(city,county,category,hashtag);
+        return studyInfoService.listSearch(mapData);
         
     }
     
