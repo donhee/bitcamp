@@ -26,9 +26,9 @@
       insert into hashtag(stdno,tag) values(#{no},#{hashtag})
   </insert>
   
-    <select id="selectList" 
+  <!-- <select id="selectList" 
           resultMap="HashTagMap" parameterType="int"> 
   select * from hashtag where stdno=#{value} 
   </select>
-  
+ -->  
 </mapper>

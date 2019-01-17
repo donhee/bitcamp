@@ -355,12 +355,10 @@
 	                   <div class='tags'><span class='tag_area_name'>${item.county}</span></div></div></div>`).appendTo(lrow);
 	            
 	                let itemNo = item.no;
-		            $.getJSON("json/studyInfo/listTag/" + itemNo, (data2) => {
 		            	console.log(itemNo);
-		                for (var i of data2) {
+		                for (var i of item.hashTagList) {
             		        $('div[data-no="' + itemNo + '"] div.tags').append($("<span class='hashtags'>" + i.hashtag + "</span>"));
 		                }
-		            });
 	            }
         });
         

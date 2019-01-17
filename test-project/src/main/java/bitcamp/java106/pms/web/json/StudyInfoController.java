@@ -42,7 +42,10 @@ public class StudyInfoController {
     @RequestMapping("listSearch")
     public Object listSearch(@RequestBody Map<String,Object> mapData) {
         System.out.println("@RequestBody"+mapData);
-        
+        /*HashMap<String,Object> list = new HashMap<>();
+        list.put("city", mapData.get("city"));
+        list.put("county", mapData.get("county"));
+        System.out.println(list);*/
         return studyInfoService.listSearch(mapData);
         
     }
@@ -61,10 +64,10 @@ public class StudyInfoController {
         return studyInfoService.list(pageNo, pageSize);
     }
     
-    @RequestMapping("listTag/{no}")
+    /*@RequestMapping("listTag/{no}")
     public Object listTag(@PathVariable int no) {
         return studyInfoService.listTag(no);
-    }
+    }*/
     
     @RequestMapping("update")
     @ResponseStatus(HttpStatus.OK)

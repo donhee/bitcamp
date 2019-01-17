@@ -45,13 +45,14 @@ public class StudyInfoServiceImpl implements StudyInfoService {
         searchs.put("category", category);
         searchs.put("hashtag", hashtag);
         */
+        System.out.println("service" + params);
         return studyInfoDao.selectSearchList(params);
     }
     
-    @Override
+    /*@Override
     public List<HashTag> listTag(int no) {
         return hashTagDao.selectList(no);
-    }
+    }*/
     
 
     @Override
