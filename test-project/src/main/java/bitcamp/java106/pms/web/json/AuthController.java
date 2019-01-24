@@ -44,8 +44,8 @@ public class AuthController {
             HttpServletResponse response,
             HttpSession session) throws Exception {
         
-        System.out.println("id:" + id);
-        System.out.println("pw:" + password);
+        System.out.println("AuthController==>id:" + id);
+        System.out.println("AuthController==>pw:" + password);
                 
         Map<String, Object> res = new HashMap<>();
 

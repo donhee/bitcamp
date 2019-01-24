@@ -496,6 +496,7 @@ $(document).ready(function() {
             dataType:'json',
             data:jsonString,
             success:function(data){
+                console.log(data);
                 
                 if (data.length <= 0) {
                     alert("검색 결과가 없습니다.");
@@ -507,7 +508,7 @@ $(document).ready(function() {
                             <a href='groupMain.html?no=${item.no}'><img src='img/searchtestimg.png'></a></div>
                             <div class='studyDetail'><div><a href='#'><h6 class='studyTitle text-center font-weight-bold'>${item.name} <span class='badge badge-warning'>모집중</span></h6></a></div></a>
                             <div class='studyHashTag text-center'></div><hr>
-                            <div class='list-details text-muted'><span class='float-left'><p>${item.city} , ${item.county}</p></span><span class='float-right'><i class='fas fa-user'></i><span> 4 / ${item.maxPeople}</span></span></div></div>`).appendTo(searchrow);
+                            <div class='list-details text-muted'><span class='float-left'><p>${item.city}, ${item.county}</p></span><span class='float-right'><i class='fas fa-user'></i><span> 4 / ${item.maxPeople}</span></span></div></div>`).appendTo(searchrow);
                     
                     let itemNo = item.no;
                     for (var i of item.hashTagList) {

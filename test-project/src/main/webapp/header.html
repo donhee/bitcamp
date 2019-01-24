@@ -139,6 +139,8 @@ let no = -1;
                 controller.close();
               } );
             $.get("json/auth/loginstat", {}, res=> {
+            	console.log(typeof res);
+            	console.log(res);
             console.log("[" + res + "]" + ", " + typeof(res));
         no = res.no;
     
@@ -189,23 +191,26 @@ let no = -1;
         $('#regLink').css('pointer-events', 'none');
             $('#regLink').css('opacity', '0.2');
     });
-        $(signin).click(function() {
-        $.post("json/auth/login", {
-            id:$(login_email).val(),
-            password:$(login_password).val()
-        }, res => {
-            if(res.state == "fail")
-                alert("login failed");
-            else
-                location.href = "index.html";
-        });
-         });
+        /* $(signin).click(function() {
+	        $.post("json/auth/login", {
+	            id:$(login_email).val(),
+	            password:$(login_password).val()
+	        }, res => {
+	        	console.log(res);
+	            if(res.state == "fail")
+	                alert("login failed");
+	            else
+	                location.href = "index.html";
+	        });
+        }); */
+        
       $("#login").click( function() {
         $("#myModal").modal();
        });
        $("#signup").click( function() {
         $("#register").modal();
        });
+       
     $(signin).click(function() {
         $.post("json/auth/login", {
             id:$(login_email).val(),
@@ -218,6 +223,7 @@ let no = -1;
         });
          });
           }) ( jQuery );
+  
     function getNo() {
         return no;
     }
