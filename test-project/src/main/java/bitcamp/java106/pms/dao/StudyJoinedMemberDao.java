@@ -6,8 +6,7 @@ import java.util.Map;
 import bitcamp.java106.pms.domain.StudyJoinedMember;
 
 public interface StudyJoinedMemberDao {
-	List<StudyJoinedMember> selectList();
+	List<StudyJoinedMember> selectList(int no);
 	int delete(int no);
-	StudyJoinedMember selectOne(int no);
 	int insert(Map<String,Object> params);
 }

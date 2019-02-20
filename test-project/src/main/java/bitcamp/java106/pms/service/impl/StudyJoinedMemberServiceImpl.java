@@ -17,7 +17,8 @@ public class StudyJoinedMemberServiceImpl implements StudyJoinedMemberService{
     StudyJoinedMemberDao studyJoinedMemberDao;
     StudyInfoDao studyInfoDao;
     
-	public StudyJoinedMemberServiceImpl(MemberDao memberDao, 
+	public StudyJoinedMemberServiceImpl(
+	        MemberDao memberDao, 
 			StudyJoinedMemberDao studyJoinedMemberDao,
 			StudyInfoDao studyInfoDao) {
 		this.memberDao = memberDao;
@@ -26,22 +27,21 @@ public class StudyJoinedMemberServiceImpl implements StudyJoinedMemberService{
 	}
 	
 	@Override
-    public int add(StudyJoinedMember studyJoinedMember, int mnumber) {
-	    
-	    int snum = studyInfoDao.selectlimitOne().getNo();
-	    System.out.println("snum=" + snum);
+    public int add(int studyNo, int memno) {
+	    int snum = studyInfoDao.selectStudyNo(studyNo);
+	    System.out.println("StudyJoinedMemberService.add===>" + snum);
 	    
 	    HashMap<String,Object> params = new HashMap<>();
-	    params.put("studyNo", snum);
-	    params.put("memNo", mnumber);
+	    params.put("studyNo", snum); // 젤 마지막 번호
+	    params.put("memNo", memno); // loginstat
 	    params.put("grade", 0); // 주최자 0, 일반회원 1, 탈퇴회원 2
 	    
         return studyJoinedMemberDao.insert(params);
     }
 	
 	@Override
-	public List<StudyJoinedMember> list(){
-		return studyJoinedMemberDao.selectList();
+	public List<StudyJoinedMember> list(int no){
+		return studyJoinedMemberDao.selectList(no);
 	}
 	
 	@Override
@@ -49,10 +49,5 @@ public class StudyJoinedMemberServiceImpl implements StudyJoinedMemberService{
 		return studyJoinedMemberDao.delete(no);
 	}
 	
-	@Override
-	public StudyJoinedMember selectOne(int no) {
-		return studyJoinedMemberDao.selectOne(no);
-	}
-    
 }
 

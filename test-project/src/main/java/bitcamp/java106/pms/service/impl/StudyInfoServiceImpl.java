@@ -35,26 +35,10 @@ public class StudyInfoServiceImpl implements StudyInfoService {
     
     @Override
     public List<StudyInfo> listSearch(Map<String,Object> params) {
-       /* HashMap<String,Object> searchs = new HashMap<>();
-        String city = (String)params.get("city");
-        String county =(String)params.get("county");
-        String category=(String)params.get("category");
-        String hashtag =(String)params.get("hashtag");
-        searchs.put("city", city);
-        searchs.put("county", county);
-        searchs.put("category", category);
-        searchs.put("hashtag", hashtag);
-        */
         System.out.println("service" + params);
         return studyInfoDao.selectSearchList(params);
     }
     
-    /*@Override
-    public List<HashTag> listTag(int no) {
-        return hashTagDao.selectList(no);
-    }*/
-    
-
     @Override
     public StudyInfo get(int no) {
         return studyInfoDao.selectOne(no);
@@ -68,9 +52,9 @@ public class StudyInfoServiceImpl implements StudyInfoService {
     @Override
     public int addTag(String[] tag) {
         int num = studyInfoDao.selectlimitOne().getNo();
-        System.out.println(num);
+        System.out.println("StudyInfoService.addTag===> " + num);
         for(int i = 0; i < tag.length; i++) {
-            System.out.println(tag[i]);
+            System.out.println("StudyInfoService.addTag===> " + tag[i]);
             HashTag hashTag = new HashTag();
             hashTag.setNo(num);
             hashTag.setHashtag(tag[i]);

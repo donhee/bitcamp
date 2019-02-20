@@ -19,8 +19,9 @@
     <result column="cdt" property="createdDate" />
     <result column="mprs" property="maxPeople" />
     <result column="ctgr" property="category" />
-    <collection property="hashTagList" column="stdno"
-    javaType="java.util.List" ofType="bitcamp.java106.pms.domain.HashTag" select="getHshTagList"/>
+    <collection property="hashTagList" column="stdno" 
+        ofType="bitcamp.java106.pms.domain.HashTag" select="getHashTagList">
+    </collection>
   </resultMap>
 
   <!-- SQL 문 id를 설정할 때 SQL문을 사용하는 메서드 이름과 같게하면
@@ -35,9 +36,14 @@
     values(#{city},#{county},#{name},#{information},now(),#{maxPeople},#{category})
   </insert>
   
-   
+  <!-- 가장 최신 스터디 번호 가져오기 --> 
   <select id="selectlimitOne" resultMap="StudyMap">
   select * from study_info order by stdno desc limit 1
+  </select>
+  
+  <!-- 해당 번호로 들어온 스터디 번호 찾기 -->
+  <select id="selectStudyNo" parameterType="int" resultType="int">
+  select stdno from study_info where stdno=#{stdno}
   </select>
   
   <select id="selectList" 
@@ -54,10 +60,9 @@
 	       and stdno in ( select stdno from hashtag where tag LIKE CONCAT('%',#{hashtag},'%'))
   </select>
   
-  
-  <select id="getHshTagList" resultType="bitcamp.java106.pms.domain.HashTag"> 
-    select tag as hashtag, stdno as no from hashtag where stdno=#{stdno} 
-  </select>  
+  <select id="getHashTagList" resultType="bitcamp.java106.pms.domain.HashTag"> 
+    select stdno as no, tag as hashtag from hashtag where stdno=#{stdno} 
+  </select> 
   
   <!-- 파라미터의 타입이 primitive type이나 wrapper 클래스, String 클래스인 경우
         값을 꺼낼 때 프로퍼티 이름을 마음대로 해도 된다.

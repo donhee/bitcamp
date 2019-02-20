@@ -3,8 +3,7 @@
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
@@ -98,7 +97,7 @@
 <title>search</title>
 </head>
 
-<body>
+<body id="container" canvas="container">
     <div id="header"> </div>
 
 
@@ -263,12 +262,10 @@
     <!-- footer end -->
 
     <!-- Bootstrap core JavaScript -->
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <!-- <script src="node_modules/popper.js/dist/popper.min.js"></script> -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="js/holder.min.js"></script>
     <script src="node_modules/slidebars/dist/slidebars.js"></script>
     <script src="js/common.js"></script>
@@ -443,20 +440,7 @@
     <script>
 $(document).ready(function() {
         
-    $("#header").load(serverRoot + "/header.html");
-    /* $("#keyword").keyup(function() {
-        var k = $(this).val();
-        $(".container .col-sm-4.box .studyHashTag").hide();
-        
-        var temp = $(".container .col-sm-4.box .studyHashTag > span:contains('" + k + "')");
-        $(temp).parent().show();
-        $(".col-sm-4").hide();
-        $(temp).parents(".col-sm-4").show();
-        console.log($(temp).parents(".col-sm-4").length);
-        
-        var length = $(temp).parents(".col-sm-4").length;
-        $("#searchCnt").html(length);
-    }); */
+	$("#header").load(serverRoot + "/header.html");
 
     Holder.addTheme("dark", {
         background: "#000",

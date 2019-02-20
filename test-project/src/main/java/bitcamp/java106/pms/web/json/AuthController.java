@@ -50,6 +50,7 @@ public class AuthController {
         Map<String, Object> res = new HashMap<>();
 
         if (memberService.isExist(id, password)) {
+            System.out.println(memberService.selectOneSimpleCase(id));
             session.setAttribute("loginUser", memberService.selectOneSimpleCase(id));
             res.put("state", "success");
         } else {

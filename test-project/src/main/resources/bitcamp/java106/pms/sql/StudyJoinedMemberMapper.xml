@@ -10,6 +10,12 @@
     <result column="memno" property="memNo"/>
     <result column="rdt" property="registedDate"/>
     <result column="grade" property="grade"/>
+    <collection property="studyList" column="stdno" 
+        ofType="bitcamp.java106.pms.domain.StudyInfo" select="getStudyInfoList">
+    </collection>
+    <collection property="memberList" column="memno" 
+        ofType="bitcamp.java106.pms.domain.Member" select="getMemberList">
+    </collection>
   </resultMap>
     
   <insert id="insert" parameterType="StudyJoinedMember" 
@@ -18,23 +24,28 @@
     values(#{studyNo},#{memNo},now(),#{grade})
   </insert>  
     
-    
-  <select id="selectList" resultMap="StudyJoinedMemberMap">
-  select stdno, memno, rdt, grade 
-  from study_joined_member
+ <!-- <select id="selectList" parameterType="int" resultMap="StudyJoinedMemberMap">
+  SELECT 
+    j.stdno, j.memno, j.rdt, j.grade, s.name, s.mprs, s.ctgr, m.mname, m.tel
+  FROM 
+    study_joined_member j 
+    left join study_info s on j.stdno = s.stdno 
+    left join member m on j.memno = m.memno 
+  WHERE s.stdno = #{value};
+  </select> -->
+
+  <select id="selectList" parameterType="int" resultMap="StudyJoinedMemberMap">
+	  SELECT * FROM study_joined_member WHERE stdno = #{value};
   </select>
 
- <select id="selectOne" parameterType="int" resultMap="StudyJoinedMemberMap">
-  select j.stdno, memno, sname, s.ctgr
-  from study_joined_member j left join study_info s on j.stdno = s.stdno
-  where memno=#{value}
+  <select id="getStudyInfoList" resultType="bitcamp.java106.pms.domain.StudyInfo"> 
+    select name, mprs as maxPeople, ctgr as category from study_info where stdno=#{stdno} 
   </select>
 
+  <select id="getMemberList" resultType="bitcamp.java106.pms.domain.Member"> 
+    select mname as name, tel from member where memno=#{value} 
+  </select>
 
-<delete id="update" parameterType="int">
-    delete from study_joined_member where stdno=#{value}
-</delete> 
-  
 </mapper>
 
 

@@ -6,14 +6,8 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
 	 crossorigin="anonymous">
-	<link href="node_modules/slidebars/dist/slidebars.css" rel="stylesheet">
+    <link href="node_modules/slidebars/dist/slidebars.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
-	<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	 crossorigin="anonymous"></script> -->
-	<!--다음지도-->
-	<script src="node_modules/popper.js/dist/popper.min.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3d17e3728271d3ca5110f531984b776f"></script>
-
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/group.css">
@@ -35,20 +29,10 @@
 			height: 10%;
 		}
 	</style>
-
 </head>
 
-<body>
-	<!--
-    <script>
-        $(".memberAdd").click(function() {
-            $('.invitation').css('display', 'block');
-        });
-
-    </script>
--->
+<body id="container" canvas="container">
 	<div id="header"> </div>
-	
 	
 	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
@@ -71,14 +55,6 @@
 					<h5 class="studyName"></h5>
 					<p>웹개발자가 되려는 모든 분들을 환영하는 스터디입니다. 만나서 반갑습니다.</p>
 				</div>
-			</div>
-			<div class="carousel-item ">
-				<img class="d-block w-100" src="img/visualBanner3.jpg" alt="Third slide">
-				<div class="carousel-caption d-none d-md-block">
-					<h5 class="studyName"></h5>
-					<p>웹개발자가 되려는 모든 분들을 환영하는 스터디입니다. 만나서 반갑습니다.</p>
-				</div>
-
 			</div>
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -117,7 +93,7 @@
 				<div class="col menu">
 					<h6 class="menu">
 						스터디 소개
-						<button type="button" class="btn-sm btn apply">가입 신청하기</button>
+						<button id="joinStudyBtn" type="button" class="btn-sm btn apply">가입 신청하기</button>
 					</h6>
 					<hr>
 					<div class="scheduleDescription">
@@ -202,16 +178,6 @@
 						<div class="col menu menu2" id="map" style="width: 100%; height: 600px;">
 						</div>
 					</div>
-					<!--DAUM지도-->
-					<script>
-						var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-						var options = { //지도를 생성할 때 필요한 기본 옵션
-							center: new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-							level: 3 //지도의 레벨(확대, 축소 정도)
-						};
-						var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
-					</script>
-					<!--DAUM지도-->
 
 				<div class="row">
 					<div class="col menu menu2">
@@ -278,121 +244,19 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 회원 리스트 목록 Start -->
 	<div class="container">
 		<div class="innerContainer">
 			<div class="row">
 				<div class="col checkedMembers menu">
 					<h6 class="menu">
-						<a name="members">회원 </a>
+						<a name="members" id="memberList">회원 </a>
 						<span class="badge badge-warning">모집중</span>&nbsp;
-						<span class="badge badge-warning">8/10</span>
+						<!-- <span class="badge badge-warning">8/10</span> -->
 					</h6>
 					<hr>
-					<script>
-					
-					</script>
 					<div class="row">
-						<div class="col">
-							<div class="row eachMember">
-								<div class="col-sm">
-									<img src="img/thumbnail2.jpg" alt="..." class="rounded-circle thumbnail">
-								</div>
-								<div class="col-sm memberProfile">
-									<span class="memberClass">회원
-										<br>
-									</span>
-									<span class="memberName">윤봉길
-										<br>
-									</span>
-								</div>
-								<div class="col-sm message">
-									<a href="message.html">
-										<img src="img/message.png" alt="..." class="message" onclick="">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="col">
-							<div class="row eachMember">
-								<div class="col-sm">
-									<img src="img/thumbnail2.jpg" alt="..." class="rounded-circle thumbnail">
-								</div>
-								<div class="col-sm memberProfile">
-									<span class="memberClass">회원
-										<br>
-									</span>
-									<span class="memberName">윤봉길
-										<br>
-									</span>
-								</div>
-								<div class="col-sm message">
-									<a href="message.html">
-										<img src="img/message.png" alt="..." class="message">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="col">
-							<div class="row eachMember">
-								<div class="col-sm">
-									<img src="img/thumbnail2.jpg" alt="..." class="rounded-circle thumbnail">
-								</div>
-								<div class="col-sm memberProfile">
-									<span class="memberClass">회원
-										<br>
-									</span>
-									<span class="memberName">윤봉길
-										<br>
-									</span>
-								</div>
-								<div class="col-sm message">
-									<a href="message.html">
-										<img src="img/message.png" alt="..." class="message">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="w-100"></div>
-						<div class="col">
-							<div class="row eachMember">
-								<div class="col-sm">
-									<img src="img/thumbnail2.jpg" alt="..." class="rounded-circle thumbnail">
-								</div>
-								<div class="col-sm memberProfile">
-									<span class="memberClass">회원
-										<br>
-									</span>
-									<span class="memberName">윤봉길
-										<br>
-									</span>
-								</div>
-								<div class="col-sm message">
-									<a href="message.html">
-										<img src="img/message.png" alt="..." class="message">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="col">
-							<div class="row eachMember">
-								<div class="col-sm">
-									<img src="img/thumbnail2.jpg" alt="..." class="rounded-circle thumbnail">
-								</div>
-								<div class="col-sm memberProfile">
-									<span class="memberClass">회원
-										<br>
-									</span>
-									<span class="memberName">윤봉길
-										<br>
-									</span>
-								</div>
-								<div class="col-sm message">
-									<a href="message.html">
-										<img src="img/message.png" alt="..." class="message">
-									</a>
-								</div>
-							</div>
-						</div>
 						<div class="col">
 							<div class="row eachMember">
 								<div class="col-sm">
@@ -419,6 +283,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- 회원 리스트 목록 End -->
+	
 	<!-- 회원 초대 Modal start -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -685,7 +551,6 @@
 			</div>
 		</div>
 	</div>
-	</div>
 	<footer class="footer">
 		<p>Logo</p>
 		<div>
@@ -697,41 +562,89 @@
 		</div>
 		<p>Copyright ⓒ 2018 WeStudy. All Rights Reserved.</p>
 	</footer>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-	<script src="node_modules/slidebars/dist/slidebars.js"></script>
+	<script src="node_modules/jquery/dist/jquery.js"></script>
+    <!-- <script src="node_modules/popper.js/dist/popper.min.js"></script> -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/slidebars/dist/slidebars.js"></script>
+    <script src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="js/common.js"></script>
-	
 	<script>
     $(document).ready(function() { 
+		var mnumber = 0;
         
         $("#header").load(serverRoot + "/header.html");
 	
+        $.get("json/auth/loginstat", (data) => {
+            mnumber = data.no;
+            console.log("loginstat=" + mnumber);
+        }); 
+        
 		$(".memberAdd").click(function () {
 			$('.invitation').css('display', 'block');
 		});
 		
-	    //console.log(location.href.split("?")[0]);
-	    //console.log(location.href.split("?")[1]);
-	    //console.log(location.href.split("?")[1].split("=")[1]);
-	    //console.log(window.fTitle);
-	    
 	    var studyName = document.querySelectorAll(".studyName");
-        var no = location.href.split("?")[1].split("=")[1];
-        //console.log(no);
+        var no = location.href.split("?")[1].split("=")[1]; // 스터디 번호
+        console.log(no);
         
+        /* no값으로 스터디 정보 가져오기 */
         $.getJSON("json/studyInfo/" + no, function(data) {
-        	console.log(data);
-       		console.log(studyName);
-       		console.log(data.no);
+        	//console.log(data);
             $(studyName).text(data.name);
   	        $(fInformation).text(data.information);
+        }); 
+        
+        /* 일반회원이 스터디 가입요청하기 버튼 클릭했을 때의 요청 로직(밑에랑 같음) */
+        /* $('#joinStudyBtn').click(() => {
+	        $.post("json/signup/add", {
+	        	studyNo : no,
+	        	memno : mnumber
+	        }, () => {
+	        	console.log("일반회원 가입 성공");
+	        });
+        }); */
+
+        /* 일반회원이 스터디 가입요청하기 버튼 클릭했을 때의 요청 로직 */
+        $('#joinStudyBtn').click(() => {
+        	var param = {
+                    studyNo : no,
+                    memno : mnumber
+            };
+        	
+	        $.ajax({
+	            url:'json/signup/add',
+	            type:'post',
+	            data:param,
+	            success:function(data){
+	            	alert("회원 가입이 완료되었습니다.");
+	            },
+	            error:function(){
+	                alert("이미 가입이 완료된 회원입니다.");
+	            }
+	        });
+        });
+                
+        /* 스터디에 가입된 회원만 출력하는 로직(회원이름,회원전화번호 등등..) */
+        $.getJSON("json/joinedmember/" + no, function(data) {
+            console.log(data);
+            console.log("-------------------");
+            for (var item of data) {
+            	console.log(item);
+
+            	for (var mList of item.memberList) {
+            		console.log(mList.name);
+            		console.log(mList.tel);
+            	}
+            	for (var sList of item.studyList) {
+            		console.log(sList.maxPeople);
+            	}
+            	console.log("-------------------");
+            }
         }); 
         
     });
 	</script>
 
 </body>
-
 </html>

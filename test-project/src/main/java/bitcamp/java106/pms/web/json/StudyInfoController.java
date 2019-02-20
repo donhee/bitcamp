@@ -33,22 +33,28 @@ public class StudyInfoController {
     @RequestMapping("addTag")
     @ResponseStatus(HttpStatus.CREATED)
     public void add(String tag) throws Exception {
-        System.out.println(tag);
-
         String[] tags = tag.split(",");
         studyInfoService.addTag(tags);
     }
 
     @RequestMapping("listSearch")
     public Object listSearch(@RequestBody Map<String,Object> mapData) {
-        System.out.println("@RequestBody"+mapData);
-        /*HashMap<String,Object> list = new HashMap<>();
-        list.put("city", mapData.get("city"));
-        list.put("county", mapData.get("county"));
-        System.out.println(list);*/
+        System.out.println(mapData);
         return studyInfoService.listSearch(mapData);
-        
     }
+    
+    /*@RequestMapping("listSearch")
+    public Object listSearch(
+            @RequestParam("city") String city, @RequestParam("county") String county,
+            @RequestParam("category") String category, @RequestParam("hashtag") String hashtag) {
+        HashMap<String,Object> list = new HashMap<>();
+        list.put("city", city);
+        list.put("county", county);
+        list.put("category", category);
+        list.put("hashtag", hashtag);
+        System.out.println(list);
+        return studyInfoService.listSearch(list);
+    }*/
     
     @RequestMapping("delete")
     //@ResponseStatus(HttpStatus.OK) // 응답 상태 코드 값의 default는 "200(OK)" 이다.

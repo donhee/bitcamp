@@ -194,16 +194,6 @@
         });
     </script>
     <script>
-    var mnumber = 0;
-    $(document).ready( function () {
-    	
-    	$("#header").load(serverRoot + "/header.html");
-    	
-        $.get("json/auth/loginstat", (data) => {
-        	mnumber = data.no;
-        	console.log("loginstat=" + mnumber);
-        });    	
-    });
     function changes(fr) {
         if(fr==1) {
             //뿌려줄값을 배열로정렬
@@ -335,38 +325,50 @@
       }
     }
     
-	$("#addBtn").click(() => {
-        $.post("json/studyInfo/add", {
-            city: $("#fCity option:checked").text(),
-            county: $("#fCounty option:checked").text(),
-            name: $(fName).val(),
-            information: $(fInformation).val(),
-            maxPeople: $(fMaxPeople).val(),
-            category: $("#fCategory option:checked").text(),
-        }, () => {
-            console.log("add success");
-            $.post("json/studyInfo/addTag", {
-                tag: $("#tagEditor").val()
-            }, () => {
-            	$.getJSON("json/studyInfo/one", function(data) {
-                    console.log(data);
-                    
-                    $.post("json/joinedmember/add", {
-                    	mnumber: mnumber
-                    }, () => {
-                    	console.log("joinedmember success");
-                    });
-                    
-                    location.href = "groupMain.html?no=" + data;
-                });
-            });
-            
-        });
+    $(document).ready( function () {
+	    var mnumber = 0;
         
+        $("#header").load(serverRoot + "/header.html");
         
-        
-    });
+        $.get(serverRoot + "/json/auth/loginstat", (data) => {
+            mnumber = data.no;
+            console.log("loginstat=" + mnumber);
+        });     
     
+    
+		$("#addBtn").click(() => {
+	        $.post(serverRoot + "/json/studyInfo/add", {
+	            city: $("#fCity option:checked").text(),
+	            county: $("#fCounty option:checked").text(),
+	            name: $(fName).val(),
+	            information: $(fInformation).val(),
+	            maxPeople: $(fMaxPeople).val(),
+	            category: $("#fCategory option:checked").text(),
+	        }, () => {
+	            console.log("add success");
+	            $.post(serverRoot + "/json/studyInfo/addTag", {
+	                tag: $("#tagEditor").val()
+	            }, () => {
+	            	console.log("add tag success");
+	            	$.getJSON(serverRoot + "/json/studyInfo/one", function(data) {
+	            	    console.log(data);
+	                    $.post(serverRoot + "/json/joinedmember/add", {
+	                    	studyNo : data,                    	
+	                    	memno: mnumber
+	                    }, () => {
+	                    	console.log("joinedmember success");
+	                    });
+	            		
+	                    location.href = "groupMain.html?no=" + data;
+	                });
+	            });
+	            
+	        });
+	        
+	        
+	        
+	    });
+    });
 </script>
 
 </body>

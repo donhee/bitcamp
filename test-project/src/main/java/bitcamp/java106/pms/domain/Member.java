@@ -21,6 +21,7 @@ public class Member implements Serializable {
     private String interestedPlace;
     private String authCode;
     private List<InterestField> interests;
+    
     public int getNo() {
         return no;
     }
